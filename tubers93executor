@@ -1,0 +1,196 @@
+local Tubers93Executor = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local ImageLabel = Instance.new("ImageLabel")
+local TextLabel = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local TextButton = Instance.new("TextButton")
+local TextButton_2 = Instance.new("TextButton")
+local TextButton_3 = Instance.new("TextButton")
+local TextButton_4 = Instance.new("TextButton")
+local scripthub = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local TextButton_5 = Instance.new("TextButton")
+
+--Properties:
+
+Tubers93Executor.Name = "Tubers93Executor"
+Tubers93Executor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Tubers93Executor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = Tubers93Executor
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BackgroundTransparency = 0.300
+MainFrame.BorderColor3 = Color3.fromRGB(255, 234, 0)
+MainFrame.BorderSizePixel = 2
+MainFrame.Position = UDim2.new(0.133562103, 0, 0.220873132, 0)
+MainFrame.Size = UDim2.new(0, 515, 0, 269)
+
+ImageLabel.Parent = MainFrame
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.629395247, 0, -0.330528349, 0)
+ImageLabel.Size = UDim2.new(0, 190, 0, 88)
+ImageLabel.Image = "rbxassetid://131615334142719"
+
+TextLabel.Parent = MainFrame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.478132218, 0, -0.000347605412, 0)
+TextLabel.Size = UDim2.new(0, 204, 0, 53)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Tubers93 Executor"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextBox.Parent = MainFrame
+TextBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0, 0, 0.199186981, 0)
+TextBox.Size = UDim2.new(0, 515, 0, 154)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 18.000
+TextBox.TextXAlignment = Enum.TextXAlignment.Left
+TextBox.TextYAlignment = Enum.TextYAlignment.Top
+
+TextButton.Parent = MainFrame
+TextButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderColor3 = Color3.fromRGB(255, 234, 0)
+TextButton.BorderSizePixel = 2
+TextButton.Position = UDim2.new(0.0291262139, 0, 0.821561337, 0)
+TextButton.Size = UDim2.new(0, 116, 0, 35)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Execute"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextScaled = true
+TextButton.TextSize = 14.000
+TextButton.TextWrapped = true
+
+TextButton_2.Parent = MainFrame
+TextButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_2.BorderColor3 = Color3.fromRGB(255, 234, 0)
+TextButton_2.BorderSizePixel = 2
+TextButton_2.Position = UDim2.new(0.283495158, 0, 0.821561337, 0)
+TextButton_2.Size = UDim2.new(0, 116, 0, 35)
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.Text = "Clear"
+TextButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_2.TextScaled = true
+TextButton_2.TextSize = 14.000
+TextButton_2.TextWrapped = true
+
+TextButton_3.Parent = MainFrame
+TextButton_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_3.BorderColor3 = Color3.fromRGB(255, 234, 0)
+TextButton_3.BorderSizePixel = 2
+TextButton_3.Position = UDim2.new(0.0291262139, 0, 0.0297397766, 0)
+TextButton_3.Size = UDim2.new(0, 116, 0, 35)
+TextButton_3.Font = Enum.Font.SourceSans
+TextButton_3.Text = "Save Script"
+TextButton_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_3.TextScaled = true
+TextButton_3.TextSize = 14.000
+TextButton_3.TextWrapped = true
+
+TextButton_4.Parent = MainFrame
+TextButton_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_4.BorderColor3 = Color3.fromRGB(255, 234, 0)
+TextButton_4.BorderSizePixel = 2
+TextButton_4.Position = UDim2.new(0.755339801, 0, 0.821561337, 0)
+TextButton_4.Size = UDim2.new(0, 116, 0, 35)
+TextButton_4.Font = Enum.Font.SourceSans
+TextButton_4.Text = "Script Hub"
+TextButton_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_4.TextScaled = true
+TextButton_4.TextSize = 14.000
+TextButton_4.TextWrapped = true
+
+scripthub.Name = "scripthub"
+scripthub.Parent = MainFrame
+scripthub.Active = true
+scripthub.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+scripthub.BackgroundTransparency = 0.300
+scripthub.BorderColor3 = Color3.fromRGB(255, 234, 0)
+scripthub.BorderSizePixel = 2
+scripthub.Position = UDim2.new(1, 0, 0, 0)
+scripthub.Size = UDim2.new(0, 139, 0, 269)
+scripthub.Visible = false
+
+UIListLayout.Parent = scripthub
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+TextButton_5.Parent = scripthub
+TextButton_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_5.BorderColor3 = Color3.fromRGB(255, 234, 0)
+TextButton_5.BorderSizePixel = 2
+TextButton_5.Position = UDim2.new(0.079136692, 0, 0, 0)
+TextButton_5.Size = UDim2.new(0, 123, 0, 35)
+TextButton_5.Font = Enum.Font.SourceSans
+TextButton_5.Text = "Infinite Yield"
+TextButton_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_5.TextScaled = true
+TextButton_5.TextSize = 14.000
+TextButton_5.TextWrapped = true
+
+-- Scripts:
+
+local function EEFV_fake_script() -- MainFrame.LocalScript 
+	local script = Instance.new('LocalScript', MainFrame)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(EEFV_fake_script)()
+local function FFUQE_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	local button = script.Parent
+	local textBox = button.Parent:WaitForChild("TextBox")
+	
+	button.MouseButton1Click:Connect(function()
+		local code = textBox.Text
+		if code and code ~= "" then
+			local success, err = pcall(function()
+				loadstring(code)()  -- Executes the code from TextBox
+			end)
+			if not success then
+				warn("Error running code:", err)
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(FFUQE_fake_script)()
+local function HVJB_fake_script() -- TextButton_2.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_2)
+
+	-- LocalScript inside the TextButton
+	
+	local button = script.Parent
+	local textBox = button.Parent:WaitForChild("TextBox") -- change name if needed
+	
+	button.MouseButton1Click:Connect(function()
+		textBox.Text = ""
+	end)
+	
+end
+coroutine.wrap(HVJB_fake_script)()
+local function XDYVNA_fake_script() -- TextButton_4.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_4)
+
+	local scripthub = script.Parent.Parent.scripthub
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		scripthub.Visible = true
+	end)
+end
+coroutine.wrap(XDYVNA_fake_script)()
