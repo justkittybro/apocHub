@@ -1,0 +1,211 @@
+-- Gui to Lua
+-- Version: 3.3
+
+-- Instances:
+
+local stats = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local PlayerUsername = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+
+--Properties:
+
+stats.Name = "stats"
+stats.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+stats.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+stats.ResetOnSpawn = false
+
+Frame.Parent = stats
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.734959424, 0, 0.0646180063, 0)
+Frame.Size = UDim2.new(0, 237, 0, 36)
+
+PlayerUsername.Name = "PlayerUsername"
+PlayerUsername.Parent = Frame
+PlayerUsername.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+PlayerUsername.BackgroundTransparency = 1.000
+PlayerUsername.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerUsername.Position = UDim2.new(0.0548523217, 0, 0.138888896, 0)
+PlayerUsername.Size = UDim2.new(0, 211, 0, 25)
+PlayerUsername.Font = Enum.Font.GothamBold
+PlayerUsername.Text = "FPS: PLAYERS: HEALTH:"
+PlayerUsername.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerUsername.TextScaled = true
+PlayerUsername.TextSize = 21.000
+PlayerUsername.TextWrapped = true
+
+UICorner.Parent = Frame
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Thickness = 2.000
+UIStroke.Parent = Frame
+
+-- Scripts:
+
+local function THNO_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(THNO_fake_script)()
+local function LIXLC_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	
+	local Players = game:GetService("Players")
+	
+	local localPlayer = Players.LocalPlayer
+	local camera = workspace.CurrentCamera
+	
+	local frame = script.Parent
+	
+	-- UI OBJECTS
+	local icon = frame:WaitForChild("PlayerIcon")
+	local usernameBox = frame:WaitForChild("UsernameBox")
+	local usernameLabel = frame:WaitForChild("PlayerUsername")
+	
+	local viewButton = frame:WaitForChild("ViewButton")
+	local unviewButton = frame:WaitForChild("UnviewButton")
+	
+	local selectedPlayer = nil
+	
+	-- FIND PLAYER USING PARTIAL USERNAME
+	local function findPlayer(username)
+		username = string.lower(username)
+	
+		if username == "" then
+			return nil
+		end
+	
+		for _, player in ipairs(Players:GetPlayers()) do
+			if string.sub(string.lower(player.Name), 1, #username) == username then
+				return player
+			end
+		end
+	
+		return nil
+	end
+	
+	-- UPDATE PLAYER INFORMATION
+	local function updatePlayer()
+		local player = findPlayer(usernameBox.Text)
+	
+		selectedPlayer = player
+	
+		if player then
+			usernameLabel.Text = player.Name
+	
+			local success, image = pcall(function()
+				return Players:GetUserThumbnailAsync(
+					player.UserId,
+					Enum.ThumbnailType.HeadShot,
+					Enum.ThumbnailSize.Size420x420
+				)
+			end)
+	
+			if success then
+				icon.Image = image
+			end
+		else
+			usernameLabel.Text = "Player not found"
+			icon.Image = ""
+		end
+	end
+	
+	-- SEARCH WHEN ENTER IS PRESSED
+	usernameBox.FocusLost:Connect(function()
+		updatePlayer()
+	end)
+	
+	-- VIEW PLAYER
+	viewButton.MouseButton1Click:Connect(function()
+		if not selectedPlayer then
+			updatePlayer()
+		end
+	
+		if selectedPlayer then
+			local character = selectedPlayer.Character
+	
+			if character then
+				local humanoid = character:FindFirstChildOfClass("Humanoid")
+	
+				if humanoid then
+					camera.CameraSubject = humanoid
+				end
+			end
+		end
+	end)
+	
+	-- STOP VIEWING
+	unviewButton.MouseButton1Click:Connect(function()
+		local character = localPlayer.Character
+	
+		if character then
+			local humanoid = character:FindFirstChildOfClass("Humanoid")
+	
+			if humanoid then
+				camera.CameraSubject = humanoid
+			end
+		end
+	end)
+	
+	-- RESET CAMERA WHEN RESPAWNING
+	localPlayer.CharacterAdded:Connect(function(character)
+		local humanoid = character:WaitForChild("Humanoid")
+		camera.CameraSubject = humanoid
+	end)
+	
+end
+coroutine.wrap(LIXLC_fake_script)()
+local function LZAO_fake_script() -- PlayerUsername.LocalScript 
+	local script = Instance.new('LocalScript', PlayerUsername)
+
+	
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	
+	local player = Players.LocalPlayer
+	local label = script.Parent
+	
+	local fps = 0
+	local frames = 0
+	local elapsed = 0
+	
+	label.TextScaled = true
+	
+	RunService.RenderStepped:Connect(function(dt)
+		frames += 1
+		elapsed += dt
+	
+		if elapsed >= 1 then
+			fps = math.floor(frames / elapsed)
+			frames = 0
+			elapsed = 0
+		end
+	
+		local character = player.Character
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	
+		local health = humanoid and math.floor(humanoid.Health) or 0
+		local playerCount = #Players:GetPlayers()
+	
+		label.Text = string.format(
+			"FPS: %d | PLAYERS: %d | HEALTH: %d",
+			fps,
+			playerCount,
+			health
+		)
+	end)
+	
+end
+coroutine.wrap(LZAO_fake_script)()
+local function BWECVPC_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.draggable = true
+end
+coroutine.wrap(BWECVPC_fake_script)()
