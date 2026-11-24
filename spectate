@@ -87,14 +87,14 @@ PlayerIcon.Image = "rbxassetid://131615334142719"
 
 -- Scripts:
 
-local function XKXGS_fake_script() -- Frame.LocalScript 
+local function SUPYXT_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(XKXGS_fake_script)()
-local function HRWCD_fake_script() -- Frame.LocalScript 
+coroutine.wrap(SUPYXT_fake_script)()
+local function QZGMW_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	
@@ -202,4 +202,4 @@ local function HRWCD_fake_script() -- Frame.LocalScript
 	end)
 	
 end
-coroutine.wrap(HRWCD_fake_script)()
+coroutine.wrap(QZGMW_fake_script)()
