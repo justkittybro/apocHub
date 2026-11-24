@@ -1432,7 +1432,7 @@ local function KVOR_fake_script() -- Quickactions.LocalScript
 	local HttpService = game:GetService("HttpService")
 	
 	local searchBox = TextBox
-	local cardTemplate = Frame_13
+	local cardTemplate = ScriptFrame
 	local resultsContainer = Quickactions
 	
 	-- Keep the template card hidden; clones will be created for each result
