@@ -944,14 +944,14 @@ UICorner_33.Parent = TextButton_12
 
 -- Scripts:
 
-local function KHOLI_fake_script() -- ImageButton.LocalScript 
+local function XNNRZ_fake_script() -- ImageButton.LocalScript 
 	local script = Instance.new('LocalScript', ImageButton)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(KHOLI_fake_script)()
-local function CEXT_fake_script() -- ImageButton.LocalScript 
+coroutine.wrap(XNNRZ_fake_script)()
+local function OJRN_fake_script() -- ImageButton.LocalScript 
 	local script = Instance.new('LocalScript', ImageButton)
 
 	local button = script.Parent
@@ -966,15 +966,15 @@ local function CEXT_fake_script() -- ImageButton.LocalScript
 	
 	end)
 end
-coroutine.wrap(CEXT_fake_script)()
-local function FJSFEB_fake_script() -- MainFrame.LocalScript 
+coroutine.wrap(OJRN_fake_script)()
+local function NUIQJ_fake_script() -- MainFrame.LocalScript 
 	local script = Instance.new('LocalScript', MainFrame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(FJSFEB_fake_script)()
-local function PBZQCX_fake_script() -- TextButton.LocalScript 
+coroutine.wrap(NUIQJ_fake_script)()
+local function UBMQ_fake_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local player = game.Players.LocalPlayer
@@ -1009,8 +1009,8 @@ local function PBZQCX_fake_script() -- TextButton.LocalScript
 	end)
 	
 end
-coroutine.wrap(PBZQCX_fake_script)()
-local function CXLQGP_fake_script() -- TextButton_2.LocalScript 
+coroutine.wrap(UBMQ_fake_script)()
+local function PEIJGCM_fake_script() -- TextButton_2.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_2)
 
 	local player = game.Players.LocalPlayer
@@ -1099,8 +1099,8 @@ local function CXLQGP_fake_script() -- TextButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(CXLQGP_fake_script)()
-local function NGLOQJJ_fake_script() -- TextLabel_4.LocalScript 
+coroutine.wrap(PEIJGCM_fake_script)()
+local function RXIRMW_fake_script() -- TextLabel_4.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_4)
 
 	local player = game.Players.LocalPlayer
@@ -1108,8 +1108,8 @@ local function NGLOQJJ_fake_script() -- TextLabel_4.LocalScript
 	
 	textLabel.Text = "Welcome, " .. player.Name
 end
-coroutine.wrap(NGLOQJJ_fake_script)()
-local function ZEITY_fake_script() -- ImageLabel_2.LocalScript 
+coroutine.wrap(RXIRMW_fake_script)()
+local function IBGJF_fake_script() -- ImageLabel_2.LocalScript 
 	local script = Instance.new('LocalScript', ImageLabel_2)
 
 	local player = game.Players.LocalPlayer
@@ -1124,8 +1124,8 @@ local function ZEITY_fake_script() -- ImageLabel_2.LocalScript
 	
 	imageLabel.Image = content
 end
-coroutine.wrap(ZEITY_fake_script)()
-local function REYPKR_fake_script() -- TextLabel_5.LocalScript 
+coroutine.wrap(IBGJF_fake_script)()
+local function OAICTZ_fake_script() -- TextLabel_5.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_5)
 
 	local player = game.Players.LocalPlayer
@@ -1133,8 +1133,8 @@ local function REYPKR_fake_script() -- TextLabel_5.LocalScript
 	
 	textLabel.Text = "User ID: " .. player.UserId
 end
-coroutine.wrap(REYPKR_fake_script)()
-local function ZSLBUG_fake_script() -- TextButton_3.LocalScript 
+coroutine.wrap(OAICTZ_fake_script)()
+local function XHLZDRX_fake_script() -- TextButton_3.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_3)
 
 	local player = game.Players.LocalPlayer
@@ -1176,8 +1176,8 @@ local function ZSLBUG_fake_script() -- TextButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZSLBUG_fake_script)()
-local function YTZC_fake_script() -- TextButton_4.LocalScript 
+coroutine.wrap(XHLZDRX_fake_script)()
+local function XZWQQ_fake_script() -- TextButton_4.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_4)
 
 	local player = game.Players.LocalPlayer
@@ -1218,8 +1218,8 @@ local function YTZC_fake_script() -- TextButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(YTZC_fake_script)()
-local function ILUTML_fake_script() -- SpeedBox.LocalScript 
+coroutine.wrap(XZWQQ_fake_script)()
+local function AVDK_fake_script() -- SpeedBox.LocalScript 
 	local script = Instance.new('LocalScript', SpeedBox)
 
 	local player = game.Players.LocalPlayer
@@ -1248,8 +1248,8 @@ local function ILUTML_fake_script() -- SpeedBox.LocalScript
 	end)
 	
 end
-coroutine.wrap(ILUTML_fake_script)()
-local function GMGKUPZ_fake_script() -- SpeedBox_2.LocalScript 
+coroutine.wrap(AVDK_fake_script)()
+local function MKAVR_fake_script() -- SpeedBox_2.LocalScript 
 	local script = Instance.new('LocalScript', SpeedBox_2)
 
 	local player = game.Players.LocalPlayer
@@ -1278,8 +1278,8 @@ local function GMGKUPZ_fake_script() -- SpeedBox_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(GMGKUPZ_fake_script)()
-local function RBKXMVJ_fake_script() -- TextLabel_12.LocalScript 
+coroutine.wrap(MKAVR_fake_script)()
+local function HYOZUA_fake_script() -- TextLabel_12.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_12)
 
 	local player = game.Players.LocalPlayer
@@ -1287,8 +1287,8 @@ local function RBKXMVJ_fake_script() -- TextLabel_12.LocalScript
 	
 	textLabel.Text = "Welcome, " .. player.Name
 end
-coroutine.wrap(RBKXMVJ_fake_script)()
-local function WNXZIFJ_fake_script() -- ImageLabel_3.LocalScript 
+coroutine.wrap(HYOZUA_fake_script)()
+local function LZSGGU_fake_script() -- ImageLabel_3.LocalScript 
 	local script = Instance.new('LocalScript', ImageLabel_3)
 
 	local player = game.Players.LocalPlayer
@@ -1303,8 +1303,8 @@ local function WNXZIFJ_fake_script() -- ImageLabel_3.LocalScript
 	
 	imageLabel.Image = content
 end
-coroutine.wrap(WNXZIFJ_fake_script)()
-local function TLLXHZY_fake_script() -- TextLabel_13.LocalScript 
+coroutine.wrap(LZSGGU_fake_script)()
+local function TVRYQB_fake_script() -- TextLabel_13.LocalScript 
 	local script = Instance.new('LocalScript', TextLabel_13)
 
 	local player = game.Players.LocalPlayer
@@ -1312,8 +1312,8 @@ local function TLLXHZY_fake_script() -- TextLabel_13.LocalScript
 	
 	textLabel.Text = "User ID: " .. player.UserId
 end
-coroutine.wrap(TLLXHZY_fake_script)()
-local function FOOVSYS_fake_script() -- ImageButton_2.LocalScript 
+coroutine.wrap(TVRYQB_fake_script)()
+local function MAMXBS_fake_script() -- ImageButton_2.LocalScript 
 	local script = Instance.new('LocalScript', ImageButton_2)
 
 	local frame = script.Parent.Parent.Parent.Scripts
@@ -1340,8 +1340,8 @@ local function FOOVSYS_fake_script() -- ImageButton_2.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(FOOVSYS_fake_script)()
-local function GQACFFG_fake_script() -- ImageButton_3.LocalScript 
+coroutine.wrap(MAMXBS_fake_script)()
+local function PJCHEA_fake_script() -- ImageButton_3.LocalScript 
 	local script = Instance.new('LocalScript', ImageButton_3)
 
 	local frame = script.Parent.Parent.Parent.Scripts
@@ -1368,8 +1368,8 @@ local function GQACFFG_fake_script() -- ImageButton_3.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(GQACFFG_fake_script)()
-local function LLFZSA_fake_script() -- ImageButton_4.LocalScript 
+coroutine.wrap(PJCHEA_fake_script)()
+local function KOTRPJ_fake_script() -- ImageButton_4.LocalScript 
 	local script = Instance.new('LocalScript', ImageButton_4)
 
 	local frame = script.Parent.Parent.Parent.Scripts
@@ -1396,8 +1396,8 @@ local function LLFZSA_fake_script() -- ImageButton_4.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(LLFZSA_fake_script)()
-local function TNZH_fake_script() -- ImageButton_5.LocalScript 
+coroutine.wrap(KOTRPJ_fake_script)()
+local function ELJIJSR_fake_script() -- ImageButton_5.LocalScript 
 	local script = Instance.new('LocalScript', ImageButton_5)
 
 	local frame = script.Parent.Parent.Parent.Scripts
@@ -1424,15 +1424,15 @@ local function TNZH_fake_script() -- ImageButton_5.LocalScript
 		frame.Visible = true
 	end)
 end
-coroutine.wrap(TNZH_fake_script)()
-local function KVOR_fake_script() -- Quickactions.LocalScript 
+coroutine.wrap(ELJIJSR_fake_script)()
+local function GWLPSTQ_fake_script() -- Quickactions.LocalScript 
 	local script = Instance.new('LocalScript', Quickactions)
 
 	-- === SCRIPTBLOX SEARCH & CARD CLONING FOR MERCURY EXECUTOR ===
 	local HttpService = game:GetService("HttpService")
 	
 	local searchBox = TextBox
-	local cardTemplate = ScriptFrame
+	local cardTemplate = Frame_13
 	local resultsContainer = Quickactions
 	
 	-- Keep the template card hidden; clones will be created for each result
@@ -1503,6 +1503,176 @@ local function KVOR_fake_script() -- Quickactions.LocalScript
 	end
 	
 	local function renderSearchResults(scriptsList)
+
+		-- === SCRIPTBLOX SEARCH & CARD CLONING FOR MERCURY EXECUTOR ===
+		local HttpService = game:GetService("HttpService")
+
+		local searchBox = TextBox
+		local cardTemplate = Frame_13
+		local resultsContainer = Quickactions
+
+		-- Keep the template card hidden; clones will be created for each result
+		cardTemplate.Visible = false
+
+		local function httpGet(url)
+			if game.HttpGet then
+				return game:HttpGet(url)
+			end
+			return HttpService:GetAsync(url)
+		end
+
+		local function urlEncode(str)
+			return (str:gsub("([^%w%-_%.~])", function(c)
+				return string.format("%%%02X", string.byte(c))
+			end))
+		end
+
+		local function updateCanvas()
+			resultsContainer.CanvasSize = UDim2.fromOffset(0, UIListLayout.AbsoluteContentSize.Y + 16)
+		end
+
+		UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateCanvas)
+
+		local function clearResultCards()
+			for _, child in ipairs(resultsContainer:GetChildren()) do
+				if child:IsA("Frame") and child.Name == "ScriptResultCard" then
+					child:Destroy()
+				end
+			end
+			updateCanvas()
+		end
+
+		local function runScriptCode(titleText, rawScript)
+			if rawScript == "" then
+				warn("No script source found for:", titleText)
+				return
+			end
+			if not loadstring then
+				warn("loadstring is not available in this environment.")
+				return
+			end
+
+			local fn, compileErr = loadstring(rawScript)
+			if not fn then
+				warn("Compile error for '" .. titleText .. "':", compileErr)
+				return
+			end
+
+			local ok, runErr = pcall(fn)
+			if not ok then
+				warn("Runtime error in '" .. titleText .. "':", runErr)
+			end
+		end
+
+		local function copyScriptCode(titleText, rawScript)
+			if rawScript == "" then
+				warn("No script source to copy for:", titleText)
+				return
+			end
+			if not setclipboard then
+				warn("setclipboard is not available in this environment.")
+				return
+			end
+
+			setclipboard(rawScript)
+			print("Copied script to clipboard:", titleText)
+		end
+
+		local function renderSearchResults(scriptsList)
+			clearResultCards()
+
+			if type(scriptsList) ~= "table" or #scriptsList == 0 then
+				local emptyCard = cardTemplate:Clone()
+				emptyCard.Name = "ScriptResultCard"
+				emptyCard.Visible = true
+				emptyCard.Parent = resultsContainer
+
+				local titleLbl = emptyCard:FindFirstChildWhichIsA("TextLabel")
+				if titleLbl then
+					titleLbl.Text = "No scripts found"
+				end
+
+				for _, btn in ipairs(emptyCard:GetDescendants()) do
+					if btn:IsA("TextButton") then
+						btn.Visible = false
+					end
+				end
+
+				updateCanvas()
+				return
+			end
+
+			for _, item in ipairs(scriptsList) do
+				local card = cardTemplate:Clone()
+				card.Name = "ScriptResultCard"
+				card.Visible = true
+				card.Parent = resultsContainer
+
+				local titleText = item.title or "Untitled"
+				local rawScript = item.script or ""
+
+				local titleLbl = card:FindFirstChildWhichIsA("TextLabel")
+				if titleLbl then
+					titleLbl.Text = titleText
+				end
+
+				local execBtn = card:FindFirstChild("TextButton_5")
+				local copyBtn = card:FindFirstChild("TextButton_6")
+				local viewBtn = card:FindFirstChild("TextButton_7")
+
+				if execBtn then
+					execBtn.MouseButton1Click:Connect(function()
+						runScriptCode(titleText, rawScript)
+					end)
+				end
+
+				if copyBtn then
+					copyBtn.MouseButton1Click:Connect(function()
+						copyScriptCode(titleText, rawScript)
+					end)
+				end
+
+				if viewBtn then
+					viewBtn.MouseButton1Click:Connect(function()
+						-- View button will be implemented in a later step
+					end)
+				end
+			end
+
+			updateCanvas()
+		end
+
+		local function searchScriptBlox(query)
+			local trimmed = (query or ""):match("^%s*(.-)%s*$")
+			local url = trimmed ~= ""
+				and ("https://scriptblox.com/api/script/search?q=" .. urlEncode(trimmed) .. "&max=20&mode=free")
+				or "https://scriptblox.com/api/script/fetch?max=20&mode=free"
+
+			local okGet, body = pcall(httpGet, url)
+			if not okGet or type(body) ~= "string" then
+				warn("ScriptBlox request failed:", body)
+				return
+			end
+
+			local okDecode, decoded = pcall(HttpService.JSONDecode, HttpService, body)
+			if not okDecode or type(decoded) ~= "table" or not decoded.result or type(decoded.result.scripts) ~= "table" then
+				warn("Failed to parse ScriptBlox JSON.")
+				return
+			end
+
+			renderSearchResults(decoded.result.scripts)
+		end
+
+		searchBox.FocusLost:Connect(function(enterPressed)
+			if enterPressed then
+				searchScriptBlox(searchBox.Text)
+			end
+		end)
+
+		task.spawn(function()
+			searchScriptBlox("")
+		end)
+
 		clearResultCards()
 	
 		if type(scriptsList) ~= "table" or #scriptsList == 0 then
@@ -1597,8 +1767,8 @@ local function KVOR_fake_script() -- Quickactions.LocalScript
 		searchScriptBlox("")
 	end)
 end
-coroutine.wrap(KVOR_fake_script)()
-local function UORKED_fake_script() -- TextButton_5.LocalScript 
+coroutine.wrap(GWLPSTQ_fake_script)()
+local function WCOSBTG_fake_script() -- TextButton_5.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_5)
 
 	-- LocalScript inside the TextButton
@@ -1617,15 +1787,15 @@ local function UORKED_fake_script() -- TextButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(UORKED_fake_script)()
-local function RIJFI_fake_script() -- TextButton_6.LocalScript 
+coroutine.wrap(WCOSBTG_fake_script)()
+local function ITRY_fake_script() -- TextButton_6.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_6)
 
 	print("Hello world!")
 	
 end
-coroutine.wrap(RIJFI_fake_script)()
-local function BBCEAMW_fake_script() -- TextButton_9.LocalScript 
+coroutine.wrap(ITRY_fake_script)()
+local function ARBN_fake_script() -- TextButton_9.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_9)
 
 	local button = script.Parent
@@ -1644,8 +1814,8 @@ local function BBCEAMW_fake_script() -- TextButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(BBCEAMW_fake_script)()
-local function JUIYHMX_fake_script() -- TextButton_10.LocalScript 
+coroutine.wrap(ARBN_fake_script)()
+local function TOZTQR_fake_script() -- TextButton_10.LocalScript 
 	local script = Instance.new('LocalScript', TextButton_10)
 
 	-- LocalScript inside the TextButton
@@ -1658,4 +1828,4 @@ local function JUIYHMX_fake_script() -- TextButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(JUIYHMX_fake_script)()
+coroutine.wrap(TOZTQR_fake_script)()
