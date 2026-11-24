@@ -1536,7 +1536,7 @@ local function MINC_fake_script() -- Quickactions.LocalScript
 		end
 	
 		for _, item in ipairs(scriptsList) do
-			local card = cardTemplate:Clone()
+			local cardTemplate = Frame_13
 			card.Name = "ScriptResultCard"
 			card.Visible = true
 			card.Parent = resultsContainer
