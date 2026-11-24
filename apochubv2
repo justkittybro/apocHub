@@ -1503,6 +1503,15 @@ local function MINC_fake_script() -- Quickactions.LocalScript
 	end
 	
 	local function renderSearchResults(scriptsList)
+
+		local function findButtonByText(card, text)
+			for _, child in ipairs(card:GetDescendants()) do
+				if child:IsA("TextButton") and child.Text == text then
+					return child
+				end
+			end
+		end
+
 		clearResultCards()
 	
 		if type(scriptsList) ~= "table" or #scriptsList == 0 then
@@ -1540,9 +1549,9 @@ local function MINC_fake_script() -- Quickactions.LocalScript
 				titleLbl.Text = titleText
 			end
 	
-			local execBtn = card:FindFirstChild("TextButton_5")
-			local copyBtn = card:FindFirstChild("TextButton_6")
-			local viewBtn = card:FindFirstChild("TextButton_7")
+			local execBtn = findButtonByText(card, "Execute")
+			local copyBtn = findButtonByText(card, "Copy")
+			local viewBtn = findButtonByText(card, "View")
 	
 			if execBtn then
 				execBtn.MouseButton1Click:Connect(function()
