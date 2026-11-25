@@ -18,6 +18,7 @@ local PlayerButton_7 = Instance.new("TextButton")
 local TextBox = Instance.new("TextBox")
 local TextBox_2 = Instance.new("TextBox")
 local PlayerButton_8 = Instance.new("TextButton")
+local PlayerButton_9 = Instance.new("TextButton")
 
 --Properties:
 
@@ -53,7 +54,6 @@ PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerList.BorderSizePixel = 0
 PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
 PlayerList.Size = UDim2.new(0, 197, 0, 230)
-PlayerList.CanvasPosition = Vector2.new(0, 200)
 
 PlayerButton.Name = "PlayerButton"
 PlayerButton.Parent = PlayerList
@@ -116,10 +116,10 @@ PlayerButton_5.Parent = PlayerList
 PlayerButton_5.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_5.BorderSizePixel = 0
-PlayerButton_5.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_5.Position = UDim2.new(-0.18274112, 0, 0.267790258, 0)
 PlayerButton_5.Size = UDim2.new(0, 185, 0, 32)
 PlayerButton_5.Font = Enum.Font.SourceSans
-PlayerButton_5.Text = ";Bank"
+PlayerButton_5.Text = ";Bank (VAULT)"
 PlayerButton_5.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_5.TextSize = 21.000
 PlayerButton_5.TextWrapped = true
@@ -186,16 +186,29 @@ PlayerButton_8.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_8.TextSize = 21.000
 PlayerButton_8.TextWrapped = true
 
+PlayerButton_9.Name = "PlayerButton"
+PlayerButton_9.Parent = PlayerList
+PlayerButton_9.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_9.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_9.BorderSizePixel = 0
+PlayerButton_9.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_9.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_9.Font = Enum.Font.SourceSans
+PlayerButton_9.Text = "Infinitejump: Off"
+PlayerButton_9.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_9.TextSize = 21.000
+PlayerButton_9.TextWrapped = true
+
 -- Scripts:
 
-local function VNDWB_fake_script() -- Frame.LocalScript 
+local function GJWV_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(VNDWB_fake_script)()
-local function BNBMUN_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(GJWV_fake_script)()
+local function ZFJNHB_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -214,8 +227,8 @@ local function BNBMUN_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(BNBMUN_fake_script)()
-local function EZRWXVS_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(ZFJNHB_fake_script)()
+local function RNDYVB_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -250,8 +263,8 @@ local function EZRWXVS_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(EZRWXVS_fake_script)()
-local function UUNPXY_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(RNDYVB_fake_script)()
+local function SEYYTKX_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -283,39 +296,37 @@ local function UUNPXY_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(UUNPXY_fake_script)()
-local function HEHKIG_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(SEYYTKX_fake_script)()
+local function PTOJMG_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
+	
 	local Players = game:GetService("Players")
 	
 	local player = Players.LocalPlayer
 	local button = script.Parent
 	
 	button.Activated:Connect(function()
-		local city = workspace:FindFirstChild("City")
-		if not city then return end
+		local money = workspace:FindFirstChild("Money", true)
+		if not money then return end
 	
-		local bank = city:FindFirstChild("bank")
-		if not bank then return end
-	
-		local atm = bank:FindFirstChild("ATM")
-		if not atm then return end
-	
-		local atmRoot = atm:FindFirstChild("HumanoidRootPart")
-			or atm.PrimaryPart
-			or atm:FindFirstChildWhichIsA("BasePart", true)
+		local part = money:FindFirstChild("pCube1", true)
+		if not part or not part:IsA("BasePart") then
+			warn("pCube1 part not found!")
+			return
+		end
 	
 		local character = player.Character
-		local playerRoot = character and character:FindFirstChild("HumanoidRootPart")
+		local root = character and character:FindFirstChild("HumanoidRootPart")
 	
-		if playerRoot and atmRoot then
-			playerRoot.CFrame = atmRoot.CFrame * CFrame.new(0, 0, 3)
+		if root then
+			root.CFrame = part.CFrame * CFrame.new(0, 0, 3)
 		end
 	end)
+	
 end
-coroutine.wrap(HEHKIG_fake_script)()
-local function DTCCHEC_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(PTOJMG_fake_script)()
+local function AXRYMRH_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -352,8 +363,8 @@ local function DTCCHEC_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(DTCCHEC_fake_script)()
-local function XYVGCE_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(AXRYMRH_fake_script)()
+local function DTAF_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -379,8 +390,8 @@ local function XYVGCE_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(XYVGCE_fake_script)()
-local function GPXR_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(DTAF_fake_script)()
+local function YBDRAKE_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -414,8 +425,8 @@ local function GPXR_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(GPXR_fake_script)()
-local function CERMQAY_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(YBDRAKE_fake_script)()
+local function XZSMJ_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -453,8 +464,8 @@ local function CERMQAY_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(CERMQAY_fake_script)()
-local function QWSY_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(XZSMJ_fake_script)()
+local function LCPFI_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -473,4 +484,41 @@ local function QWSY_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(QWSY_fake_script)()
+coroutine.wrap(LCPFI_fake_script)()
+local function THZUWHM_fake_script() -- PlayerButton_9.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_9)
+
+	
+	local Players = game:GetService("Players")
+	local UserInputService = game:GetService("UserInputService")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	local enabled = false
+	
+	button.Text = "Infinite Jump: OFF"
+	
+	button.Activated:Connect(function()
+		enabled = not enabled
+	
+		if enabled then
+			button.Text = "Infinite Jump: ON"
+		else
+			button.Text = "Infinite Jump: OFF"
+		end
+	end)
+	
+	UserInputService.JumpRequest:Connect(function()
+		if not enabled then return end
+	
+		local character = player.Character
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	
+		if humanoid then
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		end
+	end)
+	
+end
+coroutine.wrap(THZUWHM_fake_script)()
