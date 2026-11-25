@@ -272,10 +272,10 @@ PlayerButton_12.Parent = ButtonsList
 PlayerButton_12.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_12.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_12.BorderSizePixel = 0
-PlayerButton_12.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_12.Position = UDim2.new(0, 0, 0.651685417, 0)
 PlayerButton_12.Size = UDim2.new(0, 185, 0, 32)
 PlayerButton_12.Font = Enum.Font.SourceSans
-PlayerButton_12.Text = "ESP: Off"
+PlayerButton_12.Text = ";ESP: Off"
 PlayerButton_12.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_12.TextSize = 21.000
 PlayerButton_12.TextWrapped = true
@@ -395,14 +395,14 @@ CloseMenu.TextWrapped = true
 
 -- Scripts:
 
-local function DOEAWO_fake_script() -- Frame.LocalScript 
+local function DARXR_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(DOEAWO_fake_script)()
-local function GIJH_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(DARXR_fake_script)()
+local function RBBPDAY_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -421,8 +421,8 @@ local function GIJH_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(GIJH_fake_script)()
-local function EIJDXFQ_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(RBBPDAY_fake_script)()
+local function PNTH_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -457,8 +457,8 @@ local function EIJDXFQ_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(EIJDXFQ_fake_script)()
-local function LWOAJ_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(PNTH_fake_script)()
+local function CILGYC_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -490,8 +490,8 @@ local function LWOAJ_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(LWOAJ_fake_script)()
-local function ZTAIOM_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(CILGYC_fake_script)()
+local function RFSNNM_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -519,8 +519,8 @@ local function ZTAIOM_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZTAIOM_fake_script)()
-local function ZCTURLQ_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(RFSNNM_fake_script)()
+local function LCDZK_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -557,8 +557,8 @@ local function ZCTURLQ_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZCTURLQ_fake_script)()
-local function LETCW_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(LCDZK_fake_script)()
+local function JQPQ_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -584,8 +584,8 @@ local function LETCW_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(LETCW_fake_script)()
-local function IXPDP_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(JQPQ_fake_script)()
+local function ZZUIPRJ_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -619,8 +619,8 @@ local function IXPDP_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(IXPDP_fake_script)()
-local function HMCSBLM_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(ZZUIPRJ_fake_script)()
+local function SLQHYAD_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -658,8 +658,8 @@ local function HMCSBLM_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(HMCSBLM_fake_script)()
-local function IFQKJGF_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(SLQHYAD_fake_script)()
+local function LPEUH_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -678,8 +678,8 @@ local function IFQKJGF_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(IFQKJGF_fake_script)()
-local function ACKGVX_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(LPEUH_fake_script)()
+local function FPSLWS_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -715,8 +715,8 @@ local function ACKGVX_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(ACKGVX_fake_script)()
-local function QDQIVIG_fake_script() -- PlayerButton_10.LocalScript 
+coroutine.wrap(FPSLWS_fake_script)()
+local function OVFUW_fake_script() -- PlayerButton_10.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_10)
 
 	
@@ -738,8 +738,8 @@ local function QDQIVIG_fake_script() -- PlayerButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(QDQIVIG_fake_script)()
-local function ZTIBR_fake_script() -- PlayerButton_11.LocalScript 
+coroutine.wrap(OVFUW_fake_script)()
+local function JAYSDS_fake_script() -- PlayerButton_11.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_11)
 
 	
@@ -800,8 +800,8 @@ local function ZTIBR_fake_script() -- PlayerButton_11.LocalScript
 	button.Text = "Noclip: OFF"
 	
 end
-coroutine.wrap(ZTIBR_fake_script)()
-local function RDRIG_fake_script() -- TextBox_3.LocalScript 
+coroutine.wrap(JAYSDS_fake_script)()
+local function QUMJQNC_fake_script() -- TextBox_3.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_3)
 
 	
@@ -870,8 +870,8 @@ local function RDRIG_fake_script() -- TextBox_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(RDRIG_fake_script)()
-local function TZVYO_fake_script() -- TextBox_4.LocalScript 
+coroutine.wrap(QUMJQNC_fake_script)()
+local function QOYA_fake_script() -- TextBox_4.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_4)
 
 	
@@ -931,211 +931,175 @@ local function TZVYO_fake_script() -- TextBox_4.LocalScript
 	textBox.FocusLost:Connect(teleportToPlayer)
 	
 end
-coroutine.wrap(TZVYO_fake_script)()
-local function BIQMPD_fake_script() -- PlayerButton_12.LocalScript 
+coroutine.wrap(QOYA_fake_script)()
+local function AHPA_fake_script() -- PlayerButton_12.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_12)
 
-	
+	-- LocalScript inside a TextButton
 	local Players = game:GetService("Players")
+	local UserInputService = game:GetService("UserInputService")
 	local RunService = game:GetService("RunService")
 	
-	local player = Players.LocalPlayer
+	local LocalPlayer = Players.LocalPlayer
 	local button = script.Parent
 	
-	local espEnabled = false
-	local espObjects = {}
-	local updateConnection
+	-- Choose which feature this TextButton toggles:
+	-- "ESP" | "InfJump" | "Fly" | "NoClip" | "AntiAFK"
+	local MODE = "ESP"
 	
-	button.Text = "ESP: Off"
+	local enabled = false
+	local connections = {}
+	local bodyGyro, bodyVel
 	
-	-- Team colors
-	local function getTeamColor(target)
-		local teamName = target.Team and target.Team.Name or ""
-	
-		if teamName == "Prisoner" or teamName == "Prisoners" then
-			return Color3.fromRGB(255, 140, 0) -- Orange
-	
-		elseif teamName == "Cop" or teamName == "Cops"
-			or teamName == "Police" then
-			return Color3.fromRGB(0, 120, 255) -- Blue
-	
-		elseif teamName == "Fugitive" or teamName == "Fugitives" then
-			return Color3.fromRGB(255, 0, 0) -- Red
+	local function clearConnections()
+		for _, conn in ipairs(connections) do
+			conn:Disconnect()
 		end
-	
-		return Color3.fromRGB(255, 255, 255)
+		table.clear(connections)
 	end
 	
-	-- Remove ESP
-	local function removeESP(target)
-		local data = espObjects[target]
+	local function applyESP(player)
+		if player == LocalPlayer or not player.Character then return end
+		if not player.Character:FindFirstChild("ESPHighlight") then
+			local h = Instance.new("Highlight")
+			h.Name = "ESPHighlight"
+			h.Adornee = player.Character
+			h.FillColor = Color3.fromRGB(255, 0, 0)
+			h.OutlineColor = Color3.fromRGB(255, 0, 0)
+			h.FillTransparency = 0.5
+			h.OutlineTransparency = 0
+			h.Parent = player.Character
+		end
+	end
 	
-		if data then
-			if data.Highlight then
-				data.Highlight:Destroy()
+	local function removeESP(player)
+		if player.Character then
+			local h = player.Character:FindFirstChild("ESPHighlight")
+			if h then h:Destroy() end
+		end
+	end
+	
+	local function stopFly()
+		if bodyGyro then bodyGyro:Destroy() bodyGyro = nil end
+		if bodyVel then bodyVel:Destroy() bodyVel = nil end
+	end
+	
+	local function setFeatureState(state)
+		clearConnections()
+		stopFly()
+	
+		if MODE == "ESP" then
+			if state then
+				for _, plr in ipairs(Players:GetPlayers()) do
+					applyESP(plr)
+					table.insert(connections, plr.CharacterAdded:Connect(function()
+						task.wait(0.1)
+						if enabled then applyESP(plr) end
+					end))
+				end
+				table.insert(connections, Players.PlayerAdded:Connect(function(plr)
+					table.insert(connections, plr.CharacterAdded:Connect(function()
+						task.wait(0.1)
+						if enabled then applyESP(plr) end
+					end))
+				end))
+				table.insert(connections, Players.PlayerRemoving:Connect(removeESP))
+			else
+				for _, plr in ipairs(Players:GetPlayers()) do
+					removeESP(plr)
+				end
 			end
 	
-			if data.Billboard then
-				data.Billboard:Destroy()
+		elseif MODE == "InfJump" then
+			if state then
+				table.insert(connections, UserInputService.JumpRequest:Connect(function()
+					local hum = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+					if hum then
+						hum:ChangeState(Enum.HumanoidStateType.Jumping)
+					end
+				end))
 			end
 	
-			espObjects[target] = nil
-		end
-	end
+		elseif MODE == "Fly" then
+			if state then
+				local char = LocalPlayer.Character
+				local root = char and char:FindFirstChild("HumanoidRootPart")
+				if root then
+					bodyGyro = Instance.new("BodyGyro")
+					bodyGyro.P = 9e4
+					bodyGyro.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+					bodyGyro.cframe = root.CFrame
+					bodyGyro.Parent = root
 	
-	-- Create ESP
-	local function createESP(target)
-		if target == player then return end
-		if not target.Character then return end
+					bodyVel = Instance.new("BodyVelocity")
+					bodyVel.velocity = Vector3.zero
+					bodyVel.maxForce = Vector3.new(9e9, 9e9, 9e9)
+					bodyVel.Parent = root
 	
-		removeESP(target)
+					table.insert(connections, RunService.RenderStepped:Connect(function()
+						local cam = workspace.CurrentCamera
+						if not (cam and root.Parent) then return end
+						local dir = Vector3.zero
+						if UserInputService:IsKeyDown(Enum.KeyCode.W) then dir += cam.CFrame.LookVector end
+						if UserInputService:IsKeyDown(Enum.KeyCode.S) then dir -= cam.CFrame.LookVector end
+						if UserInputService:IsKeyDown(Enum.KeyCode.A) then dir -= cam.CFrame.RightVector end
+						if UserInputService:IsKeyDown(Enum.KeyCode.D) then dir += cam.CFrame.RightVector end
+						bodyGyro.CFrame = cam.CFrame
+						bodyVel.Velocity = dir.Magnitude > 0 and (dir.Unit * 50) or Vector3.zero
+					end))
+				end
+			end
 	
-		local character = target.Character
-		local humanoid = character:FindFirstChildOfClass("Humanoid")
-		local head = character:FindFirstChild("Head")
+		elseif MODE == "NoClip" then
+			local char = LocalPlayer.Character
+			if state and char then
+				table.insert(connections, RunService.Stepped:Connect(function()
+					for _, part in ipairs(char:GetDescendants()) do
+						if part:IsA("BasePart") then
+							part.CanCollide = false
+						end
+					end
+				end))
+			elseif char then
+				for _, part in ipairs(char:GetDescendants()) do
+					if part:IsA("BasePart") then
+						part.CanCollide = true
+					end
+				end
+			end
 	
-		if not humanoid or not head then return end
-	
-		local teamColor = getTeamColor(target)
-	
-		-- Highlight
-		local highlight = Instance.new("Highlight")
-		highlight.Name = "PlayerESPHighlight"
-		highlight.Adornee = character
-		highlight.FillColor = teamColor
-		highlight.OutlineColor = teamColor
-		highlight.FillTransparency = 0.8
-		highlight.OutlineTransparency = 0
-		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-		highlight.Parent = character
-	
-		-- Information above player
-		local billboard = Instance.new("BillboardGui")
-		billboard.Name = "PlayerESPInfo"
-		billboard.Adornee = head
-		billboard.Size = UDim2.fromOffset(300, 60)
-		billboard.StudsOffset = Vector3.new(0, 3, 0)
-		billboard.AlwaysOnTop = true
-		billboard.Parent = player:WaitForChild("PlayerGui")
-	
-		local label = Instance.new("TextLabel")
-		label.Size = UDim2.fromScale(1, 1)
-		label.BackgroundTransparency = 1
-		label.TextColor3 = teamColor
-		label.TextStrokeTransparency = 0
-		label.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-		label.Font = Enum.Font.GothamBold
-		label.TextSize = 14
-		label.TextWrapped = true
-		label.Parent = billboard
-	
-		espObjects[target] = {
-			Highlight = highlight,
-			Billboard = billboard,
-			Label = label,
-		}
-	end
-	
-	-- Refresh all ESP
-	local function refreshESP()
-		for target in pairs(espObjects) do
-			removeESP(target)
-		end
-	
-		if not espEnabled then return end
-	
-		for _, target in ipairs(Players:GetPlayers()) do
-			createESP(target)
-		end
-	end
-	
-	-- Update health, distance, and team color
-	local function updateESP()
-		local myCharacter = player.Character
-		local myRoot = myCharacter and myCharacter:FindFirstChild("HumanoidRootPart")
-	
-		if not myRoot then return end
-	
-		for target, data in pairs(espObjects) do
-			local character = target.Character
-			local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-			local root = character and character:FindFirstChild("HumanoidRootPart")
-	
-			if humanoid and root and data.Label then
-				local distance = (myRoot.Position - root.Position).Magnitude
-				local health = math.floor(humanoid.Health)
-				local teamColor = getTeamColor(target)
-	
-				data.Label.TextColor3 = teamColor
-				data.Highlight.FillColor = teamColor
-				data.Highlight.OutlineColor = teamColor
-	
-				data.Label.Text = string.format(
-					"%s | Health: %d | Distance: %d",
-					target.Name,
-					health,
-					distance
-				)
+		elseif MODE == "AntiAFK" then
+			if state then
+				table.insert(connections, LocalPlayer.Idled:Connect(function()
+					local VirtualUser = game:GetService("VirtualUser")
+					VirtualUser:Button2Down(Vector2.zero, workspace.CurrentCamera)
+					task.wait(1)
+					VirtualUser:Button2Up(Vector2.zero, workspace.CurrentCamera)
+				end))
 			end
 		end
 	end
 	
-	-- Toggle ESP
+	button.Text = MODE .. ": OFF"
+	
 	button.MouseButton1Click:Connect(function()
-		espEnabled = not espEnabled
+		enabled = not enabled
+		button.Text = MODE .. (enabled and ": ON" or ": OFF")
+		button.BackgroundColor3 = enabled and Color3.fromRGB(40, 140, 80) or Color3.fromRGB(40, 40, 40)
+		setFeatureState(enabled)
+	end)
 	
-		button.Text = "ESP: " .. (espEnabled and "On" or "Off")
-	
-		if espEnabled then
-			refreshESP()
-	
-			updateConnection = RunService.RenderStepped:Connect(updateESP)
-		else
-			if updateConnection then
-				updateConnection:Disconnect()
-				updateConnection = nil
-			end
-	
-			refreshESP()
+	LocalPlayer.CharacterAdded:Connect(function()
+		if enabled and (MODE == "Fly" or MODE == "NoClip") then
+			enabled = false
+			button.Text = MODE .. ": OFF"
+			button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			setFeatureState(false)
 		end
 	end)
-	
-	-- New players
-	Players.PlayerAdded:Connect(function(target)
-		target.CharacterAdded:Connect(function()
-			task.wait(1)
-	
-			if espEnabled then
-				createESP(target)
-			end
-		end)
-	end)
-	
-	-- Remove when player leaves
-	Players.PlayerRemoving:Connect(function(target)
-		removeESP(target)
-	end)
-	
-	-- Update when team changes
-	Players.PlayerAdded:Connect(function(target)
-		target:GetPropertyChangedSignal("Team"):Connect(function()
-			if espEnabled then
-				createESP(target)
-			end
-		end)
-	end)
-	
-	for _, target in ipairs(Players:GetPlayers()) do
-		target:GetPropertyChangedSignal("Team"):Connect(function()
-			if espEnabled then
-				createESP(target)
-			end
-		end)
-	end
-	
 end
-coroutine.wrap(BIQMPD_fake_script)()
-local function HQEQCBK_fake_script() -- Button.LocalScript 
+coroutine.wrap(AHPA_fake_script)()
+local function EZGJRK_fake_script() -- Button.LocalScript 
 	local script = Instance.new('LocalScript', Button)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1144,8 +1108,8 @@ local function HQEQCBK_fake_script() -- Button.LocalScript
 		frame.Visible = true
 	end)
 end
-coroutine.wrap(HQEQCBK_fake_script)()
-local function YZNSL_fake_script() -- RiotCity.LocalScript 
+coroutine.wrap(EZGJRK_fake_script)()
+local function GCPEY_fake_script() -- RiotCity.LocalScript 
 	local script = Instance.new('LocalScript', RiotCity)
 
 	local Players = game:GetService("Players")
@@ -1176,15 +1140,15 @@ local function YZNSL_fake_script() -- RiotCity.LocalScript
 		end
 	end)
 end
-coroutine.wrap(YZNSL_fake_script)()
-local function YHWZ_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(GCPEY_fake_script)()
+local function MURKZWL_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(YHWZ_fake_script)()
-local function HXXQS_fake_script() -- PlayerList.LocalScript 
+coroutine.wrap(MURKZWL_fake_script)()
+local function OJVRC_fake_script() -- PlayerList.LocalScript 
 	local script = Instance.new('LocalScript', PlayerList)
 
 	
@@ -1257,8 +1221,8 @@ local function HXXQS_fake_script() -- PlayerList.LocalScript
 	RefreshPlayers()
 	
 end
-coroutine.wrap(HXXQS_fake_script)()
-local function KWYIS_fake_script() -- CloseMenu.LocalScript 
+coroutine.wrap(OJVRC_fake_script)()
+local function ACIHEY_fake_script() -- CloseMenu.LocalScript 
 	local script = Instance.new('LocalScript', CloseMenu)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1267,4 +1231,4 @@ local function KWYIS_fake_script() -- CloseMenu.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(KWYIS_fake_script)()
+coroutine.wrap(ACIHEY_fake_script)()
