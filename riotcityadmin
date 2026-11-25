@@ -6,7 +6,7 @@
 local RiotCity = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local PlayerUsername = Instance.new("TextLabel")
-local PlayerList = Instance.new("ScrollingFrame")
+local ButtonsList = Instance.new("ScrollingFrame")
 local PlayerButton = Instance.new("TextButton")
 local UIListLayout = Instance.new("UIListLayout")
 local PlayerButton_2 = Instance.new("TextButton")
@@ -23,14 +23,14 @@ local PlayerButton_10 = Instance.new("TextButton")
 local PlayerButton_11 = Instance.new("TextButton")
 local TextBox_3 = Instance.new("TextBox")
 local TextBox_4 = Instance.new("TextBox")
-local PlayerButton_12 = Instance.new("TextButton")
+local PlayerMenuButton = Instance.new("TextButton")
 local Notification1Ran = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local TextLabel_2 = Instance.new("TextLabel")
 local PlayerMenu = Instance.new("Frame")
 local PlayerUsername_2 = Instance.new("TextLabel")
-local PlayerList_2 = Instance.new("ScrollingFrame")
-local PlayerButton_13 = Instance.new("TextButton")
+local PlayerList = Instance.new("ScrollingFrame")
+local PlayerButton_12 = Instance.new("TextButton")
 local UIListLayout_2 = Instance.new("UIListLayout")
 local InfoFrame = Instance.new("Frame")
 local PlayerUsername_3 = Instance.new("TextLabel")
@@ -70,19 +70,18 @@ PlayerUsername.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerUsername.TextSize = 25.000
 PlayerUsername.TextXAlignment = Enum.TextXAlignment.Left
 
-PlayerList.Name = "PlayerList"
-PlayerList.Parent = Frame
-PlayerList.Active = true
-PlayerList.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
-PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
-PlayerList.BorderSizePixel = 0
-PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
-PlayerList.Size = UDim2.new(0, 197, 0, 230)
-PlayerList.CanvasPosition = Vector2.new(0, 371)
-PlayerList.CanvasSize = UDim2.new(0, 0, 3, 0)
+ButtonsList.Name = "ButtonsList"
+ButtonsList.Parent = Frame
+ButtonsList.Active = true
+ButtonsList.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
+ButtonsList.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ButtonsList.BorderSizePixel = 0
+ButtonsList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
+ButtonsList.Size = UDim2.new(0, 197, 0, 230)
+ButtonsList.CanvasSize = UDim2.new(0, 0, 3, 0)
 
 PlayerButton.Name = "PlayerButton"
-PlayerButton.Parent = PlayerList
+PlayerButton.Parent = ButtonsList
 PlayerButton.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton.BorderSizePixel = 0
@@ -94,12 +93,12 @@ PlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton.TextSize = 21.000
 PlayerButton.TextWrapped = true
 
-UIListLayout.Parent = PlayerList
+UIListLayout.Parent = ButtonsList
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 3)
 
 PlayerButton_2.Name = "PlayerButton"
-PlayerButton_2.Parent = PlayerList
+PlayerButton_2.Parent = ButtonsList
 PlayerButton_2.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_2.BorderSizePixel = 0
@@ -112,7 +111,7 @@ PlayerButton_2.TextSize = 21.000
 PlayerButton_2.TextWrapped = true
 
 PlayerButton_3.Name = "PlayerButton"
-PlayerButton_3.Parent = PlayerList
+PlayerButton_3.Parent = ButtonsList
 PlayerButton_3.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_3.BorderSizePixel = 0
@@ -125,7 +124,7 @@ PlayerButton_3.TextSize = 21.000
 PlayerButton_3.TextWrapped = true
 
 PlayerButton_4.Name = "PlayerButton"
-PlayerButton_4.Parent = PlayerList
+PlayerButton_4.Parent = ButtonsList
 PlayerButton_4.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_4.BorderSizePixel = 0
@@ -138,7 +137,7 @@ PlayerButton_4.TextSize = 21.000
 PlayerButton_4.TextWrapped = true
 
 PlayerButton_5.Name = "PlayerButton"
-PlayerButton_5.Parent = PlayerList
+PlayerButton_5.Parent = ButtonsList
 PlayerButton_5.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_5.BorderSizePixel = 0
@@ -151,7 +150,7 @@ PlayerButton_5.TextSize = 21.000
 PlayerButton_5.TextWrapped = true
 
 PlayerButton_6.Name = "PlayerButton"
-PlayerButton_6.Parent = PlayerList
+PlayerButton_6.Parent = ButtonsList
 PlayerButton_6.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_6.BorderSizePixel = 0
@@ -164,7 +163,7 @@ PlayerButton_6.TextSize = 21.000
 PlayerButton_6.TextWrapped = true
 
 PlayerButton_7.Name = "PlayerButton"
-PlayerButton_7.Parent = PlayerList
+PlayerButton_7.Parent = ButtonsList
 PlayerButton_7.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_7.BorderSizePixel = 0
@@ -176,7 +175,7 @@ PlayerButton_7.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_7.TextSize = 21.000
 PlayerButton_7.TextWrapped = true
 
-TextBox.Parent = PlayerList
+TextBox.Parent = ButtonsList
 TextBox.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextBox.BorderSizePixel = 0
@@ -187,7 +186,7 @@ TextBox.Text = ""
 TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextBox.TextSize = 21.000
 
-TextBox_2.Parent = PlayerList
+TextBox_2.Parent = ButtonsList
 TextBox_2.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 TextBox_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextBox_2.BorderSizePixel = 0
@@ -200,7 +199,7 @@ TextBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextBox_2.TextSize = 21.000
 
 PlayerButton_8.Name = "PlayerButton"
-PlayerButton_8.Parent = PlayerList
+PlayerButton_8.Parent = ButtonsList
 PlayerButton_8.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_8.BorderSizePixel = 0
@@ -213,7 +212,7 @@ PlayerButton_8.TextSize = 21.000
 PlayerButton_8.TextWrapped = true
 
 PlayerButton_9.Name = "PlayerButton"
-PlayerButton_9.Parent = PlayerList
+PlayerButton_9.Parent = ButtonsList
 PlayerButton_9.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_9.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_9.BorderSizePixel = 0
@@ -226,7 +225,7 @@ PlayerButton_9.TextSize = 21.000
 PlayerButton_9.TextWrapped = true
 
 PlayerButton_10.Name = "PlayerButton"
-PlayerButton_10.Parent = PlayerList
+PlayerButton_10.Parent = ButtonsList
 PlayerButton_10.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_10.BorderSizePixel = 0
@@ -239,7 +238,7 @@ PlayerButton_10.TextSize = 21.000
 PlayerButton_10.TextWrapped = true
 
 PlayerButton_11.Name = "PlayerButton"
-PlayerButton_11.Parent = PlayerList
+PlayerButton_11.Parent = ButtonsList
 PlayerButton_11.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_11.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_11.BorderSizePixel = 0
@@ -251,7 +250,7 @@ PlayerButton_11.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_11.TextSize = 21.000
 PlayerButton_11.TextWrapped = true
 
-TextBox_3.Parent = PlayerList
+TextBox_3.Parent = ButtonsList
 TextBox_3.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 TextBox_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextBox_3.BorderSizePixel = 0
@@ -263,7 +262,7 @@ TextBox_3.Text = ""
 TextBox_3.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextBox_3.TextSize = 21.000
 
-TextBox_4.Parent = PlayerList
+TextBox_4.Parent = ButtonsList
 TextBox_4.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 TextBox_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextBox_4.BorderSizePixel = 0
@@ -275,18 +274,18 @@ TextBox_4.Text = ""
 TextBox_4.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextBox_4.TextSize = 21.000
 
-PlayerButton_12.Name = "PlayerButton"
-PlayerButton_12.Parent = PlayerList
-PlayerButton_12.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
-PlayerButton_12.BorderColor3 = Color3.fromRGB(0, 0, 0)
-PlayerButton_12.BorderSizePixel = 0
-PlayerButton_12.Position = UDim2.new(0.0050749029, 0, 0, 0)
-PlayerButton_12.Size = UDim2.new(0, 185, 0, 32)
-PlayerButton_12.Font = Enum.Font.SourceSans
-PlayerButton_12.Text = ";PlayerMenu"
-PlayerButton_12.TextColor3 = Color3.fromRGB(255, 255, 255)
-PlayerButton_12.TextSize = 21.000
-PlayerButton_12.TextWrapped = true
+PlayerMenuButton.Name = "PlayerMenuButton"
+PlayerMenuButton.Parent = ButtonsList
+PlayerMenuButton.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerMenuButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerMenuButton.BorderSizePixel = 0
+PlayerMenuButton.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerMenuButton.Size = UDim2.new(0, 185, 0, 32)
+PlayerMenuButton.Font = Enum.Font.SourceSans
+PlayerMenuButton.Text = ";PlayerMenu"
+PlayerMenuButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerMenuButton.TextSize = 21.000
+PlayerMenuButton.TextWrapped = true
 
 Notification1Ran.Name = "Notification1Ran"
 Notification1Ran.Parent = RiotCity
@@ -347,28 +346,28 @@ PlayerUsername_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerUsername_2.TextSize = 25.000
 PlayerUsername_2.TextXAlignment = Enum.TextXAlignment.Left
 
-PlayerList_2.Name = "PlayerList"
-PlayerList_2.Parent = PlayerMenu
-PlayerList_2.Active = true
-PlayerList_2.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
-PlayerList_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-PlayerList_2.BorderSizePixel = 0
-PlayerList_2.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
-PlayerList_2.Size = UDim2.new(0, 197, 0, 230)
+PlayerList.Name = "PlayerList"
+PlayerList.Parent = PlayerMenu
+PlayerList.Active = true
+PlayerList.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
+PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerList.BorderSizePixel = 0
+PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
+PlayerList.Size = UDim2.new(0, 197, 0, 230)
 
-PlayerButton_13.Name = "PlayerButton"
-PlayerButton_13.Parent = PlayerList_2
-PlayerButton_13.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
-PlayerButton_13.BorderColor3 = Color3.fromRGB(0, 0, 0)
-PlayerButton_13.BorderSizePixel = 0
-PlayerButton_13.Size = UDim2.new(0, 185, 0, 32)
-PlayerButton_13.Font = Enum.Font.SourceSans
-PlayerButton_13.Text = "Player Username"
-PlayerButton_13.TextColor3 = Color3.fromRGB(255, 255, 255)
-PlayerButton_13.TextSize = 21.000
-PlayerButton_13.TextWrapped = true
+PlayerButton_12.Name = "PlayerButton"
+PlayerButton_12.Parent = PlayerList
+PlayerButton_12.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_12.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_12.BorderSizePixel = 0
+PlayerButton_12.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_12.Font = Enum.Font.SourceSans
+PlayerButton_12.Text = "Player Username"
+PlayerButton_12.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_12.TextSize = 21.000
+PlayerButton_12.TextWrapped = true
 
-UIListLayout_2.Parent = PlayerList_2
+UIListLayout_2.Parent = PlayerList
 UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout_2.Padding = UDim.new(0, 3)
 
@@ -475,14 +474,14 @@ ViewButton.TextWrapped = true
 
 -- Scripts:
 
-local function ZYOBN_fake_script() -- Frame.LocalScript 
+local function YPFW_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(ZYOBN_fake_script)()
-local function CSLCT_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(YPFW_fake_script)()
+local function VKPDVAR_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -501,8 +500,8 @@ local function CSLCT_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(CSLCT_fake_script)()
-local function KQUELNZ_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(VKPDVAR_fake_script)()
+local function VUFM_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -537,8 +536,8 @@ local function KQUELNZ_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(KQUELNZ_fake_script)()
-local function ZJOHSW_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(VUFM_fake_script)()
+local function AAXCTID_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -570,8 +569,8 @@ local function ZJOHSW_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZJOHSW_fake_script)()
-local function GUYXCR_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(AAXCTID_fake_script)()
+local function XXUWQV_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -599,8 +598,8 @@ local function GUYXCR_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(GUYXCR_fake_script)()
-local function UOTDTLR_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(XXUWQV_fake_script)()
+local function JCCNDPB_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -637,8 +636,8 @@ local function UOTDTLR_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(UOTDTLR_fake_script)()
-local function ZSEEOD_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(JCCNDPB_fake_script)()
+local function LRHF_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -664,8 +663,8 @@ local function ZSEEOD_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZSEEOD_fake_script)()
-local function CGMC_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(LRHF_fake_script)()
+local function YLWCZLB_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -699,8 +698,8 @@ local function CGMC_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(CGMC_fake_script)()
-local function VILBRGP_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(YLWCZLB_fake_script)()
+local function JEBLWUV_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -738,8 +737,8 @@ local function VILBRGP_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(VILBRGP_fake_script)()
-local function DXET_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(JEBLWUV_fake_script)()
+local function UOJTGO_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -758,8 +757,8 @@ local function DXET_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(DXET_fake_script)()
-local function EKLWXWE_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(UOJTGO_fake_script)()
+local function JODYPEP_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -795,8 +794,8 @@ local function EKLWXWE_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(EKLWXWE_fake_script)()
-local function PHEMJJ_fake_script() -- PlayerButton_10.LocalScript 
+coroutine.wrap(JODYPEP_fake_script)()
+local function WDVU_fake_script() -- PlayerButton_10.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_10)
 
 	
@@ -818,8 +817,8 @@ local function PHEMJJ_fake_script() -- PlayerButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(PHEMJJ_fake_script)()
-local function LITUN_fake_script() -- PlayerButton_11.LocalScript 
+coroutine.wrap(WDVU_fake_script)()
+local function WTPTKF_fake_script() -- PlayerButton_11.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_11)
 
 	
@@ -880,8 +879,8 @@ local function LITUN_fake_script() -- PlayerButton_11.LocalScript
 	button.Text = "Noclip: OFF"
 	
 end
-coroutine.wrap(LITUN_fake_script)()
-local function YACN_fake_script() -- TextBox_3.LocalScript 
+coroutine.wrap(WTPTKF_fake_script)()
+local function AUDPRHR_fake_script() -- TextBox_3.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_3)
 
 	
@@ -950,8 +949,8 @@ local function YACN_fake_script() -- TextBox_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(YACN_fake_script)()
-local function DNPLI_fake_script() -- TextBox_4.LocalScript 
+coroutine.wrap(AUDPRHR_fake_script)()
+local function MZCA_fake_script() -- TextBox_4.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_4)
 
 	
@@ -1011,23 +1010,23 @@ local function DNPLI_fake_script() -- TextBox_4.LocalScript
 	textBox.FocusLost:Connect(teleportToPlayer)
 	
 end
-coroutine.wrap(DNPLI_fake_script)()
-local function WAIQ_fake_script() -- PlayerButton_12.LocalScript 
-	local script = Instance.new('LocalScript', PlayerButton_12)
+coroutine.wrap(MZCA_fake_script)()
+local function VNNHARB_fake_script() -- PlayerMenuButton.LocalScript 
+	local script = Instance.new('LocalScript', PlayerMenuButton)
 
 	
 	local button = script.Parent
+	local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	
-	local player = game.Players.LocalPlayer
-	local playerMenu = player.PlayerGui:WaitForChild("PlayerMenu")
+	local playerMenu = playerGui:WaitForChild("PlayerMenu")
 	
 	button.Activated:Connect(function()
 		playerMenu.Visible = true
 	end)
 	
 end
-coroutine.wrap(WAIQ_fake_script)()
-local function TGZKDP_fake_script() -- RiotCity.LocalScript 
+coroutine.wrap(VNNHARB_fake_script)()
+local function BVFKYHI_fake_script() -- RiotCity.LocalScript 
 	local script = Instance.new('LocalScript', RiotCity)
 
 	local Players = game:GetService("Players")
@@ -1058,22 +1057,22 @@ local function TGZKDP_fake_script() -- RiotCity.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TGZKDP_fake_script)()
-local function GSVHJ_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(BVFKYHI_fake_script)()
+local function SMEVXXA_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(GSVHJ_fake_script)()
-local function GSKHI_fake_script() -- InfoFrame.LocalScript 
+coroutine.wrap(SMEVXXA_fake_script)()
+local function PPPRKO_fake_script() -- InfoFrame.LocalScript 
 	local script = Instance.new('LocalScript', InfoFrame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(GSKHI_fake_script)()
-local function VDSAUFY_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(PPPRKO_fake_script)()
+local function OTQL_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	
@@ -1310,4 +1309,4 @@ local function VDSAUFY_fake_script() -- PlayerMenu.LocalScript
 	refreshPlayers()
 	
 end
-coroutine.wrap(VDSAUFY_fake_script)()
+coroutine.wrap(OTQL_fake_script)()
