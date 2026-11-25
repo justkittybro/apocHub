@@ -50,7 +50,6 @@ PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerList.BorderSizePixel = 0
 PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
 PlayerList.Size = UDim2.new(0, 197, 0, 230)
-PlayerList.CanvasPosition = Vector2.new(0, 100)
 
 PlayerButton.Name = "PlayerButton"
 PlayerButton.Parent = PlayerList
@@ -149,14 +148,14 @@ PlayerButton_7.TextWrapped = true
 
 -- Scripts:
 
-local function RMVZOE_fake_script() -- Frame.LocalScript 
+local function LEADBD_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(RMVZOE_fake_script)()
-local function SWSCN_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(LEADBD_fake_script)()
+local function GXBWZNG_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -175,8 +174,8 @@ local function SWSCN_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(SWSCN_fake_script)()
-local function RPNR_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(GXBWZNG_fake_script)()
+local function UQYMQYI_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -211,8 +210,8 @@ local function RPNR_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(RPNR_fake_script)()
-local function XLSWROA_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(UQYMQYI_fake_script)()
+local function VIYJAL_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -244,8 +243,8 @@ local function XLSWROA_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(XLSWROA_fake_script)()
-local function EIUQCNA_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(VIYJAL_fake_script)()
+local function HSUXN_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	local Players = game:GetService("Players")
@@ -275,8 +274,8 @@ local function EIUQCNA_fake_script() -- PlayerButton_5.LocalScript
 		end
 	end)
 end
-coroutine.wrap(EIUQCNA_fake_script)()
-local function VPDLOT_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(HSUXN_fake_script)()
+local function FIMLBP_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -313,8 +312,8 @@ local function VPDLOT_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(VPDLOT_fake_script)()
-local function RTGP_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(FIMLBP_fake_script)()
+local function XWSYBV_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -323,21 +322,21 @@ local function RTGP_fake_script() -- PlayerButton_7.LocalScript
 	local player = Players.LocalPlayer
 	local button = script.Parent
 	
-	local targetPivot = CFrame.new(
-		267.41098, -35.4699707, -925.367859,
-		0.258864343, 0, -0.965913713,
-		0, 1, 0,
-		0.965913713, 0, 0.258864343
-	)
-	
 	button.Activated:Connect(function()
+		local gate = workspace:FindFirstChild("JewerlyGate", true)
+	
+		if not gate or not gate:IsA("BasePart") then
+			warn("JewerlyGate part not found!")
+			return
+		end
+	
 		local character = player.Character
 		local root = character and character:FindFirstChild("HumanoidRootPart")
 	
 		if root then
-			root.CFrame = targetPivot
+			root.CFrame = gate.CFrame * CFrame.new(0, 0, 3)
 		end
 	end)
 	
 end
-coroutine.wrap(RTGP_fake_script)()
+coroutine.wrap(XWSYBV_fake_script)()
