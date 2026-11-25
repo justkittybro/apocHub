@@ -1,0 +1,9 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+while wait (0.5) do
+local args = {
+	-math.huge
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Damage"):FireServer(unpack(args))
+end
