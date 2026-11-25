@@ -1,0 +1,121 @@
+-- Gui to Lua
+-- Version: 3.3
+
+-- Instances:
+
+local PlayerTeleportGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local PlayerUsername = Instance.new("TextLabel")
+local PlayerList = Instance.new("ScrollingFrame")
+local PlayerButton = Instance.new("TextButton")
+local UIListLayout = Instance.new("UIListLayout")
+
+--Properties:
+
+PlayerTeleportGui.Name = "PlayerTeleportGui"
+PlayerTeleportGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+PlayerTeleportGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+PlayerTeleportGui.ResetOnSpawn = false
+
+Frame.Parent = PlayerTeleportGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.811788738, 0, 0.220634043, 0)
+Frame.Size = UDim2.new(0, 198, 0, 267)
+
+PlayerUsername.Name = "PlayerUsername"
+PlayerUsername.Parent = Frame
+PlayerUsername.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+PlayerUsername.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerUsername.Size = UDim2.new(0, 197, 0, 37)
+PlayerUsername.Font = Enum.Font.SourceSans
+PlayerUsername.Text = "Player Teleporter"
+PlayerUsername.TextColor3 = Color3.fromRGB(0, 0, 0)
+PlayerUsername.TextSize = 21.000
+
+PlayerList.Name = "PlayerList"
+PlayerList.Parent = Frame
+PlayerList.Active = true
+PlayerList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerList.BorderSizePixel = 0
+PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
+PlayerList.Size = UDim2.new(0, 197, 0, 230)
+
+PlayerButton.Name = "PlayerButton"
+PlayerButton.Parent = PlayerList
+PlayerButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+PlayerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton.BorderSizePixel = 0
+PlayerButton.Position = UDim2.new(0.0101513546, 0, 0, 0)
+PlayerButton.Size = UDim2.new(0, 197, 0, 32)
+PlayerButton.Font = Enum.Font.SourceSans
+PlayerButton.Text = "Waiting for players"
+PlayerButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton.TextSize = 21.000
+PlayerButton.TextWrapped = true
+
+UIListLayout.Parent = PlayerList
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+-- Scripts:
+
+local function FQEGOMJ_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(FQEGOMJ_fake_script)()
+local function PDTJJMT_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local playerList = script.Parent:WaitForChild("PlayerList")
+	local template = playerList:WaitForChild("PlayerButton")
+	
+	template.Visible = false
+	
+	local function refresh()
+		for _, child in ipairs(playerList:GetChildren()) do
+			if child:IsA("TextButton") and child ~= template then
+				child:Destroy()
+			end
+		end
+	
+		for _, target in ipairs(Players:GetPlayers()) do
+			if target ~= player then
+				local button = template:Clone()
+				button.Name = target.Name .. "Button"
+				button.Text = target.DisplayName .. " (@" .. target.Name .. ")"
+				button.Visible = true
+				button.Parent = playerList
+	
+				button.Activated:Connect(function()
+					local character = player.Character
+					local targetCharacter = target.Character
+	
+					if character and targetCharacter then
+						local myRoot = character:FindFirstChild("HumanoidRootPart")
+						local targetRoot = targetCharacter:FindFirstChild("HumanoidRootPart")
+	
+						if myRoot and targetRoot then
+							myRoot.CFrame = targetRoot.CFrame * CFrame.new(0, 0, 3)
+						end
+					end
+				end)
+			end
+		end
+	end
+	
+	Players.PlayerAdded:Connect(refresh)
+	Players.PlayerRemoving:Connect(refresh)
+	
+	refresh()
+	
+end
+coroutine.wrap(PDTJJMT_fake_script)()
