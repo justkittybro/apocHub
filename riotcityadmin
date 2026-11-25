@@ -19,6 +19,10 @@ local TextBox = Instance.new("TextBox")
 local TextBox_2 = Instance.new("TextBox")
 local PlayerButton_8 = Instance.new("TextButton")
 local PlayerButton_9 = Instance.new("TextButton")
+local PlayerButton_10 = Instance.new("TextButton")
+local Notification1Ran = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
 
 --Properties:
 
@@ -31,13 +35,14 @@ Frame.Parent = RiotCity
 Frame.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.811788738, 0, 0.220634043, 0)
+Frame.Position = UDim2.new(0.542886317, 0, 0.218319222, 0)
 Frame.Size = UDim2.new(0, 198, 0, 267)
 
 PlayerUsername.Name = "PlayerUsername"
 PlayerUsername.Parent = Frame
 PlayerUsername.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
 PlayerUsername.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerUsername.BorderSizePixel = 0
 PlayerUsername.Position = UDim2.new(0.0505050495, 0, 0, 0)
 PlayerUsername.Size = UDim2.new(0, 187, 0, 37)
 PlayerUsername.Font = Enum.Font.SourceSans
@@ -199,16 +204,65 @@ PlayerButton_9.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_9.TextSize = 21.000
 PlayerButton_9.TextWrapped = true
 
+PlayerButton_10.Name = "PlayerButton"
+PlayerButton_10.Parent = PlayerList
+PlayerButton_10.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_10.BorderSizePixel = 0
+PlayerButton_10.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_10.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_10.Font = Enum.Font.SourceSans
+PlayerButton_10.Text = "instantproxy: Off"
+PlayerButton_10.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_10.TextSize = 21.000
+PlayerButton_10.TextWrapped = true
+
+Notification1Ran.Name = "Notification1Ran"
+Notification1Ran.Parent = RiotCity
+Notification1Ran.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+Notification1Ran.BorderColor3 = Color3.fromRGB(84, 84, 84)
+Notification1Ran.BorderSizePixel = 2
+Notification1Ran.Position = UDim2.new(0.21676828, 0, 0.0493206456, 0)
+Notification1Ran.Size = UDim2.new(0, 192, 0, 110)
+
+TextLabel.Parent = Notification1Ran
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.202683449, 0, 0.100188099, 0)
+TextLabel.Size = UDim2.new(0, 111, 0, 23)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Notification"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextLabel_2.Parent = Notification1Ran
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.198494598, 0, 0.364543021, 0)
+TextLabel_2.Size = UDim2.new(0, 121, 0, 69)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "If it does not teleport then its been robbed already"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+
 -- Scripts:
 
-local function GJWV_fake_script() -- Frame.LocalScript 
+local function VSCN_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(GJWV_fake_script)()
-local function ZFJNHB_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(VSCN_fake_script)()
+local function RCDKD_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -227,8 +281,8 @@ local function ZFJNHB_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(ZFJNHB_fake_script)()
-local function RNDYVB_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(RCDKD_fake_script)()
+local function LFTJ_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -263,8 +317,8 @@ local function RNDYVB_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(RNDYVB_fake_script)()
-local function SEYYTKX_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(LFTJ_fake_script)()
+local function DUZTVB_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -296,8 +350,8 @@ local function SEYYTKX_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(SEYYTKX_fake_script)()
-local function PTOJMG_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(DUZTVB_fake_script)()
+local function UWJUWH_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -325,8 +379,8 @@ local function PTOJMG_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(PTOJMG_fake_script)()
-local function AXRYMRH_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(UWJUWH_fake_script)()
+local function BONNAO_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -363,8 +417,8 @@ local function AXRYMRH_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(AXRYMRH_fake_script)()
-local function DTAF_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(BONNAO_fake_script)()
+local function UQJA_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -390,8 +444,8 @@ local function DTAF_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(DTAF_fake_script)()
-local function YBDRAKE_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(UQJA_fake_script)()
+local function WWFG_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -425,8 +479,8 @@ local function YBDRAKE_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(YBDRAKE_fake_script)()
-local function XZSMJ_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(WWFG_fake_script)()
+local function ARQP_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -464,8 +518,8 @@ local function XZSMJ_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(XZSMJ_fake_script)()
-local function LCPFI_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(ARQP_fake_script)()
+local function HEFAY_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -484,8 +538,8 @@ local function LCPFI_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(LCPFI_fake_script)()
-local function THZUWHM_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(HEFAY_fake_script)()
+local function UYVWFK_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -521,4 +575,27 @@ local function THZUWHM_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(THZUWHM_fake_script)()
+coroutine.wrap(UYVWFK_fake_script)()
+local function WAGFQMT_fake_script() -- PlayerButton_10.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_10)
+
+	
+	local button = script.Parent
+	local instant = false
+	
+	button.Text = "Instant Proxy: OFF"
+	
+	button.Activated:Connect(function()
+		instant = not instant
+	
+		button.Text = instant and "Instant Proxy: ON" or "Instant Proxy: OFF"
+	
+		for _, prompt in ipairs(workspace:GetDescendants()) do
+			if prompt:IsA("ProximityPrompt") then
+				prompt.HoldDuration = instant and 0 or 1
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(WAGFQMT_fake_script)()
