@@ -395,14 +395,14 @@ CloseMenu.TextWrapped = true
 
 -- Scripts:
 
-local function LEZP_fake_script() -- Frame.LocalScript 
+local function DOEAWO_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(LEZP_fake_script)()
-local function DURAKI_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(DOEAWO_fake_script)()
+local function GIJH_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -421,8 +421,8 @@ local function DURAKI_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(DURAKI_fake_script)()
-local function RMHBUFX_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(GIJH_fake_script)()
+local function EIJDXFQ_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -457,8 +457,8 @@ local function RMHBUFX_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(RMHBUFX_fake_script)()
-local function DQSHQK_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(EIJDXFQ_fake_script)()
+local function LWOAJ_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -490,8 +490,8 @@ local function DQSHQK_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(DQSHQK_fake_script)()
-local function BIBU_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(LWOAJ_fake_script)()
+local function ZTAIOM_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -519,8 +519,8 @@ local function BIBU_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(BIBU_fake_script)()
-local function DHPBOO_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(ZTAIOM_fake_script)()
+local function ZCTURLQ_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -557,8 +557,8 @@ local function DHPBOO_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(DHPBOO_fake_script)()
-local function MMGR_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(ZCTURLQ_fake_script)()
+local function LETCW_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -584,8 +584,8 @@ local function MMGR_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(MMGR_fake_script)()
-local function BFLKZ_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(LETCW_fake_script)()
+local function IXPDP_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -619,8 +619,8 @@ local function BFLKZ_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(BFLKZ_fake_script)()
-local function KSPX_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(IXPDP_fake_script)()
+local function HMCSBLM_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -658,8 +658,8 @@ local function KSPX_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(KSPX_fake_script)()
-local function PYTGHWE_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(HMCSBLM_fake_script)()
+local function IFQKJGF_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -678,8 +678,8 @@ local function PYTGHWE_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(PYTGHWE_fake_script)()
-local function LZIFW_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(IFQKJGF_fake_script)()
+local function ACKGVX_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -715,8 +715,8 @@ local function LZIFW_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(LZIFW_fake_script)()
-local function BOQDUO_fake_script() -- PlayerButton_10.LocalScript 
+coroutine.wrap(ACKGVX_fake_script)()
+local function QDQIVIG_fake_script() -- PlayerButton_10.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_10)
 
 	
@@ -738,8 +738,8 @@ local function BOQDUO_fake_script() -- PlayerButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(BOQDUO_fake_script)()
-local function XRZOGWX_fake_script() -- PlayerButton_11.LocalScript 
+coroutine.wrap(QDQIVIG_fake_script)()
+local function ZTIBR_fake_script() -- PlayerButton_11.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_11)
 
 	
@@ -800,8 +800,8 @@ local function XRZOGWX_fake_script() -- PlayerButton_11.LocalScript
 	button.Text = "Noclip: OFF"
 	
 end
-coroutine.wrap(XRZOGWX_fake_script)()
-local function GWLTD_fake_script() -- TextBox_3.LocalScript 
+coroutine.wrap(ZTIBR_fake_script)()
+local function RDRIG_fake_script() -- TextBox_3.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_3)
 
 	
@@ -870,8 +870,8 @@ local function GWLTD_fake_script() -- TextBox_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(GWLTD_fake_script)()
-local function AINAHC_fake_script() -- TextBox_4.LocalScript 
+coroutine.wrap(RDRIG_fake_script)()
+local function TZVYO_fake_script() -- TextBox_4.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_4)
 
 	
@@ -931,25 +931,59 @@ local function AINAHC_fake_script() -- TextBox_4.LocalScript
 	textBox.FocusLost:Connect(teleportToPlayer)
 	
 end
-coroutine.wrap(AINAHC_fake_script)()
-local function CTRR_fake_script() -- PlayerButton_12.LocalScript 
+coroutine.wrap(TZVYO_fake_script)()
+local function BIQMPD_fake_script() -- PlayerButton_12.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_12)
 
 	
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	local espEnabled = false
+	local espObjects = {}
+	local updateConnection
+	
+	button.Text = "ESP: Off"
+	
+	-- Team colors
 	local function getTeamColor(target)
 		local teamName = target.Team and target.Team.Name or ""
 	
 		if teamName == "Prisoner" or teamName == "Prisoners" then
 			return Color3.fromRGB(255, 140, 0) -- Orange
-		elseif teamName == "Cop" or teamName == "Cops" or teamName == "Police" then
+	
+		elseif teamName == "Cop" or teamName == "Cops"
+			or teamName == "Police" then
 			return Color3.fromRGB(0, 120, 255) -- Blue
+	
 		elseif teamName == "Fugitive" or teamName == "Fugitives" then
 			return Color3.fromRGB(255, 0, 0) -- Red
 		end
 	
-		return Color3.fromRGB(255, 255, 255) -- Default white
+		return Color3.fromRGB(255, 255, 255)
 	end
 	
+	-- Remove ESP
+	local function removeESP(target)
+		local data = espObjects[target]
+	
+		if data then
+			if data.Highlight then
+				data.Highlight:Destroy()
+			end
+	
+			if data.Billboard then
+				data.Billboard:Destroy()
+			end
+	
+			espObjects[target] = nil
+		end
+	end
+	
+	-- Create ESP
 	local function createESP(target)
 		if target == player then return end
 		if not target.Character then return end
@@ -964,7 +998,7 @@ local function CTRR_fake_script() -- PlayerButton_12.LocalScript
 	
 		local teamColor = getTeamColor(target)
 	
-		-- Team-colored highlight
+		-- Highlight
 		local highlight = Instance.new("Highlight")
 		highlight.Name = "PlayerESPHighlight"
 		highlight.Adornee = character
@@ -975,11 +1009,11 @@ local function CTRR_fake_script() -- PlayerButton_12.LocalScript
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 		highlight.Parent = character
 	
-		-- Player information above head
+		-- Information above player
 		local billboard = Instance.new("BillboardGui")
 		billboard.Name = "PlayerESPInfo"
 		billboard.Adornee = head
-		billboard.Size = UDim2.fromOffset(250, 60)
+		billboard.Size = UDim2.fromOffset(300, 60)
 		billboard.StudsOffset = Vector3.new(0, 3, 0)
 		billboard.AlwaysOnTop = true
 		billboard.Parent = player:WaitForChild("PlayerGui")
@@ -992,7 +1026,7 @@ local function CTRR_fake_script() -- PlayerButton_12.LocalScript
 		label.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 		label.Font = Enum.Font.GothamBold
 		label.TextSize = 14
-		label.Text = target.Name
+		label.TextWrapped = true
 		label.Parent = billboard
 	
 		espObjects[target] = {
@@ -1002,9 +1036,106 @@ local function CTRR_fake_script() -- PlayerButton_12.LocalScript
 		}
 	end
 	
+	-- Refresh all ESP
+	local function refreshESP()
+		for target in pairs(espObjects) do
+			removeESP(target)
+		end
+	
+		if not espEnabled then return end
+	
+		for _, target in ipairs(Players:GetPlayers()) do
+			createESP(target)
+		end
+	end
+	
+	-- Update health, distance, and team color
+	local function updateESP()
+		local myCharacter = player.Character
+		local myRoot = myCharacter and myCharacter:FindFirstChild("HumanoidRootPart")
+	
+		if not myRoot then return end
+	
+		for target, data in pairs(espObjects) do
+			local character = target.Character
+			local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+			local root = character and character:FindFirstChild("HumanoidRootPart")
+	
+			if humanoid and root and data.Label then
+				local distance = (myRoot.Position - root.Position).Magnitude
+				local health = math.floor(humanoid.Health)
+				local teamColor = getTeamColor(target)
+	
+				data.Label.TextColor3 = teamColor
+				data.Highlight.FillColor = teamColor
+				data.Highlight.OutlineColor = teamColor
+	
+				data.Label.Text = string.format(
+					"%s | Health: %d | Distance: %d",
+					target.Name,
+					health,
+					distance
+				)
+			end
+		end
+	end
+	
+	-- Toggle ESP
+	button.MouseButton1Click:Connect(function()
+		espEnabled = not espEnabled
+	
+		button.Text = "ESP: " .. (espEnabled and "On" or "Off")
+	
+		if espEnabled then
+			refreshESP()
+	
+			updateConnection = RunService.RenderStepped:Connect(updateESP)
+		else
+			if updateConnection then
+				updateConnection:Disconnect()
+				updateConnection = nil
+			end
+	
+			refreshESP()
+		end
+	end)
+	
+	-- New players
+	Players.PlayerAdded:Connect(function(target)
+		target.CharacterAdded:Connect(function()
+			task.wait(1)
+	
+			if espEnabled then
+				createESP(target)
+			end
+		end)
+	end)
+	
+	-- Remove when player leaves
+	Players.PlayerRemoving:Connect(function(target)
+		removeESP(target)
+	end)
+	
+	-- Update when team changes
+	Players.PlayerAdded:Connect(function(target)
+		target:GetPropertyChangedSignal("Team"):Connect(function()
+			if espEnabled then
+				createESP(target)
+			end
+		end)
+	end)
+	
+	for _, target in ipairs(Players:GetPlayers()) do
+		target:GetPropertyChangedSignal("Team"):Connect(function()
+			if espEnabled then
+				createESP(target)
+			end
+		end)
+	end
+	
 end
-coroutine.wrap(CTRR_fake_script)()
-local function QJHDLED_fake_script() -- Button.LocalScript 
+coroutine.wrap(BIQMPD_fake_script)()
+local function HQEQCBK_fake_script() -- Button.LocalScript 
 	local script = Instance.new('LocalScript', Button)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1013,8 +1144,8 @@ local function QJHDLED_fake_script() -- Button.LocalScript
 		frame.Visible = true
 	end)
 end
-coroutine.wrap(QJHDLED_fake_script)()
-local function TTPJOFT_fake_script() -- RiotCity.LocalScript 
+coroutine.wrap(HQEQCBK_fake_script)()
+local function YZNSL_fake_script() -- RiotCity.LocalScript 
 	local script = Instance.new('LocalScript', RiotCity)
 
 	local Players = game:GetService("Players")
@@ -1045,15 +1176,15 @@ local function TTPJOFT_fake_script() -- RiotCity.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TTPJOFT_fake_script)()
-local function VZXISD_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(YZNSL_fake_script)()
+local function YHWZ_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(VZXISD_fake_script)()
-local function WGWENJU_fake_script() -- PlayerList.LocalScript 
+coroutine.wrap(YHWZ_fake_script)()
+local function HXXQS_fake_script() -- PlayerList.LocalScript 
 	local script = Instance.new('LocalScript', PlayerList)
 
 	
@@ -1126,8 +1257,8 @@ local function WGWENJU_fake_script() -- PlayerList.LocalScript
 	RefreshPlayers()
 	
 end
-coroutine.wrap(WGWENJU_fake_script)()
-local function YMRLHCM_fake_script() -- CloseMenu.LocalScript 
+coroutine.wrap(HXXQS_fake_script)()
+local function KWYIS_fake_script() -- CloseMenu.LocalScript 
 	local script = Instance.new('LocalScript', CloseMenu)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1136,4 +1267,4 @@ local function YMRLHCM_fake_script() -- CloseMenu.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(YMRLHCM_fake_script)()
+coroutine.wrap(KWYIS_fake_script)()
