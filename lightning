@@ -1,0 +1,575 @@
+-- Gui to Lua
+-- Version: 3.3
+
+-- Instances:
+
+local Lightning = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Executor = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local UIStroke = Instance.new("UIStroke")
+local Exe = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+local UIStroke_2 = Instance.new("UIStroke")
+local Cle = Instance.new("ImageButton")
+local UICorner_2 = Instance.new("UICorner")
+local UIStroke_3 = Instance.new("UIStroke")
+local R6 = Instance.new("TextButton")
+local UIStroke_4 = Instance.new("UIStroke")
+local UICorner_3 = Instance.new("UICorner")
+local Discord = Instance.new("ImageButton")
+local UICorner_4 = Instance.new("UICorner")
+local UIStroke_5 = Instance.new("UIStroke")
+local Executor_2 = Instance.new("ImageButton")
+local UICorner_5 = Instance.new("UICorner")
+local UIStroke_6 = Instance.new("UIStroke")
+local ScriptHub = Instance.new("ImageButton")
+local UICorner_6 = Instance.new("UICorner")
+local UIStroke_7 = Instance.new("UIStroke")
+local Settings = Instance.new("ImageButton")
+local UICorner_7 = Instance.new("UICorner")
+local UIStroke_8 = Instance.new("UIStroke")
+local ImageLabel = Instance.new("ImageLabel")
+local TextLabel = Instance.new("TextLabel")
+local X = Instance.new("ImageButton")
+local UICorner_8 = Instance.new("UICorner")
+local UIStroke_9 = Instance.new("UIStroke")
+local Scripts = Instance.new("Frame")
+local R6_2 = Instance.new("TextButton")
+local UIStroke_10 = Instance.new("UIStroke")
+local UICorner_9 = Instance.new("UICorner")
+local R6_3 = Instance.new("TextButton")
+local UIStroke_11 = Instance.new("UIStroke")
+local UICorner_10 = Instance.new("UICorner")
+local R6_4 = Instance.new("TextButton")
+local UIStroke_12 = Instance.new("UIStroke")
+local UICorner_11 = Instance.new("UICorner")
+local R6_5 = Instance.new("TextButton")
+local UIStroke_13 = Instance.new("UIStroke")
+local UICorner_12 = Instance.new("UICorner")
+local R6_6 = Instance.new("TextButton")
+local UIStroke_14 = Instance.new("UIStroke")
+local UICorner_13 = Instance.new("UICorner")
+local R6_7 = Instance.new("TextButton")
+local UIStroke_15 = Instance.new("UIStroke")
+local UICorner_14 = Instance.new("UICorner")
+local R6_8 = Instance.new("TextButton")
+local UIStroke_16 = Instance.new("UIStroke")
+local UICorner_15 = Instance.new("UICorner")
+
+--Properties:
+
+Lightning.Name = "Lightning"
+Lightning.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Lightning.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = Lightning
+Main.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.254609764, 0, 0.248777747, 0)
+Main.Size = UDim2.new(0, 493, 0, 271)
+
+Executor.Name = "Executor"
+Executor.Parent = Main
+Executor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Executor.BackgroundTransparency = 1.000
+Executor.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Executor.BorderSizePixel = 0
+Executor.Position = UDim2.new(0.10547667, 0, 0.16974169, 0)
+Executor.Size = UDim2.new(0, 441, 0, 225)
+
+TextBox.Parent = Executor
+TextBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+TextBox.BackgroundTransparency = 1.000
+TextBox.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0136105632, 0, 0.0502515994, 0)
+TextBox.Size = UDim2.new(0, 428, 0, 162)
+TextBox.ClearTextOnFocus = false
+TextBox.Font = Enum.Font.Code
+TextBox.PlaceholderColor3 = Color3.fromRGB(62, 150, 22)
+TextBox.PlaceholderText = "-- welcome to lightning"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 17.000
+TextBox.TextXAlignment = Enum.TextXAlignment.Left
+TextBox.TextYAlignment = Enum.TextYAlignment.Top
+
+UIStroke.Color = Color3.fromRGB(74, 74, 74)
+UIStroke.Thickness = 2.000
+UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke.Parent = TextBox
+
+Exe.Name = "Exe"
+Exe.Parent = Executor
+Exe.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Exe.BackgroundTransparency = 1.000
+Exe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Exe.BorderSizePixel = 0
+Exe.Position = UDim2.new(0.0136054419, 0, 0.800000012, 0)
+Exe.Size = UDim2.new(0, 45, 0, 37)
+Exe.Image = "rbxassetid://113742736013920"
+
+UICorner.Parent = Exe
+
+UIStroke_2.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_2.Thickness = 2.000
+UIStroke_2.Parent = Exe
+
+Cle.Name = "Cle"
+Cle.Parent = Executor
+Cle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Cle.BackgroundTransparency = 1.000
+Cle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Cle.BorderSizePixel = 0
+Cle.Position = UDim2.new(0.142857149, 0, 0.800000012, 0)
+Cle.Size = UDim2.new(0, 45, 0, 37)
+Cle.Image = "rbxassetid://106031395011774"
+
+UICorner_2.Parent = Cle
+
+UIStroke_3.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_3.Thickness = 2.000
+UIStroke_3.Parent = Cle
+
+R6.Name = "R6"
+R6.Parent = Executor
+R6.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6.BackgroundTransparency = 1.000
+R6.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6.BorderSizePixel = 0
+R6.Position = UDim2.new(0, 379, 0, 180)
+R6.Size = UDim2.new(0, 45, 0, 37)
+R6.Font = Enum.Font.SourceSans
+R6.Text = "R6"
+R6.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6.TextSize = 41.000
+R6.TextWrapped = true
+
+UIStroke_4.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_4.Thickness = 2.000
+UIStroke_4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_4.Parent = R6
+
+UICorner_3.Parent = R6
+
+Discord.Name = "Discord"
+Discord.Parent = Executor
+Discord.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Discord.BackgroundTransparency = 1.000
+Discord.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Discord.BorderSizePixel = 0
+Discord.Position = UDim2.new(0.267573684, 0, 0.800000012, 0)
+Discord.Size = UDim2.new(0, 45, 0, 37)
+Discord.Image = "rbxassetid://130739831469194"
+
+UICorner_4.Parent = Discord
+
+UIStroke_5.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_5.Thickness = 2.000
+UIStroke_5.Parent = Discord
+
+Executor_2.Name = "Executor"
+Executor_2.Parent = Main
+Executor_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Executor_2.BackgroundTransparency = 1.000
+Executor_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Executor_2.BorderSizePixel = 0
+Executor_2.Position = UDim2.new(0, 5, 0.216000006, 0)
+Executor_2.Size = UDim2.new(0, 45, 0, 37)
+Executor_2.Image = "rbxassetid://89052983999511"
+
+UICorner_5.Parent = Executor_2
+
+UIStroke_6.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_6.Thickness = 2.000
+UIStroke_6.Parent = Executor_2
+
+ScriptHub.Name = "ScriptHub"
+ScriptHub.Parent = Main
+ScriptHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScriptHub.BackgroundTransparency = 1.000
+ScriptHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScriptHub.BorderSizePixel = 0
+ScriptHub.Position = UDim2.new(0, 5, 0.441092283, 0)
+ScriptHub.Size = UDim2.new(0, 45, 0, 37)
+ScriptHub.Image = "rbxassetid://135179266644314"
+
+UICorner_6.Parent = ScriptHub
+
+UIStroke_7.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_7.Thickness = 2.000
+UIStroke_7.Parent = ScriptHub
+
+Settings.Name = "Settings"
+Settings.Parent = Main
+Settings.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Settings.BackgroundTransparency = 1.000
+Settings.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Settings.BorderSizePixel = 0
+Settings.Position = UDim2.new(0, 5, 0.666184545, 0)
+Settings.Size = UDim2.new(0, 45, 0, 37)
+Settings.Image = "rbxassetid://106225423599515"
+
+UICorner_7.Parent = Settings
+
+UIStroke_8.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_8.Thickness = 2.000
+UIStroke_8.Parent = Settings
+
+ImageLabel.Parent = Main
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.0101419883, 0, 0.0278081577, 0)
+ImageLabel.Size = UDim2.new(0, 50, 0, 41)
+ImageLabel.Image = "rbxassetid://125825896318452"
+ImageLabel.ImageColor3 = Color3.fromRGB(28, 119, 255)
+
+TextLabel.Parent = Main
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.117647059, 0, 0.0442804433, 0)
+TextLabel.Size = UDim2.new(0, 157, 0, 32)
+TextLabel.Font = Enum.Font.GothamBlack
+TextLabel.Text = "Lightning"
+TextLabel.TextColor3 = Color3.fromRGB(28, 119, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+X.Name = "X"
+X.Parent = Main
+X.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+X.BackgroundTransparency = 1.000
+X.BorderColor3 = Color3.fromRGB(0, 0, 0)
+X.BorderSizePixel = 0
+X.Position = UDim2.new(0.887807965, 0, 0.0333907343, 0)
+X.Size = UDim2.new(0, 45, 0, 37)
+X.Image = "rbxassetid://120649114199409"
+
+UICorner_8.Parent = X
+
+UIStroke_9.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_9.Thickness = 2.000
+UIStroke_9.Parent = X
+
+Scripts.Name = "Scripts"
+Scripts.Parent = Main
+Scripts.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Scripts.BackgroundTransparency = 1.000
+Scripts.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Scripts.BorderSizePixel = 0
+Scripts.Position = UDim2.new(0.10547667, 0, 0.16974169, 0)
+Scripts.Size = UDim2.new(0, 441, 0, 225)
+Scripts.Visible = false
+
+R6_2.Name = "R6"
+R6_2.Parent = Scripts
+R6_2.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_2.BackgroundTransparency = 1.000
+R6_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_2.BorderSizePixel = 0
+R6_2.Position = UDim2.new(0, 27, 0, 12)
+R6_2.Size = UDim2.new(0, 108, 0, 37)
+R6_2.Font = Enum.Font.SourceSans
+R6_2.Text = "KoopGui"
+R6_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_2.TextScaled = true
+R6_2.TextSize = 1.000
+R6_2.TextWrapped = true
+
+UIStroke_10.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_10.Thickness = 2.000
+UIStroke_10.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_10.Parent = R6_2
+
+UICorner_9.Parent = R6_2
+
+R6_3.Name = "R6"
+R6_3.Parent = Scripts
+R6_3.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_3.BackgroundTransparency = 1.000
+R6_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_3.BorderSizePixel = 0
+R6_3.Position = UDim2.new(0, 163, 0, 12)
+R6_3.Size = UDim2.new(0, 108, 0, 37)
+R6_3.Font = Enum.Font.SourceSans
+R6_3.Text = "grab knife"
+R6_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_3.TextScaled = true
+R6_3.TextSize = 1.000
+R6_3.TextWrapped = true
+
+UIStroke_11.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_11.Thickness = 2.000
+UIStroke_11.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_11.Parent = R6_3
+
+UICorner_10.Parent = R6_3
+
+R6_4.Name = "R6"
+R6_4.Parent = Scripts
+R6_4.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_4.BackgroundTransparency = 1.000
+R6_4.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_4.BorderSizePixel = 0
+R6_4.Position = UDim2.new(0, 296, 0, 12)
+R6_4.Size = UDim2.new(0, 108, 0, 37)
+R6_4.Font = Enum.Font.SourceSans
+R6_4.Text = "happy hub ss"
+R6_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_4.TextScaled = true
+R6_4.TextSize = 1.000
+R6_4.TextWrapped = true
+
+UIStroke_12.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_12.Thickness = 2.000
+UIStroke_12.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_12.Parent = R6_4
+
+UICorner_11.Parent = R6_4
+
+R6_5.Name = "R6"
+R6_5.Parent = Scripts
+R6_5.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_5.BackgroundTransparency = 1.000
+R6_5.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_5.BorderSizePixel = 0
+R6_5.Position = UDim2.new(0, 27, 0, 57)
+R6_5.Size = UDim2.new(0, 108, 0, 37)
+R6_5.Font = Enum.Font.SourceSans
+R6_5.Text = "HD Admin Rank Giver"
+R6_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_5.TextScaled = true
+R6_5.TextSize = 1.000
+R6_5.TextWrapped = true
+
+UIStroke_13.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_13.Thickness = 2.000
+UIStroke_13.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_13.Parent = R6_5
+
+UICorner_12.Parent = R6_5
+
+R6_6.Name = "R6"
+R6_6.Parent = Scripts
+R6_6.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_6.BackgroundTransparency = 1.000
+R6_6.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_6.BorderSizePixel = 0
+R6_6.Position = UDim2.new(0, 163, 0, 57)
+R6_6.Size = UDim2.new(0, 108, 0, 37)
+R6_6.Font = Enum.Font.SourceSans
+R6_6.Text = "Polaria"
+R6_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_6.TextScaled = true
+R6_6.TextSize = 1.000
+R6_6.TextWrapped = true
+
+UIStroke_14.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_14.Thickness = 2.000
+UIStroke_14.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_14.Parent = R6_6
+
+UICorner_13.Parent = R6_6
+
+R6_7.Name = "R6"
+R6_7.Parent = Scripts
+R6_7.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_7.BackgroundTransparency = 1.000
+R6_7.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_7.BorderSizePixel = 0
+R6_7.Position = UDim2.new(0, 296, 0, 57)
+R6_7.Size = UDim2.new(0, 108, 0, 37)
+R6_7.Font = Enum.Font.SourceSans
+R6_7.Text = "Lightning Hint"
+R6_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_7.TextScaled = true
+R6_7.TextSize = 1.000
+R6_7.TextWrapped = true
+
+UIStroke_15.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_15.Thickness = 2.000
+UIStroke_15.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_15.Parent = R6_7
+
+UICorner_14.Parent = R6_7
+
+R6_8.Name = "R6"
+R6_8.Parent = Scripts
+R6_8.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+R6_8.BackgroundTransparency = 1.000
+R6_8.BorderColor3 = Color3.fromRGB(27, 42, 53)
+R6_8.BorderSizePixel = 0
+R6_8.Position = UDim2.new(0, 27, 0, 104)
+R6_8.Size = UDim2.new(0, 108, 0, 37)
+R6_8.Font = Enum.Font.SourceSans
+R6_8.Text = "Polaria"
+R6_8.TextColor3 = Color3.fromRGB(255, 255, 255)
+R6_8.TextScaled = true
+R6_8.TextSize = 1.000
+R6_8.TextWrapped = true
+
+UIStroke_16.Color = Color3.fromRGB(74, 74, 74)
+UIStroke_16.Thickness = 2.000
+UIStroke_16.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_16.Parent = R6_8
+
+UICorner_15.Parent = R6_8
+
+-- Scripts:
+
+local function LIWHZVJ_fake_script() -- Main.LocalScript 
+	local script = Instance.new('LocalScript', Main)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(LIWHZVJ_fake_script)()
+local function JTACBTO_fake_script() -- Exe.Script 
+	local script = Instance.new('Script', Exe)
+
+	-- Pick up FireEvent once button is pressed
+	
+	local sss = script.Parent.RemoteEvent
+	
+	sss.OnServerEvent:Connect(function(skid, lol)
+		require(script.Loadstring)(lol)()
+	end)
+end
+coroutine.wrap(JTACBTO_fake_script)()
+local function LHMQA_fake_script() -- Exe.LocalScript 
+	local script = Instance.new('LocalScript', Exe)
+
+	-- Fires RemoteEvent once button is pressed
+	
+	local RS = script.Parent.RemoteEvent
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		RS:FireServer(script.Parent.Parent.Frame1.TextBox.Text) -- Fires the Text in the TextBox
+	end)
+end
+coroutine.wrap(LHMQA_fake_script)()
+local function IGGBE_fake_script() -- Cle.LocalScript 
+	local script = Instance.new('LocalScript', Cle)
+
+	local box = script.Parent.Parent.Frame1.TextBox
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		box.Text = "-- Script Cleared!"
+		wait(.6)
+		box.Text = ""
+	end)
+end
+coroutine.wrap(IGGBE_fake_script)()
+local function ALJCRG_fake_script() -- R6.LocalScript 
+	local script = Instance.new('LocalScript', R6)
+
+	script.Parent.MouseButton1Click:Connect(function()
+	script.RemoteEvent:FireServer()
+	end)
+end
+coroutine.wrap(ALJCRG_fake_script)()
+local function RAYW_fake_script() -- nil.Script 
+	local script = Instance.new('Script', nil)
+
+	script.Parent.RemoteEvent.OnServerEvent:Connect(function(player)
+	require(script.Parent.Parent.R6).load(player.Name)
+	end)
+end
+coroutine.wrap(RAYW_fake_script)()
+local function QEYOPMX_fake_script() -- Executor_2.LocalScript 
+	local script = Instance.new('LocalScript', Executor_2)
+
+	local frame = script.Parent.Parent.Parent.Executor
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		frame.Visible = true
+	end)
+	
+	local frame = script.Parent.Parent.Parent.Scripts
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		frame.Visible = false
+	end)
+end
+coroutine.wrap(QEYOPMX_fake_script)()
+local function OWCSIO_fake_script() -- ScriptHub.LocalScript 
+	local script = Instance.new('LocalScript', ScriptHub)
+
+	local frame = script.Parent.Parent.Parent.Executor
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		frame.Visible = false
+	end)
+	
+	local frame = script.Parent.Parent.Parent.Scripts
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		frame.Visible = true
+	end)
+end
+coroutine.wrap(OWCSIO_fake_script)()
+local function CLJZJV_fake_script() -- R6_2.ClientHandler 
+	local script = Instance.new('LocalScript', R6_2)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.ServerEvent:FireServer()
+	end) 
+end
+coroutine.wrap(CLJZJV_fake_script)()
+local function QSKRRZ_fake_script() -- R6_3.ClientHandler 
+	local script = Instance.new('LocalScript', R6_3)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.ServerEvent:FireServer()
+	end) 
+end
+coroutine.wrap(QSKRRZ_fake_script)()
+local function ADHY_fake_script() -- R6_4.ClientHandler 
+	local script = Instance.new('LocalScript', R6_4)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.ServerEvent:FireServer()
+	end) 
+end
+coroutine.wrap(ADHY_fake_script)()
+local function YSAO_fake_script() -- R6_5.ClientHandler 
+	local script = Instance.new('LocalScript', R6_5)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.ServerEvent:FireServer()
+	end) 
+end
+coroutine.wrap(YSAO_fake_script)()
+local function VSCPH_fake_script() -- R6_6.ClientHandler 
+	local script = Instance.new('LocalScript', R6_6)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.ServerEvent:FireServer()
+	end) 
+end
+coroutine.wrap(VSCPH_fake_script)()
+local function UTWJGJZ_fake_script() -- R6_7.Script 
+	local script = Instance.new('Script', R6_7)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		local m = Instance.new("Hint", game.workspace)
+		m.Text = "⚡Use lightning Today | Fast Executions and Backdoored Games⚡"
+	end)
+end
+coroutine.wrap(UTWJGJZ_fake_script)()
+local function KYGBHG_fake_script() -- R6_8.ClientHandler 
+	local script = Instance.new('LocalScript', R6_8)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.ServerEvent:FireServer()
+	end) 
+end
+coroutine.wrap(KYGBHG_fake_script)()
