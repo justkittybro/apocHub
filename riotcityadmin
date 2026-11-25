@@ -20,6 +20,9 @@ local TextBox_2 = Instance.new("TextBox")
 local PlayerButton_8 = Instance.new("TextButton")
 local PlayerButton_9 = Instance.new("TextButton")
 local PlayerButton_10 = Instance.new("TextButton")
+local PlayerButton_11 = Instance.new("TextButton")
+local TextBox_3 = Instance.new("TextBox")
+local TextBox_4 = Instance.new("TextBox")
 local Notification1Ran = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local TextLabel_2 = Instance.new("TextLabel")
@@ -217,6 +220,43 @@ PlayerButton_10.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_10.TextSize = 21.000
 PlayerButton_10.TextWrapped = true
 
+PlayerButton_11.Name = "PlayerButton"
+PlayerButton_11.Parent = PlayerList
+PlayerButton_11.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_11.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_11.BorderSizePixel = 0
+PlayerButton_11.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_11.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_11.Font = Enum.Font.SourceSans
+PlayerButton_11.Text = "Noclip: Off"
+PlayerButton_11.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_11.TextSize = 21.000
+PlayerButton_11.TextWrapped = true
+
+TextBox_3.Parent = PlayerList
+TextBox_3.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+TextBox_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_3.BorderSizePixel = 0
+TextBox_3.Size = UDim2.new(0, 185, 0, 32)
+TextBox_3.Font = Enum.Font.SourceSans
+TextBox_3.PlaceholderColor3 = Color3.fromRGB(127, 127, 127)
+TextBox_3.PlaceholderText = "Kill"
+TextBox_3.Text = ""
+TextBox_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox_3.TextSize = 21.000
+
+TextBox_4.Parent = PlayerList
+TextBox_4.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+TextBox_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_4.BorderSizePixel = 0
+TextBox_4.Size = UDim2.new(0, 185, 0, 32)
+TextBox_4.Font = Enum.Font.SourceSans
+TextBox_4.PlaceholderColor3 = Color3.fromRGB(127, 127, 127)
+TextBox_4.PlaceholderText = "Teleport"
+TextBox_4.Text = ""
+TextBox_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox_4.TextSize = 21.000
+
 Notification1Ran.Name = "Notification1Ran"
 Notification1Ran.Parent = RiotCity
 Notification1Ran.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
@@ -224,6 +264,7 @@ Notification1Ran.BorderColor3 = Color3.fromRGB(84, 84, 84)
 Notification1Ran.BorderSizePixel = 2
 Notification1Ran.Position = UDim2.new(0.21676828, 0, 0.0493206456, 0)
 Notification1Ran.Size = UDim2.new(0, 192, 0, 110)
+Notification1Ran.Visible = false
 
 TextLabel.Parent = Notification1Ran
 TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -255,14 +296,14 @@ TextLabel_2.TextWrapped = true
 
 -- Scripts:
 
-local function VSCN_fake_script() -- Frame.LocalScript 
+local function UTMBPQ_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(VSCN_fake_script)()
-local function RCDKD_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(UTMBPQ_fake_script)()
+local function CQSKHM_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -281,8 +322,8 @@ local function RCDKD_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(RCDKD_fake_script)()
-local function LFTJ_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(CQSKHM_fake_script)()
+local function HSLXXO_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -317,8 +358,8 @@ local function LFTJ_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(LFTJ_fake_script)()
-local function DUZTVB_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(HSLXXO_fake_script)()
+local function DRCZKU_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -350,8 +391,8 @@ local function DUZTVB_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(DUZTVB_fake_script)()
-local function UWJUWH_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(DRCZKU_fake_script)()
+local function ZJHRVV_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -379,8 +420,8 @@ local function UWJUWH_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(UWJUWH_fake_script)()
-local function BONNAO_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(ZJHRVV_fake_script)()
+local function SQVOTPS_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -417,8 +458,8 @@ local function BONNAO_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(BONNAO_fake_script)()
-local function UQJA_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(SQVOTPS_fake_script)()
+local function FEABQM_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -444,8 +485,8 @@ local function UQJA_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(UQJA_fake_script)()
-local function WWFG_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(FEABQM_fake_script)()
+local function YVOSSSX_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -479,8 +520,8 @@ local function WWFG_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(WWFG_fake_script)()
-local function ARQP_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(YVOSSSX_fake_script)()
+local function KXKABL_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -518,8 +559,8 @@ local function ARQP_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(ARQP_fake_script)()
-local function HEFAY_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(KXKABL_fake_script)()
+local function XFFOR_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -538,8 +579,8 @@ local function HEFAY_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(HEFAY_fake_script)()
-local function UYVWFK_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(XFFOR_fake_script)()
+local function WCRBAPT_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -575,8 +616,8 @@ local function UYVWFK_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(UYVWFK_fake_script)()
-local function WAGFQMT_fake_script() -- PlayerButton_10.LocalScript 
+coroutine.wrap(WCRBAPT_fake_script)()
+local function TGOAV_fake_script() -- PlayerButton_10.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_10)
 
 	
@@ -598,4 +639,229 @@ local function WAGFQMT_fake_script() -- PlayerButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(WAGFQMT_fake_script)()
+coroutine.wrap(TGOAV_fake_script)()
+local function XYIWOX_fake_script() -- PlayerButton_11.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_11)
+
+	
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	local noclip = false
+	local connection
+	
+	local function setNoclip(enabled)
+		noclip = enabled
+	
+		button.Text = noclip and "Noclip: ON" or "Noclip: OFF"
+	
+		if connection then
+			connection:Disconnect()
+			connection = nil
+		end
+	
+		if noclip then
+			connection = RunService.Stepped:Connect(function()
+				local character = player.Character
+				if not character then return end
+	
+				for _, part in ipairs(character:GetDescendants()) do
+					if part:IsA("BasePart") then
+						part.CanCollide = false
+					end
+				end
+			end)
+		else
+			local character = player.Character
+			if character then
+				for _, part in ipairs(character:GetDescendants()) do
+					if part:IsA("BasePart") then
+						part.CanCollide = true
+					end
+				end
+			end
+		end
+	end
+	
+	button.Activated:Connect(function()
+		setNoclip(not noclip)
+	end)
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+	
+		if noclip then
+			setNoclip(true)
+		end
+	end)
+	
+	button.Text = "Noclip: OFF"
+	
+end
+coroutine.wrap(XYIWOX_fake_script)()
+local function SFUNZVK_fake_script() -- TextBox_3.LocalScript 
+	local script = Instance.new('LocalScript', TextBox_3)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local textBox = script.Parent
+	
+	local targetName = ""
+	
+	local function findPlayer(input)
+		input = input:lower():gsub("^%s+", ""):gsub("%s+$", "")
+	
+		if input == "" then
+			return nil
+		end
+	
+		-- Exact username first
+		for _, target in ipairs(Players:GetPlayers()) do
+			if target ~= player and target.Name:lower() == input then
+				return target
+			end
+		end
+	
+		-- Exact display name
+		for _, target in ipairs(Players:GetPlayers()) do
+			if target ~= player and target.DisplayName:lower() == input then
+				return target
+			end
+		end
+	
+		-- Shortened username or display name
+		for _, target in ipairs(Players:GetPlayers()) do
+			if target ~= player then
+				if target.Name:lower():sub(1, #input) == input
+					or target.DisplayName:lower():sub(1, #input) == input then
+					return target
+				end
+			end
+		end
+	
+		return nil
+	end
+	
+	textBox:GetPropertyChangedSignal("Text"):Connect(function()
+		targetName = textBox.Text
+	end)
+	
+	task.spawn(function()
+		while true do
+			if targetName ~= "" then
+				local target = findPlayer(targetName)
+	
+				if target and target.Character and player.Character then
+					local targetRoot = target.Character:FindFirstChild("HumanoidRootPart")
+					local myRoot = player.Character:FindFirstChild("HumanoidRootPart")
+	
+					if targetRoot and myRoot then
+						myRoot.CFrame = targetRoot.CFrame * CFrame.new(0, 0, 3)
+					end
+				end
+			end
+	
+			task.wait(0.1)
+		end
+	end)
+	
+end
+coroutine.wrap(SFUNZVK_fake_script)()
+local function ZUYBQNS_fake_script() -- TextBox_4.LocalScript 
+	local script = Instance.new('LocalScript', TextBox_4)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local textBox = script.Parent
+	
+	local function findPlayer(input)
+		input = input:lower():gsub("^%s+", ""):gsub("%s+$", "")
+	
+		if input == "" then
+			return nil
+		end
+	
+		-- Exact username or display name first
+		for _, target in ipairs(Players:GetPlayers()) do
+			if target ~= player then
+				if target.Name:lower() == input
+					or target.DisplayName:lower() == input then
+					return target
+				end
+			end
+		end
+	
+		-- Shortened username or display name
+		for _, target in ipairs(Players:GetPlayers()) do
+			if target ~= player then
+				if target.Name:lower():sub(1, #input) == input
+					or target.DisplayName:lower():sub(1, #input) == input then
+					return target
+				end
+			end
+		end
+	
+		return nil
+	end
+	
+	local function teleportToPlayer()
+		local target = findPlayer(textBox.Text)
+	
+		if not target then
+			return
+		end
+	
+		local character = player.Character
+		local targetCharacter = target.Character
+	
+		local root = character and character:FindFirstChild("HumanoidRootPart")
+		local targetRoot = targetCharacter and targetCharacter:FindFirstChild("HumanoidRootPart")
+	
+		if root and targetRoot then
+			root.CFrame = targetRoot.CFrame * CFrame.new(0, 0, 3)
+		end
+	end
+	
+	textBox.FocusLost:Connect(teleportToPlayer)
+	
+end
+coroutine.wrap(ZUYBQNS_fake_script)()
+local function PDXZB_fake_script() -- RiotCity.LocalScript 
+	local script = Instance.new('LocalScript', RiotCity)
+
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local screenGui = script.Parent
+	local notification = screenGui:WaitForChild("Notification1Ran")
+	
+	-- Make sure the notification is ready
+	notification.Visible = false
+	
+	local function showNotification()
+		notification.Visible = true
+	
+		task.wait(5)
+	
+		notification.Visible = false
+	end
+	
+	-- Show when the player joins
+	task.wait(1)
+	showNotification()
+	
+	-- Show whenever the ScreenGui gets enabled
+	screenGui:GetPropertyChangedSignal("Enabled"):Connect(function()
+		if screenGui.Enabled then
+			showNotification()
+		end
+	end)
+end
+coroutine.wrap(PDXZB_fake_script)()
