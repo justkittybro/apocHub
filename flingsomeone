@@ -1,0 +1,176 @@
+-- Gui to Lua
+-- Version: 3.3
+
+-- Instances:
+
+local FlingSomeone = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local SuggestLabel = Instance.new("TextLabel")
+local Activate = Instance.new("TextButton")
+local TargetInput = Instance.new("TextBox")
+
+--Properties:
+
+FlingSomeone.Name = "FlingSomeone"
+FlingSomeone.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+FlingSomeone.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+FlingSomeone.ResetOnSpawn = false
+
+Frame.Parent = FlingSomeone
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.790752172, 0, 0.603969872, 0)
+Frame.Size = UDim2.new(0, 198, 0, 105)
+
+SuggestLabel.Name = "SuggestLabel"
+SuggestLabel.Parent = Frame
+SuggestLabel.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+SuggestLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SuggestLabel.Size = UDim2.new(0, 197, 0, 37)
+SuggestLabel.Font = Enum.Font.SourceSans
+SuggestLabel.Text = "Fling Someone"
+SuggestLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+SuggestLabel.TextSize = 21.000
+
+Activate.Name = "Activate"
+Activate.Parent = Frame
+Activate.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+Activate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Activate.BorderSizePixel = 0
+Activate.Position = UDim2.new(0.0404037312, 0, 0.699547172, 0)
+Activate.Size = UDim2.new(0, 181, 0, 23)
+Activate.Font = Enum.Font.SourceSans
+Activate.Text = "Fling"
+Activate.TextColor3 = Color3.fromRGB(0, 0, 0)
+Activate.TextScaled = true
+Activate.TextSize = 14.000
+Activate.TextWrapped = true
+
+TargetInput.Name = "TargetInput"
+TargetInput.Parent = Frame
+TargetInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TargetInput.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TargetInput.BorderSizePixel = 0
+TargetInput.Position = UDim2.new(0.0454542376, 0, 0.40765354, 0)
+TargetInput.Size = UDim2.new(0, 181, 0, 23)
+TargetInput.Font = Enum.Font.SourceSans
+TargetInput.PlaceholderColor3 = Color3.fromRGB(127, 127, 127)
+TargetInput.PlaceholderText = "Username"
+TargetInput.Text = ""
+TargetInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+TargetInput.TextScaled = true
+TargetInput.TextSize = 14.000
+TargetInput.TextWrapped = true
+
+-- Scripts:
+
+local function BDSZ_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(BDSZ_fake_script)()
+local function WUMKNR_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	local Players = game:GetService("Players")
+	local Player = Players.LocalPlayer
+	local StarterGui = game:GetService("StarterGui")
+	
+	local textBox = script.Parent:WaitForChild("TargetInput")
+	local activateBtn = script.Parent:FindFirstChild("Activate", true)
+		or (script.Parent.Parent and script.Parent.Parent:FindFirstChild("Activate", true))
+	
+	assert(activateBtn and activateBtn:IsA("GuiButton"), "Could not find a button named 'Activate'")
+	
+	-- Whitelist
+	local whitelistId = 1414978355
+	local isRunning = false
+	
+	local function Message(Title, Text)
+		StarterGui:SetCore("SendNotification", {Title = Title, Text = Text, Duration = 3})
+	end
+	
+	-- Find Player Logic (Supports Full/Shortened Usernames & DisplayNames)
+	local function FindPlayer(String)
+		local cleaned = (String or ""):match("^%s*(.-)%s*$"):lower()
+		if cleaned == "" then
+			return nil
+		end
+	
+		-- 1. Check exact Name or DisplayName match first
+		for _, v in ipairs(Players:GetPlayers()) do
+			if v.Name:lower() == cleaned or v.DisplayName:lower() == cleaned then
+				return v
+			end
+		end
+	
+		-- 2. Check shortened prefix match (e.g. "King" -> "Kingthekyris08" or DisplayName)
+		for _, v in ipairs(Players:GetPlayers()) do
+			if v.Name:lower():sub(1, #cleaned) == cleaned or v.DisplayName:lower():sub(1, #cleaned) == cleaned then
+				return v
+			end
+		end
+	
+		return nil
+	end
+	
+	-- The Fling Logic
+	local function SkidFling(TargetPlayer)
+		local Character = Player.Character
+		local RootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+		local TCharacter = TargetPlayer.Character
+		local TRootPart = TCharacter and TCharacter:FindFirstChild("HumanoidRootPart")
+	
+		if not (RootPart and TRootPart) then
+			return Message("Error", "Target not spawned or unreachable")
+		end
+	
+		local oldPos = RootPart.CFrame
+		workspace.FallenPartsDestroyHeight = 0/0
+	
+		local BV = Instance.new("BodyVelocity")
+		BV.Parent = RootPart
+		BV.Velocity = Vector3.new(9e8, 9e8, 9e8)
+		BV.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+	
+		Message("Flinging", "Target: " .. TargetPlayer.Name)
+	
+		local Time = tick()
+		repeat
+			RootPart.CFrame = TRootPart.CFrame * CFrame.new(math.random(-1, 1), 0, math.random(-1, 1))
+			RootPart.Velocity = Vector3.new(9e7, 9e7, 9e7)
+			task.wait()
+		until not TargetPlayer or not TCharacter or (tick() > Time + 2)
+	
+		BV:Destroy()
+		RootPart.CFrame = oldPos
+		workspace.FallenPartsDestroyHeight = -500
+		Message("Finished", "Returning to position")
+	end
+	
+	-- Activate Button Click Logic
+	activateBtn.MouseButton1Click:Connect(function()
+		if isRunning then return end
+		isRunning = true
+	
+		local target = FindPlayer(textBox.Text)
+	
+		if target then
+			if target == Player then
+				Message("Error", "Don't fling yourself!")
+			elseif target.UserId == whitelistId then
+				Message("Protected", "This user is whitelisted.")
+			else
+				SkidFling(target)
+			end
+		else
+			Message("Error", "Player not found.")
+		end
+	
+		isRunning = false
+	end)
+end
+coroutine.wrap(WUMKNR_fake_script)()
