@@ -33,7 +33,7 @@ local PlayerList = Instance.new("ScrollingFrame")
 local PlayerButton_12 = Instance.new("TextButton")
 local UIListLayout_2 = Instance.new("UIListLayout")
 local InfoFrame = Instance.new("Frame")
-local PlayerUsername_3 = Instance.new("TextLabel")
+local Label = Instance.new("TextLabel")
 local Avatar = Instance.new("ImageLabel")
 local UICorner = Instance.new("UICorner")
 local UIStroke = Instance.new("UIStroke")
@@ -79,7 +79,6 @@ ButtonsList.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ButtonsList.BorderSizePixel = 0
 ButtonsList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
 ButtonsList.Size = UDim2.new(0, 197, 0, 230)
-ButtonsList.CanvasPosition = Vector2.new(0, 400)
 ButtonsList.CanvasSize = UDim2.new(0, 0, 3, 0)
 
 PlayerButton.Name = "PlayerButton"
@@ -335,6 +334,7 @@ PlayerMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerMenu.BorderSizePixel = 0
 PlayerMenu.Position = UDim2.new(0.30873999, 0, 0.218319222, 0)
 PlayerMenu.Size = UDim2.new(0, 198, 0, 267)
+PlayerMenu.Visible = false
 
 PlayerUsername_2.Name = "PlayerUsername"
 PlayerUsername_2.Parent = PlayerMenu
@@ -364,6 +364,7 @@ PlayerButton_12.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
 PlayerButton_12.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerButton_12.BorderSizePixel = 0
 PlayerButton_12.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_12.Visible = false
 PlayerButton_12.Font = Enum.Font.SourceSans
 PlayerButton_12.Text = "Player Username"
 PlayerButton_12.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -383,18 +384,18 @@ InfoFrame.Position = UDim2.new(-1.62560344, 0, 0.0823970065, 0)
 InfoFrame.Size = UDim2.new(0, 320, 0, 222)
 InfoFrame.Visible = false
 
-PlayerUsername_3.Name = "PlayerUsername"
-PlayerUsername_3.Parent = InfoFrame
-PlayerUsername_3.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
-PlayerUsername_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-PlayerUsername_3.BorderSizePixel = 0
-PlayerUsername_3.Position = UDim2.new(0.0286300424, 0, 0, 0)
-PlayerUsername_3.Size = UDim2.new(0, 187, 0, 37)
-PlayerUsername_3.Font = Enum.Font.SourceSans
-PlayerUsername_3.Text = "INFO"
-PlayerUsername_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-PlayerUsername_3.TextSize = 25.000
-PlayerUsername_3.TextXAlignment = Enum.TextXAlignment.Left
+Label.Name = "Label"
+Label.Parent = InfoFrame
+Label.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
+Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Label.BorderSizePixel = 0
+Label.Position = UDim2.new(0.0286300424, 0, 0, 0)
+Label.Size = UDim2.new(0, 187, 0, 37)
+Label.Font = Enum.Font.SourceSans
+Label.Text = "INFO"
+Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+Label.TextSize = 25.000
+Label.TextXAlignment = Enum.TextXAlignment.Left
 
 Avatar.Name = "Avatar"
 Avatar.Parent = InfoFrame
@@ -491,14 +492,14 @@ Button_2.TextWrapped = true
 
 -- Scripts:
 
-local function EJVFHSE_fake_script() -- Frame.LocalScript 
+local function SHDUOPO_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(EJVFHSE_fake_script)()
-local function OYRL_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(SHDUOPO_fake_script)()
+local function BNXVZ_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -517,8 +518,8 @@ local function OYRL_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(OYRL_fake_script)()
-local function IYNVYDZ_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(BNXVZ_fake_script)()
+local function EONVJ_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -553,8 +554,8 @@ local function IYNVYDZ_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(IYNVYDZ_fake_script)()
-local function OFYVL_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(EONVJ_fake_script)()
+local function YPXTF_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -586,8 +587,8 @@ local function OFYVL_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(OFYVL_fake_script)()
-local function YVLTE_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(YPXTF_fake_script)()
+local function PTBXIVW_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -615,8 +616,8 @@ local function YVLTE_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(YVLTE_fake_script)()
-local function AEEL_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(PTBXIVW_fake_script)()
+local function HADYJR_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -653,8 +654,8 @@ local function AEEL_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(AEEL_fake_script)()
-local function AKZFGY_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(HADYJR_fake_script)()
+local function PGPN_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -680,8 +681,8 @@ local function AKZFGY_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(AKZFGY_fake_script)()
-local function JTBE_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(PGPN_fake_script)()
+local function LZIH_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -715,8 +716,8 @@ local function JTBE_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(JTBE_fake_script)()
-local function QBTKJH_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(LZIH_fake_script)()
+local function YIVK_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -754,8 +755,8 @@ local function QBTKJH_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(QBTKJH_fake_script)()
-local function PTWVLZ_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(YIVK_fake_script)()
+local function WDGOIM_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -774,8 +775,8 @@ local function PTWVLZ_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(PTWVLZ_fake_script)()
-local function JWTIC_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(WDGOIM_fake_script)()
+local function FRNMFO_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -811,8 +812,8 @@ local function JWTIC_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(JWTIC_fake_script)()
-local function MMTEFC_fake_script() -- PlayerButton_10.LocalScript 
+coroutine.wrap(FRNMFO_fake_script)()
+local function JTLE_fake_script() -- PlayerButton_10.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_10)
 
 	
@@ -834,8 +835,8 @@ local function MMTEFC_fake_script() -- PlayerButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(MMTEFC_fake_script)()
-local function XITZPB_fake_script() -- PlayerButton_11.LocalScript 
+coroutine.wrap(JTLE_fake_script)()
+local function UIKZWM_fake_script() -- PlayerButton_11.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_11)
 
 	
@@ -896,8 +897,8 @@ local function XITZPB_fake_script() -- PlayerButton_11.LocalScript
 	button.Text = "Noclip: OFF"
 	
 end
-coroutine.wrap(XITZPB_fake_script)()
-local function JIQSC_fake_script() -- TextBox_3.LocalScript 
+coroutine.wrap(UIKZWM_fake_script)()
+local function KUQGVGC_fake_script() -- TextBox_3.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_3)
 
 	
@@ -966,8 +967,8 @@ local function JIQSC_fake_script() -- TextBox_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(JIQSC_fake_script)()
-local function KEOBVVO_fake_script() -- TextBox_4.LocalScript 
+coroutine.wrap(KUQGVGC_fake_script)()
+local function OYUBVV_fake_script() -- TextBox_4.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_4)
 
 	
@@ -1027,8 +1028,8 @@ local function KEOBVVO_fake_script() -- TextBox_4.LocalScript
 	textBox.FocusLost:Connect(teleportToPlayer)
 	
 end
-coroutine.wrap(KEOBVVO_fake_script)()
-local function AIVQBBY_fake_script() -- Button.LocalScript 
+coroutine.wrap(OYUBVV_fake_script)()
+local function ZDOJ_fake_script() -- Button.LocalScript 
 	local script = Instance.new('LocalScript', Button)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1037,8 +1038,8 @@ local function AIVQBBY_fake_script() -- Button.LocalScript
 		frame.Visible = true
 	end)
 end
-coroutine.wrap(AIVQBBY_fake_script)()
-local function XKWXH_fake_script() -- RiotCity.LocalScript 
+coroutine.wrap(ZDOJ_fake_script)()
+local function PJIZ_fake_script() -- RiotCity.LocalScript 
 	local script = Instance.new('LocalScript', RiotCity)
 
 	local Players = game:GetService("Players")
@@ -1069,102 +1070,58 @@ local function XKWXH_fake_script() -- RiotCity.LocalScript
 		end
 	end)
 end
-coroutine.wrap(XKWXH_fake_script)()
-local function DLKRK_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(PJIZ_fake_script)()
+local function PBGJRCD_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(DLKRK_fake_script)()
-local function MYAKZRC_fake_script() -- InfoFrame.LocalScript 
+coroutine.wrap(PBGJRCD_fake_script)()
+local function DBZVBGT_fake_script() -- InfoFrame.LocalScript 
 	local script = Instance.new('LocalScript', InfoFrame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(MYAKZRC_fake_script)()
-local function RYKMK_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(DBZVBGT_fake_script)()
+local function FCYK_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	
 	local Players = game:GetService("Players")
 	
-	local LocalPlayer = Players.LocalPlayer
-	local PlayerMenu = script.Parent
+	local localPlayer = Players.LocalPlayer
+	local playerMenu = script.Parent
 	
-	-- Your existing GUI objects
-	local PlayerList = PlayerMenu:WaitForChild("PlayerList")
-	local InfoFrame = PlayerMenu:WaitForChild("InfoFrame")
+	local playerList = playerMenu:WaitForChild("PlayerList")
+	local playerButtonTemplate = playerList:WaitForChild("PlayerButton")
 	
-	local PlayerButtonTemplate = PlayerList:WaitForChild("PlayerButton")
+	local infoFrame = playerMenu:WaitForChild("InfoFrame")
 	
-	local Avatar = InfoFrame:WaitForChild("Avatar")
-	local Username = InfoFrame:WaitForChild("Username")
-	local DisplayName = InfoFrame:WaitForChild("DisplayName")
-	local TeamLabel = InfoFrame:WaitForChild("Team")
+	local usernameLabel = infoFrame:WaitForChild("Username")
+	local displayNameLabel = infoFrame:WaitForChild("DisplayName")
+	local teamLabel = infoFrame:WaitForChild("Team")
+	local avatarImage = infoFrame:WaitForChild("Avatar")
 	
-	local TeleportButton = InfoFrame:WaitForChild("TeleportButton")
-	local ViewButton = InfoFrame:WaitForChild("ViewButton")
+	playerButtonTemplate.Visible = false
+	infoFrame.Visible = false
 	
-	local selectedPlayer
-	local viewingPlayer = false
-	
-	InfoFrame.Visible = false
-	PlayerButtonTemplate.Visible = false
-	
-	-- Team colors
-	local TEAM_COLORS = {
+	local teamColors = {
 		Prisoner = Color3.fromRGB(229, 138, 50),
 		Police = Color3.fromRGB(52, 127, 229),
 		Fugitive = Color3.fromRGB(217, 68, 68)
 	}
 	
-	-- Get player team
-	local function getTeamName(player)
-		if player.Team then
-			return player.Team.Name
-		end
+	local function updatePlayerInfo(player)
+		infoFrame.Visible = true
 	
-		return "No Team"
-	end
+		usernameLabel.Text = "@" .. player.Name
+		displayNameLabel.Text = player.DisplayName
 	
-	-- Find player by username or display name
-	local function findPlayer(name)
-		name = string.lower(name)
-	
-		for _, player in ipairs(Players:GetPlayers()) do
-			if player ~= LocalPlayer then
-				if string.lower(player.Name) == name
-					or string.lower(player.DisplayName) == name then
-					return player
-				end
-			end
-		end
-	
-		for _, player in ipairs(Players:GetPlayers()) do
-			if player ~= LocalPlayer then
-				if string.lower(player.Name):sub(1, #name) == name
-					or string.lower(player.DisplayName):sub(1, #name) == name then
-					return player
-				end
-			end
-		end
-	end
-	
-	-- Update InfoFrame
-	local function updateInfoFrame(player)
-		selectedPlayer = player
-		InfoFrame.Visible = true
-	
-		Username.Text = "@" .. player.Name
-		DisplayName.Text = player.DisplayName
-	
-		local teamName = getTeamName(player)
-		TeamLabel.Text = teamName
-	
-		TeamLabel.TextColor3 =
-			TEAM_COLORS[teamName]
+		local teamName = player.Team and player.Team.Name or "No Team"
+		teamLabel.Text = teamName
+		teamLabel.TextColor3 = teamColors[teamName]
 			or Color3.fromRGB(255, 255, 255)
 	
 		local success, image = pcall(function()
@@ -1176,52 +1133,45 @@ local function RYKMK_fake_script() -- PlayerMenu.LocalScript
 		end)
 	
 		if success then
-			Avatar.Image = image
+			avatarImage.Image = image
 		end
 	end
 	
-	-- Create player buttons using your template
 	local function createPlayerButton(player)
-		if player == LocalPlayer then
+		if player == localPlayer then
 			return
 		end
 	
-		local button = PlayerButtonTemplate:Clone()
+		local button = playerButtonTemplate:Clone()
 		button.Name = player.Name
 		button.Visible = true
-		button.Parent = PlayerList
+		button.Parent = playerList
 	
-		if button:IsA("TextButton") then
-			button.Text = player.DisplayName .. " (@" .. player.Name .. ")"
-		end
+		button.Text = player.DisplayName .. " (@" .. player.Name .. ")"
 	
-		local teamName = getTeamName(player)
-	
-		button.BackgroundColor3 =
-			TEAM_COLORS[teamName]
+		local teamName = player.Team and player.Team.Name or "No Team"
+		button.BackgroundColor3 = teamColors[teamName]
 			or Color3.fromRGB(60, 60, 60)
 	
 		button.Activated:Connect(function()
-			updateInfoFrame(player)
+			updatePlayerInfo(player)
 		end)
 	
 		player:GetPropertyChangedSignal("Team"):Connect(function()
-			if button and button.Parent then
-				local newTeam = getTeamName(player)
+			if button.Parent then
+				local newTeam = player.Team and player.Team.Name or "No Team"
 	
-				button.BackgroundColor3 =
-					TEAM_COLORS[newTeam]
+				button.BackgroundColor3 = teamColors[newTeam]
 					or Color3.fromRGB(60, 60, 60)
 			end
 		end)
 	end
 	
-	-- Refresh player list
-	local function refreshPlayers()
-		for _, object in ipairs(PlayerList:GetChildren()) do
-			if object:IsA("TextButton")
-				and object ~= PlayerButtonTemplate then
-				object:Destroy()
+	local function refreshPlayerList()
+		for _, child in ipairs(playerList:GetChildren()) do
+			if child:IsA("TextButton")
+				and child ~= playerButtonTemplate then
+				child:Destroy()
 			end
 		end
 	
@@ -1230,99 +1180,20 @@ local function RYKMK_fake_script() -- PlayerMenu.LocalScript
 		end
 	end
 	
-	-- Teleport button
-	TeleportButton.Activated:Connect(function()
-		if not selectedPlayer then
-			return
-		end
-	
-		local targetCharacter = selectedPlayer.Character
-		local myCharacter = LocalPlayer.Character
-	
-		if not targetCharacter or not myCharacter then
-			return
-		end
-	
-		local targetRoot =
-			targetCharacter:FindFirstChild("HumanoidRootPart")
-	
-		local myRoot =
-			myCharacter:FindFirstChild("HumanoidRootPart")
-	
-		if targetRoot and myRoot then
-			myRoot.CFrame =
-				targetRoot.CFrame * CFrame.new(0, 0, 3)
-		end
-	end)
-	
-	-- View button
-	ViewButton.Activated:Connect(function()
-		local camera = workspace.CurrentCamera
-	
-		if not camera then
-			return
-		end
-	
-		if viewingPlayer then
-			viewingPlayer = false
-	
-			local myCharacter = LocalPlayer.Character
-			local myHumanoid = myCharacter
-				and myCharacter:FindFirstChildOfClass("Humanoid")
-	
-			if myHumanoid then
-				camera.CameraSubject = myHumanoid
-			end
-	
-			ViewButton.Text = "View"
-			return
-		end
-	
-		if not selectedPlayer then
-			return
-		end
-	
-		local targetCharacter = selectedPlayer.Character
-		local targetHumanoid = targetCharacter
-			and targetCharacter:FindFirstChildOfClass("Humanoid")
-	
-		if targetHumanoid then
-			viewingPlayer = true
-			camera.CameraSubject = targetHumanoid
-			ViewButton.Text = "Unview"
-		end
-	end)
-	
-	-- Reset camera when respawning
-	LocalPlayer.CharacterAdded:Connect(function(character)
-		local humanoid = character:WaitForChild("Humanoid")
-	
-		viewingPlayer = false
-		workspace.CurrentCamera.CameraSubject = humanoid
-		ViewButton.Text = "View"
-	end)
-	
-	-- Player joins/leaves
 	Players.PlayerAdded:Connect(function()
-		task.wait(0.5)
-		refreshPlayers()
+		task.wait(0.2)
+		refreshPlayerList()
 	end)
 	
-	Players.PlayerRemoving:Connect(function(player)
-		if selectedPlayer == player then
-			selectedPlayer = nil
-			InfoFrame.Visible = false
-		end
-	
-		refreshPlayers()
+	Players.PlayerRemoving:Connect(function()
+		refreshPlayerList()
 	end)
 	
-	-- Initial list
-	refreshPlayers()
+	refreshPlayerList()
 	
 end
-coroutine.wrap(RYKMK_fake_script)()
-local function QBQSIOU_fake_script() -- Button_2.LocalScript 
+coroutine.wrap(FCYK_fake_script)()
+local function EBUB_fake_script() -- Button_2.LocalScript 
 	local script = Instance.new('LocalScript', Button_2)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1331,4 +1202,4 @@ local function QBQSIOU_fake_script() -- Button_2.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(QBQSIOU_fake_script)()
+coroutine.wrap(EBUB_fake_script)()
