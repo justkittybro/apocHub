@@ -11,6 +11,10 @@ local PlayerButton = Instance.new("TextButton")
 local UIListLayout = Instance.new("UIListLayout")
 local PlayerButton_2 = Instance.new("TextButton")
 local PlayerButton_3 = Instance.new("TextButton")
+local PlayerButton_4 = Instance.new("TextButton")
+local PlayerButton_5 = Instance.new("TextButton")
+local PlayerButton_6 = Instance.new("TextButton")
+local PlayerButton_7 = Instance.new("TextButton")
 
 --Properties:
 
@@ -46,6 +50,7 @@ PlayerList.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerList.BorderSizePixel = 0
 PlayerList.Position = UDim2.new(-0.00504958024, 0, 0.138576776, 0)
 PlayerList.Size = UDim2.new(0, 197, 0, 230)
+PlayerList.CanvasPosition = Vector2.new(0, 100)
 
 PlayerButton.Name = "PlayerButton"
 PlayerButton.Parent = PlayerList
@@ -90,16 +95,68 @@ PlayerButton_3.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerButton_3.TextSize = 21.000
 PlayerButton_3.TextWrapped = true
 
+PlayerButton_4.Name = "PlayerButton"
+PlayerButton_4.Parent = PlayerList
+PlayerButton_4.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_4.BorderSizePixel = 0
+PlayerButton_4.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_4.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_4.Font = Enum.Font.SourceSans
+PlayerButton_4.Text = ";GasStation"
+PlayerButton_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_4.TextSize = 21.000
+PlayerButton_4.TextWrapped = true
+
+PlayerButton_5.Name = "PlayerButton"
+PlayerButton_5.Parent = PlayerList
+PlayerButton_5.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_5.BorderSizePixel = 0
+PlayerButton_5.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_5.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_5.Font = Enum.Font.SourceSans
+PlayerButton_5.Text = ";Bank"
+PlayerButton_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_5.TextSize = 21.000
+PlayerButton_5.TextWrapped = true
+
+PlayerButton_6.Name = "PlayerButton"
+PlayerButton_6.Parent = PlayerList
+PlayerButton_6.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_6.BorderSizePixel = 0
+PlayerButton_6.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_6.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_6.Font = Enum.Font.SourceSans
+PlayerButton_6.Text = ";Mansion"
+PlayerButton_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_6.TextSize = 21.000
+PlayerButton_6.TextWrapped = true
+
+PlayerButton_7.Name = "PlayerButton"
+PlayerButton_7.Parent = PlayerList
+PlayerButton_7.BackgroundColor3 = Color3.fromRGB(106, 106, 106)
+PlayerButton_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerButton_7.BorderSizePixel = 0
+PlayerButton_7.Position = UDim2.new(0.0050749029, 0, 0, 0)
+PlayerButton_7.Size = UDim2.new(0, 185, 0, 32)
+PlayerButton_7.Font = Enum.Font.SourceSans
+PlayerButton_7.Text = ";JewelryStore"
+PlayerButton_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerButton_7.TextSize = 21.000
+PlayerButton_7.TextWrapped = true
+
 -- Scripts:
 
-local function KMQZ_fake_script() -- Frame.LocalScript 
+local function RMVZOE_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(KMQZ_fake_script)()
-local function KHVTWYU_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(RMVZOE_fake_script)()
+local function SWSCN_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -118,8 +175,8 @@ local function KHVTWYU_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(KHVTWYU_fake_script)()
-local function QOIFQH_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(SWSCN_fake_script)()
+local function RPNR_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -154,4 +211,133 @@ local function QOIFQH_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(QOIFQH_fake_script)()
+coroutine.wrap(RPNR_fake_script)()
+local function XLSWROA_fake_script() -- PlayerButton_4.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_4)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	button.Activated:Connect(function()
+		local robberies = workspace:FindFirstChild("Robberies")
+		if not robberies then return end
+	
+		local gasStation = robberies:FindFirstChild("GasStationRobbery")
+		if not gasStation then return end
+	
+		local npc = gasStation:FindFirstChild("NPC")
+		if not npc then return end
+	
+		local npcRoot = npc:FindFirstChild("HumanoidRootPart")
+			or npc.PrimaryPart
+			or npc:FindFirstChildWhichIsA("BasePart", true)
+	
+		local character = player.Character
+		local playerRoot = character and character:FindFirstChild("HumanoidRootPart")
+	
+		if playerRoot and npcRoot then
+			playerRoot.CFrame = npcRoot.CFrame * CFrame.new(0, 0, 3)
+		end
+	end)
+	
+end
+coroutine.wrap(XLSWROA_fake_script)()
+local function EIUQCNA_fake_script() -- PlayerButton_5.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_5)
+
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	button.Activated:Connect(function()
+		local city = workspace:FindFirstChild("City")
+		if not city then return end
+	
+		local bank = city:FindFirstChild("bank")
+		if not bank then return end
+	
+		local atm = bank:FindFirstChild("ATM")
+		if not atm then return end
+	
+		local atmRoot = atm:FindFirstChild("HumanoidRootPart")
+			or atm.PrimaryPart
+			or atm:FindFirstChildWhichIsA("BasePart", true)
+	
+		local character = player.Character
+		local playerRoot = character and character:FindFirstChild("HumanoidRootPart")
+	
+		if playerRoot and atmRoot then
+			playerRoot.CFrame = atmRoot.CFrame * CFrame.new(0, 0, 3)
+		end
+	end)
+end
+coroutine.wrap(EIUQCNA_fake_script)()
+local function VPDLOT_fake_script() -- PlayerButton_6.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_6)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	button.Activated:Connect(function()
+		local robberies = workspace:FindFirstChild("Robberies")
+		if not robberies then return end
+	
+		local mansion = robberies:FindFirstChild("MansionRobbery")
+		if not mansion then return end
+	
+		local window = mansion:FindFirstChild("MansionRobberyWindow")
+		if not window then return end
+	
+		local targetPart
+	
+		if window:IsA("BasePart") then
+			targetPart = window
+		elseif window:IsA("Model") then
+			targetPart = window.PrimaryPart
+				or window:FindFirstChildWhichIsA("BasePart", true)
+		end
+	
+		local character = player.Character
+		local playerRoot = character and character:FindFirstChild("HumanoidRootPart")
+	
+		if playerRoot and targetPart then
+			playerRoot.CFrame = targetPart.CFrame * CFrame.new(0, 0, 3)
+		end
+	end)
+	
+end
+coroutine.wrap(VPDLOT_fake_script)()
+local function RTGP_fake_script() -- PlayerButton_7.LocalScript 
+	local script = Instance.new('LocalScript', PlayerButton_7)
+
+	
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent
+	
+	local targetPivot = CFrame.new(
+		267.41098, -35.4699707, -925.367859,
+		0.258864343, 0, -0.965913713,
+		0, 1, 0,
+		0.965913713, 0, 0.258864343
+	)
+	
+	button.Activated:Connect(function()
+		local character = player.Character
+		local root = character and character:FindFirstChild("HumanoidRootPart")
+	
+		if root then
+			root.CFrame = targetPivot
+		end
+	end)
+	
+end
+coroutine.wrap(RTGP_fake_script)()
