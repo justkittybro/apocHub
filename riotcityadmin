@@ -328,6 +328,7 @@ TextLabel_2.TextWrapped = true
 
 PlayerMenu.Name = "PlayerMenu"
 PlayerMenu.Parent = RiotCity
+PlayerMenu.Active = true
 PlayerMenu.BackgroundColor3 = Color3.fromRGB(84, 84, 84)
 PlayerMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerMenu.BorderSizePixel = 0
@@ -476,14 +477,14 @@ ViewButton.TextWrapped = true
 
 -- Scripts:
 
-local function ISORZX_fake_script() -- Frame.LocalScript 
+local function JKYB_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(ISORZX_fake_script)()
-local function YZOJ_fake_script() -- PlayerButton_2.LocalScript 
+coroutine.wrap(JKYB_fake_script)()
+local function SCSA_fake_script() -- PlayerButton_2.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_2)
 
 	-- LocalScript inside the TextButton
@@ -502,8 +503,8 @@ local function YZOJ_fake_script() -- PlayerButton_2.LocalScript
 	end)
 	
 end
-coroutine.wrap(YZOJ_fake_script)()
-local function DMWPH_fake_script() -- PlayerButton_3.LocalScript 
+coroutine.wrap(SCSA_fake_script)()
+local function VSJWJPI_fake_script() -- PlayerButton_3.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_3)
 
 	
@@ -538,8 +539,8 @@ local function DMWPH_fake_script() -- PlayerButton_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(DMWPH_fake_script)()
-local function GQYYP_fake_script() -- PlayerButton_4.LocalScript 
+coroutine.wrap(VSJWJPI_fake_script)()
+local function KBDW_fake_script() -- PlayerButton_4.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_4)
 
 	
@@ -571,8 +572,8 @@ local function GQYYP_fake_script() -- PlayerButton_4.LocalScript
 	end)
 	
 end
-coroutine.wrap(GQYYP_fake_script)()
-local function BHIBOXF_fake_script() -- PlayerButton_5.LocalScript 
+coroutine.wrap(KBDW_fake_script)()
+local function NMSUEF_fake_script() -- PlayerButton_5.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_5)
 
 	
@@ -600,8 +601,8 @@ local function BHIBOXF_fake_script() -- PlayerButton_5.LocalScript
 	end)
 	
 end
-coroutine.wrap(BHIBOXF_fake_script)()
-local function YCWK_fake_script() -- PlayerButton_6.LocalScript 
+coroutine.wrap(NMSUEF_fake_script)()
+local function XVZOIHW_fake_script() -- PlayerButton_6.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_6)
 
 	
@@ -638,8 +639,8 @@ local function YCWK_fake_script() -- PlayerButton_6.LocalScript
 	end)
 	
 end
-coroutine.wrap(YCWK_fake_script)()
-local function MOUOF_fake_script() -- PlayerButton_7.LocalScript 
+coroutine.wrap(XVZOIHW_fake_script)()
+local function XGQJZIH_fake_script() -- PlayerButton_7.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_7)
 
 	
@@ -665,8 +666,8 @@ local function MOUOF_fake_script() -- PlayerButton_7.LocalScript
 	end)
 	
 end
-coroutine.wrap(MOUOF_fake_script)()
-local function UJCN_fake_script() -- TextBox.LocalScript 
+coroutine.wrap(XGQJZIH_fake_script)()
+local function YOCIFF_fake_script() -- TextBox.LocalScript 
 	local script = Instance.new('LocalScript', TextBox)
 
 	
@@ -700,8 +701,8 @@ local function UJCN_fake_script() -- TextBox.LocalScript
 	end
 	
 end
-coroutine.wrap(UJCN_fake_script)()
-local function RJCTWG_fake_script() -- TextBox_2.LocalScript 
+coroutine.wrap(YOCIFF_fake_script)()
+local function RESIWAD_fake_script() -- TextBox_2.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_2)
 
 	
@@ -739,8 +740,8 @@ local function RJCTWG_fake_script() -- TextBox_2.LocalScript
 	end
 	
 end
-coroutine.wrap(RJCTWG_fake_script)()
-local function BFDSUDZ_fake_script() -- PlayerButton_8.LocalScript 
+coroutine.wrap(RESIWAD_fake_script)()
+local function DFQYU_fake_script() -- PlayerButton_8.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_8)
 
 	-- LocalScript inside the TextButton
@@ -759,8 +760,8 @@ local function BFDSUDZ_fake_script() -- PlayerButton_8.LocalScript
 	end)
 	
 end
-coroutine.wrap(BFDSUDZ_fake_script)()
-local function EWEZTT_fake_script() -- PlayerButton_9.LocalScript 
+coroutine.wrap(DFQYU_fake_script)()
+local function QTNSVT_fake_script() -- PlayerButton_9.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_9)
 
 	
@@ -796,8 +797,8 @@ local function EWEZTT_fake_script() -- PlayerButton_9.LocalScript
 	end)
 	
 end
-coroutine.wrap(EWEZTT_fake_script)()
-local function OOYMZ_fake_script() -- PlayerButton_10.LocalScript 
+coroutine.wrap(QTNSVT_fake_script)()
+local function LDBZJZN_fake_script() -- PlayerButton_10.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_10)
 
 	
@@ -819,8 +820,8 @@ local function OOYMZ_fake_script() -- PlayerButton_10.LocalScript
 	end)
 	
 end
-coroutine.wrap(OOYMZ_fake_script)()
-local function ZZQQ_fake_script() -- PlayerButton_11.LocalScript 
+coroutine.wrap(LDBZJZN_fake_script)()
+local function TNJKE_fake_script() -- PlayerButton_11.LocalScript 
 	local script = Instance.new('LocalScript', PlayerButton_11)
 
 	
@@ -881,8 +882,8 @@ local function ZZQQ_fake_script() -- PlayerButton_11.LocalScript
 	button.Text = "Noclip: OFF"
 	
 end
-coroutine.wrap(ZZQQ_fake_script)()
-local function AVTUHP_fake_script() -- TextBox_3.LocalScript 
+coroutine.wrap(TNJKE_fake_script)()
+local function WJMG_fake_script() -- TextBox_3.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_3)
 
 	
@@ -951,8 +952,8 @@ local function AVTUHP_fake_script() -- TextBox_3.LocalScript
 	end)
 	
 end
-coroutine.wrap(AVTUHP_fake_script)()
-local function ZTRPP_fake_script() -- TextBox_4.LocalScript 
+coroutine.wrap(WJMG_fake_script)()
+local function EPZR_fake_script() -- TextBox_4.LocalScript 
 	local script = Instance.new('LocalScript', TextBox_4)
 
 	
@@ -1012,8 +1013,8 @@ local function ZTRPP_fake_script() -- TextBox_4.LocalScript
 	textBox.FocusLost:Connect(teleportToPlayer)
 	
 end
-coroutine.wrap(ZTRPP_fake_script)()
-local function LNJEBOT_fake_script() -- PlayerMenuButton.LocalScript 
+coroutine.wrap(EPZR_fake_script)()
+local function RZMZGNJ_fake_script() -- PlayerMenuButton.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenuButton)
 
 	local frame = script.Parent.Parent.Parent.PlayerMenu
@@ -1022,8 +1023,8 @@ local function LNJEBOT_fake_script() -- PlayerMenuButton.LocalScript
 		frame.Visible = false
 	end)
 end
-coroutine.wrap(LNJEBOT_fake_script)()
-local function DDZCMQA_fake_script() -- RiotCity.LocalScript 
+coroutine.wrap(RZMZGNJ_fake_script)()
+local function CEZSCP_fake_script() -- RiotCity.LocalScript 
 	local script = Instance.new('LocalScript', RiotCity)
 
 	local Players = game:GetService("Players")
@@ -1054,22 +1055,22 @@ local function DDZCMQA_fake_script() -- RiotCity.LocalScript
 		end
 	end)
 end
-coroutine.wrap(DDZCMQA_fake_script)()
-local function UNAWNXU_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(CEZSCP_fake_script)()
+local function KTAAC_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(UNAWNXU_fake_script)()
-local function YVLYZY_fake_script() -- InfoFrame.LocalScript 
+coroutine.wrap(KTAAC_fake_script)()
+local function XDWLD_fake_script() -- InfoFrame.LocalScript 
 	local script = Instance.new('LocalScript', InfoFrame)
 
 	script.Parent.Active = true
 	script.Parent.Draggable = true
 end
-coroutine.wrap(YVLYZY_fake_script)()
-local function MMPFZP_fake_script() -- PlayerMenu.LocalScript 
+coroutine.wrap(XDWLD_fake_script)()
+local function DIHZY_fake_script() -- PlayerMenu.LocalScript 
 	local script = Instance.new('LocalScript', PlayerMenu)
 
 	
@@ -1306,4 +1307,4 @@ local function MMPFZP_fake_script() -- PlayerMenu.LocalScript
 	refreshPlayers()
 	
 end
-coroutine.wrap(MMPFZP_fake_script)()
+coroutine.wrap(DIHZY_fake_script)()
