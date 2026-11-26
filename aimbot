@@ -7,30 +7,13 @@ local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
 local player = Players.LocalPlayer
-if not player then
-	local ok = pcall(function()
-		player = Players:GetPropertyChangedSignal("LocalPlayer"):Wait() and Players.LocalPlayer
-	end)
-	if not ok or not player then
-		warn("Tubers Aimbot: LocalPlayer not found")
-		return
-	end
+while not player do
+	task.wait()
+	player = Players.LocalPlayer
 end
 
-local playerGui = player:WaitForChild("PlayerGui", 15)
-if not playerGui then
-	warn("Tubers Aimbot: PlayerGui not found")
-	return
-end
-
-local camera = Workspace.CurrentCamera
-pcall(function()
-	Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-		if Workspace.CurrentCamera then
-			camera = Workspace.CurrentCamera
-		end
-	end)
-end)
+local playerGui = player:WaitForChild("PlayerGui")
+local camera = workspace.CurrentCamera
 
 local FOV_RADIUS = 150
 local SMOOTHNESS = 0.15
@@ -42,10 +25,6 @@ local SHOW_FOV_CIRCLE = false
 local TARGET_OPTIONS = { "Head", "Arm", "Torso" }
 local AIM_PART_MODE = "Head"
 local dropdownOpen = false
-
--- Whitelist tables (case-insensitive names/display names + numeric UserIds)
-local WHITELIST_NAMES = {}
-local WHITELIST_IDS = {}
 
 local target = nil
 local MOUSE_LOCKED = false
@@ -77,16 +56,6 @@ fovCircle.Parent = screenGui
 local circleCorner = Instance.new("UICorner")
 circleCorner.CornerRadius = UDim.new(1, 0)
 circleCorner.Parent = fovCircle
-
-local function isWhitelisted(otherPlayer)
-	if not otherPlayer then return false end
-	if WHITELIST_IDS[otherPlayer.UserId] == true then
-		return true
-	end
-	local nameKey = string.lower(otherPlayer.Name or "")
-	local displayKey = string.lower(otherPlayer.DisplayName or "")
-	return WHITELIST_NAMES[nameKey] == true or WHITELIST_NAMES[displayKey] == true
-end
 
 local function getTargetPart(character)
 	if not character then return nil end
@@ -128,8 +97,7 @@ local function isVisible(targetCharacter)
 	local part = getTargetPart(targetCharacter)
 	if not part then return false end
 
-	local activeCam = Workspace.CurrentCamera or camera
-	local origin = activeCam.CFrame.Position
+	local origin = camera.CFrame.Position
 	local direction = part.Position - origin
 
 	local params = RaycastParams.new()
@@ -146,19 +114,18 @@ end
 local function getClosestInFOV()
 	local closest = nil
 	local shortestDistance = math.huge
-	local activeCam = Workspace.CurrentCamera or camera
 	local screenCenter = Vector2.new(
-		activeCam.ViewportSize.X / 2,
-		activeCam.ViewportSize.Y / 2
+		camera.ViewportSize.X / 2,
+		camera.ViewportSize.Y / 2
 	)
 
 	for _, plr in ipairs(Players:GetPlayers()) do
-		if plr ~= player and not isWhitelisted(plr) and not isSameTeam(plr) and plr.Character then
+		if plr ~= player and not isSameTeam(plr) and plr.Character then
 			local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
 			local part = getTargetPart(plr.Character)
 
 			if humanoid and humanoid.Health > 0 and part then
-				local screenPos, onScreen = activeCam:WorldToViewportPoint(part.Position)
+				local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
 
 				if onScreen then
 					local dist = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
@@ -178,7 +145,6 @@ local function getClosestInFOV()
 end
 
 RunService.RenderStepped:Connect(function()
-	local activeCam = Workspace.CurrentCamera or camera
 	if not AIMBOT_ENABLED then
 		if MOUSE_LOCKED then
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
@@ -193,10 +159,10 @@ RunService.RenderStepped:Connect(function()
 		local part = getTargetPart(target.Character)
 
 		if part then
-			local camPos = activeCam.CFrame.Position
+			local camPos = camera.CFrame.Position
 			local lookAt = CFrame.new(camPos, part.Position)
 
-			activeCam.CFrame = activeCam.CFrame:Lerp(lookAt, SMOOTHNESS)
+			camera.CFrame = camera.CFrame:Lerp(lookAt, SMOOTHNESS)
 
 			if not MOUSE_LOCKED then
 				UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
@@ -241,7 +207,7 @@ menuToggleCorner.Parent = menuToggleButton
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.fromOffset(230, 365)
+mainFrame.Size = UDim2.fromOffset(230, 355)
 mainFrame.Position = UDim2.fromOffset(20, 62)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
@@ -269,7 +235,7 @@ listLayout.Parent = mainFrame
 
 local function resizeMainFrame()
 	local contentY = listLayout.AbsoluteContentSize.Y
-	mainFrame.Size = UDim2.fromOffset(230, math.max(365, contentY + 24))
+	mainFrame.Size = UDim2.fromOffset(230, math.max(355, contentY + 24))
 end
 
 listLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(resizeMainFrame)
@@ -442,46 +408,9 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
-local whitelistRow = Instance.new("Frame")
-whitelistRow.Name = "WhitelistRow"
-whitelistRow.LayoutOrder = 10
-whitelistRow.Size = UDim2.new(1, 0, 0, 28)
-whitelistRow.BackgroundTransparency = 1
-whitelistRow.ZIndex = 8
-whitelistRow.Parent = mainFrame
-
-local whitelistLabel = Instance.new("TextLabel")
-whitelistLabel.Size = UDim2.new(0.46, 0, 1, 0)
-whitelistLabel.BackgroundTransparency = 1
-whitelistLabel.TextColor3 = Color3.new(1, 1, 1)
-whitelistLabel.Font = Enum.Font.SourceSansPro
-whitelistLabel.TextSize = 16
-whitelistLabel.TextXAlignment = Enum.TextXAlignment.Left
-whitelistLabel.Text = "Whitelist:"
-whitelistLabel.ZIndex = 10
-whitelistLabel.Parent = whitelistRow
-
-local whitelistBox = Instance.new("TextBox")
-whitelistBox.Name = "WhitelistBox"
-whitelistBox.Size = UDim2.new(0.50, 0, 1, 0)
-whitelistBox.Position = UDim2.fromScale(0.50, 0)
-whitelistBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
-whitelistBox.TextColor3 = Color3.new(1, 1, 1)
-whitelistBox.Font = Enum.Font.SourceSansPro
-whitelistBox.TextSize = 15
-whitelistBox.PlaceholderText = "Name / ID"
-whitelistBox.Text = ""
-whitelistBox.ClearTextOnFocus = true
-whitelistBox.ZIndex = 10
-whitelistBox.Parent = whitelistRow
-
-local whitelistCorner = Instance.new("UICorner")
-whitelistCorner.CornerRadius = UDim.new(0, 6)
-whitelistCorner.Parent = whitelistBox
-
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
-stepRow.LayoutOrder = 11
+stepRow.LayoutOrder = 10
 stepRow.Size = UDim2.new(1, 0, 0, 28)
 stepRow.BackgroundTransparency = 1
 stepRow.ZIndex = 8
@@ -552,38 +481,6 @@ local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
-local function toggleWhitelistEntry(rawInput)
-	local trimmed = (rawInput or ""):match("^%s*(.-)%s*$") or ""
-	if trimmed == "" then return end
-
-	local numericId = tonumber(trimmed)
-	local added = false
-
-	if numericId then
-		if WHITELIST_IDS[numericId] then
-			WHITELIST_IDS[numericId] = nil
-		else
-			WHITELIST_IDS[numericId] = true
-			added = true
-		end
-	else
-		local key = string.lower(trimmed)
-		if WHITELIST_NAMES[key] then
-			WHITELIST_NAMES[key] = nil
-		else
-			WHITELIST_NAMES[key] = true
-			added = true
-		end
-	end
-
-	whitelistLabel.Text = added and "Whitelist (+)" or "Whitelist (-)"
-	task.delay(1.2, function()
-		if whitelistLabel and whitelistLabel.Parent then
-			whitelistLabel.Text = "Whitelist:"
-		end
-	end)
-end
-
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
 	menuToggleButton.Text = mainFrame.Visible and "Menu: ON" or "Menu: OFF"
@@ -631,13 +528,6 @@ smoothBox.FocusLost:Connect(function()
 		SMOOTHNESS = math.clamp(parsed, 0.01, 1)
 	end
 	updateSmoothDisplay()
-end)
-
-whitelistBox.FocusLost:Connect(function()
-	if whitelistBox.Text ~= "" then
-		toggleWhitelistEntry(whitelistBox.Text)
-		whitelistBox.Text = ""
-	end
 end)
 
 UserInputService.InputBegan:Connect(function(input, processed)
