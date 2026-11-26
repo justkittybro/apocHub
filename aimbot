@@ -6,25 +6,20 @@ local Workspace = game:GetService("Workspace")
 local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
-local VirtualInputManager = nil
-pcall(function()
-	VirtualInputManager = game:GetService("VirtualInputManager")
-end)
-
 local player = Players.LocalPlayer
 if not player then
 	local ok = pcall(function()
 		player = Players:GetPropertyChangedSignal("LocalPlayer"):Wait() and Players.LocalPlayer
 	end)
 	if not ok or not player then
-		warn("LocalPlayer unavailable")
+		warn("Tubers Aimbot: LocalPlayer not found")
 		return
 	end
 end
 
-local playerGui = player:WaitForChild("PlayerGui", 10)
+local playerGui = player:WaitForChild("PlayerGui", 15)
 if not playerGui then
-	warn("PlayerGui not found")
+	warn("Tubers Aimbot: PlayerGui not found")
 	return
 end
 
@@ -40,15 +35,15 @@ end)
 local FOV_RADIUS = 150
 local SMOOTHNESS = 0.15
 local AIMBOT_ENABLED = false
-local TRIGGERBOT_ENABLED = false
 local TEAM_CHECK_ENABLED = false
 local WALL_CHECK_ENABLED = false
 local SHOW_FOV_CIRCLE = false
 
-local TRIGGER_COOLDOWN = 0.12
-local lastTriggerTime = 0
+local TARGET_OPTIONS = { "Head", "Arm", "Torso" }
+local AIM_PART_MODE = "Head"
+local dropdownOpen = false
 
--- Whitelist keyed by lowercase Name/DisplayName or numeric UserId
+-- Whitelist tables (case-insensitive names/display names + numeric UserIds)
 local WHITELIST_NAMES = {}
 local WHITELIST_IDS = {}
 
@@ -95,8 +90,23 @@ end
 
 local function getTargetPart(character)
 	if not character then return nil end
-	return character:FindFirstChild("Head")
-		or character:FindFirstChild("HumanoidRootPart")
+
+	if AIM_PART_MODE == "Head" then
+		return character:FindFirstChild("Head")
+			or character:FindFirstChild("HumanoidRootPart")
+	elseif AIM_PART_MODE == "Arm" then
+		return character:FindFirstChild("RightUpperArm")
+			or character:FindFirstChild("Right Arm")
+			or character:FindFirstChild("LeftUpperArm")
+			or character:FindFirstChild("Left Arm")
+			or character:FindFirstChild("HumanoidRootPart")
+	elseif AIM_PART_MODE == "Torso" then
+		return character:FindFirstChild("UpperTorso")
+			or character:FindFirstChild("Torso")
+			or character:FindFirstChild("HumanoidRootPart")
+	end
+
+	return character:FindFirstChild("Head") or character:FindFirstChild("HumanoidRootPart")
 end
 
 local function isSameTeam(otherPlayer)
@@ -131,68 +141,6 @@ local function isVisible(targetCharacter)
 
 	local result = Workspace:Raycast(origin, direction, params)
 	return result == nil
-end
-
-local function getPlayerFromCharacter(descendant)
-	if not descendant then return nil end
-	for _, plr in ipairs(Players:GetPlayers()) do
-		if plr.Character and descendant:IsDescendantOf(plr.Character) then
-			return plr
-		end
-	end
-	return nil
-end
-
-local function triggerClick()
-	if not VirtualInputManager then return end
-	local activeCam = Workspace.CurrentCamera or camera
-	pcall(function()
-		VirtualInputManager:SendMouseButtonEvent(
-			activeCam.ViewportSize.X / 2,
-			activeCam.ViewportSize.Y / 2,
-			0,
-			true,
-			game,
-			1
-		)
-		task.wait(0.02)
-		VirtualInputManager:SendMouseButtonEvent(
-			activeCam.ViewportSize.X / 2,
-			activeCam.ViewportSize.Y / 2,
-			0,
-			false,
-			game,
-			1
-		)
-	end)
-end
-
-local function checkTriggerBot()
-	if not TRIGGERBOT_ENABLED then return end
-	local now = os.clock()
-	if now - lastTriggerTime < TRIGGER_COOLDOWN then return end
-
-	local activeCam = Workspace.CurrentCamera or camera
-	local center = Vector2.new(activeCam.ViewportSize.X / 2, activeCam.ViewportSize.Y / 2)
-	local ray = activeCam:ViewportPointToRay(center.X, center.Y)
-
-	local params = RaycastParams.new()
-	params.FilterType = Enum.RaycastFilterType.Exclude
-	if player.Character then
-		params.FilterDescendantsInstances = { player.Character }
-	end
-
-	local result = Workspace:Raycast(ray.Origin, ray.Direction * 1000, params)
-	if not result or not result.Instance then return end
-
-	local hitPlayer = getPlayerFromCharacter(result.Instance)
-	if not hitPlayer or hitPlayer == player or isWhitelisted(hitPlayer) or isSameTeam(hitPlayer) then return end
-
-	local humanoid = hitPlayer.Character and hitPlayer.Character:FindFirstChildOfClass("Humanoid")
-	if not humanoid or humanoid.Health <= 0 then return end
-
-	lastTriggerTime = now
-	triggerClick()
 end
 
 local function getClosestInFOV()
@@ -230,8 +178,6 @@ local function getClosestInFOV()
 end
 
 RunService.RenderStepped:Connect(function()
-	checkTriggerBot()
-
 	local activeCam = Workspace.CurrentCamera or camera
 	if not AIMBOT_ENABLED then
 		if MOUSE_LOCKED then
@@ -274,8 +220,9 @@ menuGui.Parent = playerGui
 
 local OFF_COLOR = Color3.fromRGB(140, 40, 40)
 local ON_COLOR = Color3.fromRGB(35, 150, 75)
+local SELECT_COLOR = Color3.fromRGB(45, 95, 165)
+local OPTION_IDLE_COLOR = Color3.fromRGB(45, 45, 56)
 
--- TOGGLE MENU BUTTON
 local menuToggleButton = Instance.new("TextButton")
 menuToggleButton.Name = "MenuToggleButton"
 menuToggleButton.Size = UDim2.fromOffset(130, 34)
@@ -292,7 +239,6 @@ local menuToggleCorner = Instance.new("UICorner")
 menuToggleCorner.CornerRadius = UDim.new(0, 8)
 menuToggleCorner.Parent = menuToggleButton
 
--- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.fromOffset(230, 365)
@@ -359,25 +305,74 @@ local function makeToggleButton(name, text, order, bgColor)
 	return btn
 end
 
--- 1. Aimbot Toggle
 local toggleButton = makeToggleButton("AimbotToggle", "Aimbot: OFF", 2, OFF_COLOR)
+local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 3, OFF_COLOR)
+local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4, OFF_COLOR)
+local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5, OFF_COLOR)
+local targetDropdownButton = makeToggleButton("TargetDropdownToggle", "Target: " .. AIM_PART_MODE .. " v", 6, SELECT_COLOR)
 
--- 2. Trigger Bot Toggle
-local triggerButton = makeToggleButton("TriggerBotToggle", "Trigger Bot: OFF", 3, OFF_COLOR)
+local targetListFrame = Instance.new("Frame")
+targetListFrame.Name = "TargetDropdownList"
+targetListFrame.LayoutOrder = 7
+targetListFrame.Size = UDim2.new(1, 0, 0, #TARGET_OPTIONS * 28)
+targetListFrame.BackgroundColor3 = Color3.fromRGB(28, 28, 35)
+targetListFrame.BorderSizePixel = 0
+targetListFrame.Visible = false
+targetListFrame.ZIndex = 9
+targetListFrame.Parent = mainFrame
 
--- 3. Team Check Toggle
-local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 4, OFF_COLOR)
+local targetListCorner = Instance.new("UICorner")
+targetListCorner.CornerRadius = UDim.new(0, 6)
+targetListCorner.Parent = targetListFrame
 
--- 4. Wall Check Toggle
-local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 5, OFF_COLOR)
+local targetListLayout = Instance.new("UIListLayout")
+targetListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+targetListLayout.Padding = UDim.new(0, 2)
+targetListLayout.Parent = targetListFrame
 
--- 5. Show FOV Circle Toggle
-local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 6, OFF_COLOR)
+local optionButtons = {}
 
--- 6. FOV Radius Row
+local function refreshOptionColors()
+	for optionName, optBtn in pairs(optionButtons) do
+		local isSelected = (optionName == AIM_PART_MODE)
+		optBtn.BackgroundColor3 = isSelected and SELECT_COLOR or OPTION_IDLE_COLOR
+		optBtn.Text = isSelected and ("> " .. optionName) or optionName
+	end
+	targetDropdownButton.Text = "Target: " .. AIM_PART_MODE .. (dropdownOpen and " ^" or " v")
+end
+
+for idx, optionName in ipairs(TARGET_OPTIONS) do
+	local optBtn = Instance.new("TextButton")
+	optBtn.Name = "Option_" .. optionName
+	optBtn.LayoutOrder = idx
+	optBtn.Size = UDim2.new(1, 0, 0, 26)
+	optBtn.BackgroundColor3 = OPTION_IDLE_COLOR
+	optBtn.TextColor3 = Color3.new(1, 1, 1)
+	optBtn.Font = Enum.Font.SourceSansPro
+	optBtn.TextSize = 15
+	optBtn.Text = optionName
+	optBtn.ZIndex = 11
+	optBtn.Parent = targetListFrame
+
+	local optCorner = Instance.new("UICorner")
+	optCorner.CornerRadius = UDim.new(0, 5)
+	optCorner.Parent = optBtn
+
+	optionButtons[optionName] = optBtn
+
+	optBtn.MouseButton1Click:Connect(function()
+		AIM_PART_MODE = optionName
+		dropdownOpen = false
+		targetListFrame.Visible = false
+		refreshOptionColors()
+	end)
+end
+
+refreshOptionColors()
+
 local fovRow = Instance.new("Frame")
 fovRow.Name = "FovRow"
-fovRow.LayoutOrder = 7
+fovRow.LayoutOrder = 8
 fovRow.Size = UDim2.new(1, 0, 0, 28)
 fovRow.BackgroundTransparency = 1
 fovRow.ZIndex = 8
@@ -385,7 +380,6 @@ fovRow.Parent = mainFrame
 
 local fovLabel = Instance.new("TextLabel")
 fovLabel.Size = UDim2.new(0.56, 0, 1, 0)
-fovLabel.Position = UDim2.fromScale(0, 0)
 fovLabel.BackgroundTransparency = 1
 fovLabel.TextColor3 = Color3.new(1, 1, 1)
 fovLabel.Font = Enum.Font.SourceSansPro
@@ -412,10 +406,9 @@ local fovBoxCorner = Instance.new("UICorner")
 fovBoxCorner.CornerRadius = UDim.new(0, 6)
 fovBoxCorner.Parent = fovBox
 
--- 7. Smoothing Row
 local smoothRow = Instance.new("Frame")
 smoothRow.Name = "SmoothRow"
-smoothRow.LayoutOrder = 8
+smoothRow.LayoutOrder = 9
 smoothRow.Size = UDim2.new(1, 0, 0, 28)
 smoothRow.BackgroundTransparency = 1
 smoothRow.ZIndex = 8
@@ -423,7 +416,6 @@ smoothRow.Parent = mainFrame
 
 local smoothLabel = Instance.new("TextLabel")
 smoothLabel.Size = UDim2.new(0.56, 0, 1, 0)
-smoothLabel.Position = UDim2.fromScale(0, 0)
 smoothLabel.BackgroundTransparency = 1
 smoothLabel.TextColor3 = Color3.new(1, 1, 1)
 smoothLabel.Font = Enum.Font.SourceSansPro
@@ -450,10 +442,9 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
--- 8. Whitelist Row (Name or UserId)
 local whitelistRow = Instance.new("Frame")
 whitelistRow.Name = "WhitelistRow"
-whitelistRow.LayoutOrder = 9
+whitelistRow.LayoutOrder = 10
 whitelistRow.Size = UDim2.new(1, 0, 0, 28)
 whitelistRow.BackgroundTransparency = 1
 whitelistRow.ZIndex = 8
@@ -461,7 +452,6 @@ whitelistRow.Parent = mainFrame
 
 local whitelistLabel = Instance.new("TextLabel")
 whitelistLabel.Size = UDim2.new(0.46, 0, 1, 0)
-whitelistLabel.Position = UDim2.fromScale(0, 0)
 whitelistLabel.BackgroundTransparency = 1
 whitelistLabel.TextColor3 = Color3.new(1, 1, 1)
 whitelistLabel.Font = Enum.Font.SourceSansPro
@@ -489,10 +479,9 @@ local whitelistCorner = Instance.new("UICorner")
 whitelistCorner.CornerRadius = UDim.new(0, 6)
 whitelistCorner.Parent = whitelistBox
 
--- 9. Minus / Plus Row
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
-stepRow.LayoutOrder = 10
+stepRow.LayoutOrder = 11
 stepRow.Size = UDim2.new(1, 0, 0, 28)
 stepRow.BackgroundTransparency = 1
 stepRow.ZIndex = 8
@@ -501,7 +490,6 @@ stepRow.Parent = mainFrame
 local minus = Instance.new("TextButton")
 minus.Name = "SmoothMinus"
 minus.Size = UDim2.new(0.47, 0, 1, 0)
-minus.Position = UDim2.fromScale(0, 0)
 minus.Text = "-"
 minus.Font = Enum.Font.SourceSansPro
 minus.TextSize = 18
@@ -530,7 +518,6 @@ local plusCorner = Instance.new("UICorner")
 plusCorner.CornerRadius = UDim.new(0, 6)
 plusCorner.Parent = plus
 
--- State updates
 local function updateAimbotState()
 	toggleButton.Text = AIMBOT_ENABLED and "Aimbot: ON" or "Aimbot: OFF"
 	toggleButton.BackgroundColor3 = AIMBOT_ENABLED and ON_COLOR or OFF_COLOR
@@ -538,11 +525,6 @@ local function updateAimbotState()
 		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 		MOUSE_LOCKED = false
 	end
-end
-
-local function updateTriggerBotState()
-	triggerButton.Text = TRIGGERBOT_ENABLED and "Trigger Bot: ON" or "Trigger Bot: OFF"
-	triggerButton.BackgroundColor3 = TRIGGERBOT_ENABLED and ON_COLOR or OFF_COLOR
 end
 
 local function updateTeamCheckState()
@@ -602,7 +584,6 @@ local function toggleWhitelistEntry(rawInput)
 	end)
 end
 
--- Events
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
 	menuToggleButton.Text = mainFrame.Visible and "Menu: ON" or "Menu: OFF"
@@ -612,11 +593,6 @@ end)
 toggleButton.MouseButton1Click:Connect(function()
 	AIMBOT_ENABLED = not AIMBOT_ENABLED
 	updateAimbotState()
-end)
-
-triggerButton.MouseButton1Click:Connect(function()
-	TRIGGERBOT_ENABLED = not TRIGGERBOT_ENABLED
-	updateTriggerBotState()
 end)
 
 teamButton.MouseButton1Click:Connect(function()
@@ -632,6 +608,13 @@ end)
 fovButton.MouseButton1Click:Connect(function()
 	SHOW_FOV_CIRCLE = not SHOW_FOV_CIRCLE
 	updateFovCircleState()
+end)
+
+targetDropdownButton.MouseButton1Click:Connect(function()
+	dropdownOpen = not dropdownOpen
+	targetListFrame.Visible = dropdownOpen
+	refreshOptionColors()
+	resizeMainFrame()
 end)
 
 fovBox.FocusLost:Connect(function()
