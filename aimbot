@@ -26,29 +26,39 @@ local AIM_PART = "Head"
 local target = nil
 local MOUSE_LOCKED = false
 
+-- Remove old copies if re-executed
+if playerGui:FindFirstChild("FOVGui") then
+	playerGui.FOVGui:Destroy()
+end
+if playerGui:FindFirstChild("AimbotMenu") then
+	playerGui.AimbotMenu:Destroy()
+end
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "FOVGui"
 screenGui.ResetOnSpawn = false
+screenGui.IgnoreGuiInset = true
 screenGui.Parent = playerGui
 
 local fovCircle = Instance.new("Frame")
-fovCircle.Size = UDim2.new(0, FOV_RADIUS*2, 0, FOV_RADIUS*2)
+fovCircle.Size = UDim2.new(0, FOV_RADIUS * 2, 0, FOV_RADIUS * 2)
 fovCircle.AnchorPoint = Vector2.new(0.5, 0.5)
 fovCircle.Position = UDim2.new(0.5, 0, 0.5, 0)
-fovCircle.BackgroundColor3 = Color3.fromRGB(255,0,0)
-fovCircle.BackgroundTransparency = 0.9
+fovCircle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+fovCircle.BackgroundTransparency = 0.85
 fovCircle.BorderSizePixel = 0
+fovCircle.Visible = SHOW_FOV_CIRCLE
 fovCircle.Parent = screenGui
 
 local circleCorner = Instance.new("UICorner")
-circleCorner.CornerRadius = UDim.new(1,0)
+circleCorner.CornerRadius = UDim.new(1, 0)
 circleCorner.Parent = fovCircle
-
-fovCircle.Visible = SHOW_FOV_CIRCLE
 
 local function getTargetPart(character)
 	if not character then return nil end
-	return character:FindFirstChild(AIM_PART) or character:FindFirstChild("Head") or character:FindFirstChild("HumanoidRootPart")
+	return character:FindFirstChild(AIM_PART)
+		or character:FindFirstChild("Head")
+		or character:FindFirstChild("HumanoidRootPart")
 end
 
 local function isSameTeam(otherPlayer)
@@ -66,20 +76,20 @@ local function isVisible(targetCharacter)
 		return true
 	end
 	if not targetCharacter then return false end
-	
+
 	local part = getTargetPart(targetCharacter)
 	if not part then return false end
-	
+
 	local origin = camera.CFrame.Position
 	local direction = part.Position - origin
-	
+
 	local params = RaycastParams.new()
 	params.FilterType = Enum.RaycastFilterType.Exclude
 	params.FilterDescendantsInstances = {
 		player.Character,
 		targetCharacter
 	}
-	
+
 	local result = Workspace:Raycast(origin, direction, params)
 	return result == nil
 end
@@ -88,23 +98,21 @@ local function getClosestInFOV()
 	local closest = nil
 	local shortestDistance = math.huge
 	local screenCenter = Vector2.new(
-		camera.ViewportSize.X/2,
-		camera.ViewportSize.Y/2
+		camera.ViewportSize.X / 2,
+		camera.ViewportSize.Y / 2
 	)
 
 	for _, plr in ipairs(Players:GetPlayers()) do
 		if plr ~= player and not isSameTeam(plr) and plr.Character then
-			
 			local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
 			local part = getTargetPart(plr.Character)
-			
+
 			if humanoid and humanoid.Health > 0 and part then
-				
 				local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
-				
+
 				if onScreen then
 					local dist = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
-					
+
 					if dist < FOV_RADIUS and dist < shortestDistance then
 						if isVisible(plr.Character) then
 							closest = plr
@@ -115,12 +123,11 @@ local function getClosestInFOV()
 			end
 		end
 	end
-	
+
 	return closest
 end
 
 RunService.RenderStepped:Connect(function()
-
 	if not AIMBOT_ENABLED then
 		if MOUSE_LOCKED then
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
@@ -128,152 +135,175 @@ RunService.RenderStepped:Connect(function()
 		end
 		return
 	end
-	
+
 	target = getClosestInFOV()
-	
+
 	if target and target.Character then
-		
 		local part = getTargetPart(target.Character)
-		
+
 		if part then
 			local camPos = camera.CFrame.Position
 			local lookAt = CFrame.new(camPos, part.Position)
-			
-			camera.CFrame = camera.CFrame:Lerp(
-				lookAt,
-				SMOOTHNESS
-			)
 
-			-- LOCK MOUSE MOVEMENT
+			camera.CFrame = camera.CFrame:Lerp(lookAt, SMOOTHNESS)
+
 			if not MOUSE_LOCKED then
 				UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 				MOUSE_LOCKED = true
 			end
 		end
 	else
-		-- UNLOCK MOUSE if no target
 		if MOUSE_LOCKED then
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 			MOUSE_LOCKED = false
 		end
 	end
-	
 end)
 
+-- MENU GUI
 local menuGui = Instance.new("ScreenGui")
 menuGui.Name = "AimbotMenu"
 menuGui.ResetOnSpawn = false
+menuGui.DisplayOrder = 10
 menuGui.Parent = playerGui
 
--- Top button to toggle the menu frame on/off
+-- 1. TOP-LEFT MENU TOGGLE BUTTON (Toggles mainFrame ON/OFF)
 local menuToggleButton = Instance.new("TextButton")
 menuToggleButton.Name = "MenuToggleButton"
-menuToggleButton.Size = UDim2.new(0, 110, 0, 30)
-menuToggleButton.Position = UDim2.new(0.05, 0, 0.24, 0)
-menuToggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+menuToggleButton.Size = UDim2.fromOffset(120, 34)
+menuToggleButton.Position = UDim2.fromOffset(20, 20)
+menuToggleButton.BackgroundColor3 = Color3.fromRGB(35, 150, 75)
 menuToggleButton.TextColor3 = Color3.new(1, 1, 1)
+menuToggleButton.Font = Enum.Font.GothamBold
+menuToggleButton.TextSize = 14
 menuToggleButton.Text = "Menu: ON"
-menuToggleButton.Active = true
-menuToggleButton.Draggable = true
+menuToggleButton.ZIndex = 10
 menuToggleButton.Parent = menuGui
 
 local menuToggleCorner = Instance.new("UICorner")
 menuToggleCorner.CornerRadius = UDim.new(0, 8)
 menuToggleCorner.Parent = menuToggleButton
 
+-- 2. MAIN MENU FRAME (Positioned directly below MenuToggleButton)
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0,220,0,260)
-mainFrame.Position = UDim2.new(0.05,0,0.3,0)
-mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.fromOffset(220, 265)
+mainFrame.Position = UDim2.fromOffset(20, 62)
+mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
 mainFrame.Draggable = true
+mainFrame.Visible = true
+mainFrame.ZIndex = 2
 mainFrame.Parent = menuGui
 
 local frameCorner = Instance.new("UICorner")
-frameCorner.CornerRadius = UDim.new(0,12)
+frameCorner.CornerRadius = UDim.new(0, 12)
 frameCorner.Parent = mainFrame
 
 local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1,0,0,30)
+title.Size = UDim2.new(1, 0, 0, 32)
+title.Position = UDim2.fromOffset(0, 2)
 title.BackgroundTransparency = 1
 title.Text = "Tubers Aimbot"
-title.TextColor3 = Color3.new(1,1,1)
-title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextSize = 16
+title.ZIndex = 3
 title.Parent = mainFrame
 
-local toggleButton = Instance.new("TextButton")
-toggleButton.Size = UDim2.new(0.8,0,0,28)
-toggleButton.Position = UDim2.new(0.1,0,0,36)
-toggleButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
-toggleButton.TextColor3 = Color3.new(0,0,0)
-toggleButton.Text = "Aimbot: OFF"
-toggleButton.Parent = mainFrame
+local OFF_COLOR = Color3.fromRGB(140, 40, 40)
+local ON_COLOR = Color3.fromRGB(35, 150, 75)
 
-local teamButton = Instance.new("TextButton")
-teamButton.Size = UDim2.new(0.8,0,0,28)
-teamButton.Position = UDim2.new(0.1,0,0,70)
-teamButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
-teamButton.TextColor3 = Color3.new(0,0,0)
-teamButton.Text = "Team Check: OFF"
-teamButton.Parent = mainFrame
+local function makeToggleButton(text, yPos)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0.84, 0, 0, 28)
+	btn.Position = UDim2.new(0.08, 0, 0, yPos)
+	btn.BackgroundColor3 = OFF_COLOR
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 13
+	btn.Text = text
+	btn.ZIndex = 5
+	btn.Parent = mainFrame
 
-local wallButton = Instance.new("TextButton")
-wallButton.Size = UDim2.new(0.8,0,0,28)
-wallButton.Position = UDim2.new(0.1,0,0,104)
-wallButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
-wallButton.TextColor3 = Color3.new(0,0,0)
-wallButton.Text = "Wall Check: OFF"
-wallButton.Parent = mainFrame
+	local c = Instance.new("UICorner")
+	c.CornerRadius = UDim.new(0, 6)
+	c.Parent = btn
 
-local fovButton = Instance.new("TextButton")
-fovButton.Size = UDim2.new(0.8,0,0,28)
-fovButton.Position = UDim2.new(0.1,0,0,138)
-fovButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
-fovButton.TextColor3 = Color3.new(0,0,0)
-fovButton.Text = "Show FOV Circle: OFF"
-fovButton.Parent = mainFrame
+	return btn
+end
 
+-- Toggle buttons inside MainFrame
+local toggleButton = makeToggleButton("Aimbot: OFF", 38)
+local teamButton = makeToggleButton("Team Check: OFF", 72)
+local wallButton = makeToggleButton("Wall Check: OFF", 106)
+local fovButton = makeToggleButton("Show FOV Circle: OFF", 140)
+
+-- Smoothing Label + TextBox
 local smoothLabel = Instance.new("TextLabel")
-smoothLabel.Size = UDim2.new(0.45,0,0,28)
-smoothLabel.Position = UDim2.new(0.1,0,0,174)
+smoothLabel.Size = UDim2.new(0.46, 0, 0, 28)
+smoothLabel.Position = UDim2.new(0.08, 0, 0, 176)
 smoothLabel.BackgroundTransparency = 1
-smoothLabel.TextColor3 = Color3.new(1,1,1)
-smoothLabel.TextScaled = true
+smoothLabel.TextColor3 = Color3.new(1, 1, 1)
+smoothLabel.Font = Enum.Font.Gotham
+smoothLabel.TextSize = 13
 smoothLabel.TextXAlignment = Enum.TextXAlignment.Left
 smoothLabel.Text = "Smoothing:"
+smoothLabel.ZIndex = 5
 smoothLabel.Parent = mainFrame
 
 local smoothBox = Instance.new("TextBox")
-smoothBox.Size = UDim2.new(0.32,0,0,28)
-smoothBox.Position = UDim2.new(0.58,0,0,174)
-smoothBox.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
-smoothBox.TextColor3 = Color3.new(0,0,0)
+smoothBox.Size = UDim2.new(0.36, 0, 0, 28)
+smoothBox.Position = UDim2.new(0.56, 0, 0, 176)
+smoothBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+smoothBox.TextColor3 = Color3.new(1, 1, 1)
+smoothBox.Font = Enum.Font.GothamBold
+smoothBox.TextSize = 13
 smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 smoothBox.ClearTextOnFocus = false
+smoothBox.ZIndex = 5
 smoothBox.Parent = mainFrame
 
+local smoothCorner = Instance.new("UICorner")
+smoothCorner.CornerRadius = UDim.new(0, 6)
+smoothCorner.Parent = smoothBox
+
 local minus = Instance.new("TextButton")
-minus.Size = UDim2.new(0,40,0,28)
-minus.Position = UDim2.new(0.2,0,0,212)
+minus.Size = UDim2.new(0.38, 0, 0, 28)
+minus.Position = UDim2.new(0.08, 0, 0, 214)
 minus.Text = "-"
-minus.BackgroundColor3 = Color3.fromRGB(255,252,252)
-minus.TextColor3 = Color3.new(0,0,0)
+minus.Font = Enum.Font.GothamBold
+minus.TextSize = 16
+minus.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+minus.TextColor3 = Color3.new(1, 1, 1)
+minus.ZIndex = 5
 minus.Parent = mainFrame
 
+local minusCorner = Instance.new("UICorner")
+minusCorner.CornerRadius = UDim.new(0, 6)
+minusCorner.Parent = minus
+
 local plus = Instance.new("TextButton")
-plus.Size = UDim2.new(0,40,0,28)
-plus.Position = UDim2.new(0.6,0,0,212)
+plus.Size = UDim2.new(0.38, 0, 0, 28)
+plus.Position = UDim2.new(0.54, 0, 0, 214)
 plus.Text = "+"
-plus.BackgroundColor3 = Color3.fromRGB(255,252,252)
-plus.TextColor3 = Color3.new(0,0,0)
+plus.Font = Enum.Font.GothamBold
+plus.TextSize = 16
+plus.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+plus.TextColor3 = Color3.new(1, 1, 1)
+plus.ZIndex = 5
 plus.Parent = mainFrame
 
+local plusCorner = Instance.new("UICorner")
+plusCorner.CornerRadius = UDim.new(0, 6)
+plusCorner.Parent = plus
+
+-- State update functions
 local function updateAimbotState()
-	if AIMBOT_ENABLED then
-		toggleButton.Text = "Aimbot: ON"
-	else
-		toggleButton.Text = "Aimbot: OFF"
+	toggleButton.Text = AIMBOT_ENABLED and "Aimbot: ON" or "Aimbot: OFF"
+	toggleButton.BackgroundColor3 = AIMBOT_ENABLED and ON_COLOR or OFF_COLOR
+	if not AIMBOT_ENABLED then
 		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 		MOUSE_LOCKED = false
 	end
@@ -281,24 +311,29 @@ end
 
 local function updateTeamCheckState()
 	teamButton.Text = TEAM_CHECK_ENABLED and "Team Check: ON" or "Team Check: OFF"
+	teamButton.BackgroundColor3 = TEAM_CHECK_ENABLED and ON_COLOR or OFF_COLOR
 end
 
 local function updateWallCheckState()
 	wallButton.Text = WALL_CHECK_ENABLED and "Wall Check: ON" or "Wall Check: OFF"
+	wallButton.BackgroundColor3 = WALL_CHECK_ENABLED and ON_COLOR or OFF_COLOR
 end
 
 local function updateFovCircleState()
 	fovCircle.Visible = SHOW_FOV_CIRCLE
 	fovButton.Text = SHOW_FOV_CIRCLE and "Show FOV Circle: ON" or "Show FOV Circle: OFF"
+	fovButton.BackgroundColor3 = SHOW_FOV_CIRCLE and ON_COLOR or OFF_COLOR
 end
 
 local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
+-- Button Connections
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
 	menuToggleButton.Text = mainFrame.Visible and "Menu: ON" or "Menu: OFF"
+	menuToggleButton.BackgroundColor3 = mainFrame.Visible and ON_COLOR or OFF_COLOR
 end)
 
 toggleButton.MouseButton1Click:Connect(function()
@@ -331,7 +366,6 @@ end)
 
 UserInputService.InputBegan:Connect(function(input, processed)
 	if processed then return end
-	
 	if input.KeyCode == Enum.KeyCode.E then
 		AIMBOT_ENABLED = not AIMBOT_ENABLED
 		updateAimbotState()
@@ -354,12 +388,10 @@ player.CharacterAdded:Connect(function()
 	MOUSE_LOCKED = false
 end)
 
-local function sendNotification(title, text, duration)
+pcall(function()
 	StarterGui:SetCore("SendNotification", {
-		Title = title;          
-		Text = text;            
-		Duration = duration or 5; 
+		Title = "Tubers93",
+		Text = "Use E to toggle the aimbot on PC",
+		Duration = 5
 	})
-end
-
-sendNotification("Tubers93", "Use E to toggle the aimbot on PC", 5)
+end)
