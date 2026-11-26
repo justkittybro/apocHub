@@ -7,13 +7,22 @@ local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
 local player = Players.LocalPlayer
-while not player do
-	task.wait()
-	player = Players.LocalPlayer
+if not player then
+	player = Players:GetPropertyChangedSignal("LocalPlayer"):Wait() and Players.LocalPlayer
 end
 
-local playerGui = player:WaitForChild("PlayerGui")
-local camera = workspace.CurrentCamera
+local playerGui = player:WaitForChild("PlayerGui", 10)
+if not playerGui then
+	warn("PlayerGui not found")
+	return
+end
+
+local camera = Workspace.CurrentCamera
+Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+	if Workspace.CurrentCamera then
+		camera = Workspace.CurrentCamera
+	end
+end)
 
 local FOV_RADIUS = 150
 local SMOOTHNESS = 0.15
@@ -25,6 +34,9 @@ local SHOW_FOV_CIRCLE = false
 local TARGET_OPTIONS = { "Head", "Arm", "Torso" }
 local AIM_PART_MODE = "Head"
 local dropdownOpen = false
+
+-- Whitelist table keyed by lowercase username/displayname
+local WHITELIST = {}
 
 local target = nil
 local MOUSE_LOCKED = false
@@ -56,6 +68,13 @@ fovCircle.Parent = screenGui
 local circleCorner = Instance.new("UICorner")
 circleCorner.CornerRadius = UDim.new(1, 0)
 circleCorner.Parent = fovCircle
+
+local function isWhitelisted(otherPlayer)
+	if not otherPlayer then return false end
+	local nameKey = string.lower(otherPlayer.Name or "")
+	local displayKey = string.lower(otherPlayer.DisplayName or "")
+	return WHITELIST[nameKey] == true or WHITELIST[displayKey] == true
+end
 
 local function getTargetPart(character)
 	if not character then return nil end
@@ -120,7 +139,7 @@ local function getClosestInFOV()
 	)
 
 	for _, plr in ipairs(Players:GetPlayers()) do
-		if plr ~= player and not isSameTeam(plr) and plr.Character then
+		if plr ~= player and not isWhitelisted(plr) and not isSameTeam(plr) and plr.Character then
 			local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
 			local part = getTargetPart(plr.Character)
 
@@ -209,7 +228,7 @@ menuToggleCorner.Parent = menuToggleButton
 -- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.fromOffset(230, 355)
+mainFrame.Size = UDim2.fromOffset(230, 390)
 mainFrame.Position = UDim2.fromOffset(20, 62)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
@@ -237,7 +256,7 @@ listLayout.Parent = mainFrame
 
 local function resizeMainFrame()
 	local contentY = listLayout.AbsoluteContentSize.Y
-	mainFrame.Size = UDim2.fromOffset(230, math.max(355, contentY + 24))
+	mainFrame.Size = UDim2.fromOffset(230, math.max(390, contentY + 24))
 end
 
 listLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(resizeMainFrame)
@@ -423,10 +442,49 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
--- 8. Minus / Plus Row
+-- 8. Whitelist Input Row
+local whitelistRow = Instance.new("Frame")
+whitelistRow.Name = "WhitelistRow"
+whitelistRow.LayoutOrder = 10
+whitelistRow.Size = UDim2.new(1, 0, 0, 28)
+whitelistRow.BackgroundTransparency = 1
+whitelistRow.ZIndex = 8
+whitelistRow.Parent = mainFrame
+
+local whitelistLabel = Instance.new("TextLabel")
+whitelistLabel.Size = UDim2.new(0.46, 0, 1, 0)
+whitelistLabel.Position = UDim2.fromScale(0, 0)
+whitelistLabel.BackgroundTransparency = 1
+whitelistLabel.TextColor3 = Color3.new(1, 1, 1)
+whitelistLabel.Font = Enum.Font.Gotham
+whitelistLabel.TextSize = 13
+whitelistLabel.TextXAlignment = Enum.TextXAlignment.Left
+whitelistLabel.Text = "Whitelist:"
+whitelistLabel.ZIndex = 10
+whitelistLabel.Parent = whitelistRow
+
+local whitelistBox = Instance.new("TextBox")
+whitelistBox.Name = "WhitelistBox"
+whitelistBox.Size = UDim2.new(0.50, 0, 1, 0)
+whitelistBox.Position = UDim2.fromScale(0.50, 0)
+whitelistBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+whitelistBox.TextColor3 = Color3.new(1, 1, 1)
+whitelistBox.Font = Enum.Font.GothamBold
+whitelistBox.TextSize = 12
+whitelistBox.PlaceholderText = "Name..."
+whitelistBox.Text = ""
+whitelistBox.ClearTextOnFocus = true
+whitelistBox.ZIndex = 10
+whitelistBox.Parent = whitelistRow
+
+local whitelistCorner = Instance.new("UICorner")
+whitelistCorner.CornerRadius = UDim.new(0, 6)
+whitelistCorner.Parent = whitelistBox
+
+-- 9. Minus / Plus Row
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
-stepRow.LayoutOrder = 10
+stepRow.LayoutOrder = 11
 stepRow.Size = UDim2.new(1, 0, 0, 28)
 stepRow.BackgroundTransparency = 1
 stepRow.ZIndex = 8
@@ -499,6 +557,24 @@ local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
+local function toggleWhitelistName(rawName)
+	local cleaned = string.lower((rawName or ""):match("^%s*(.-)%s*$") or "")
+	if cleaned == "" then return end
+
+	if WHITELIST[cleaned] then
+		WHITELIST[cleaned] = nil
+		whitelistLabel.Text = "Whitelist (-)"
+	else
+		WHITELIST[cleaned] = true
+		whitelistLabel.Text = "Whitelist (+)"
+	end
+	task.delay(1.2, function()
+		if whitelistLabel and whitelistLabel.Parent then
+			whitelistLabel.Text = "Whitelist:"
+		end
+	end)
+end
+
 -- Events
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
@@ -547,6 +623,13 @@ smoothBox.FocusLost:Connect(function()
 		SMOOTHNESS = math.clamp(parsed, 0.01, 1)
 	end
 	updateSmoothDisplay()
+end)
+
+whitelistBox.FocusLost:Connect(function(enterPressed)
+	if whitelistBox.Text ~= "" then
+		toggleWhitelistName(whitelistBox.Text)
+		whitelistBox.Text = ""
+	end
 end)
 
 UserInputService.InputBegan:Connect(function(input, processed)
