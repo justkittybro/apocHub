@@ -15,15 +15,14 @@ end
 local playerGui = player:WaitForChild("PlayerGui")
 local camera = workspace.CurrentCamera
 
-
 local FOV_RADIUS = 150
 local SMOOTHNESS = 0.15
 local AIMBOT_ENABLED = true
+local TEAM_CHECK_ENABLED = true
+local WALL_CHECK_ENABLED = true
 
 local target = nil
 local MOUSE_LOCKED = false
-
-
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "FOVGui"
@@ -45,9 +44,20 @@ circleCorner.Parent = fovCircle
 
 fovCircle.Visible = AIMBOT_ENABLED
 
-
+local function isSameTeam(otherPlayer)
+	if not TEAM_CHECK_ENABLED then
+		return false
+	end
+	if otherPlayer.Team ~= nil and player.Team ~= nil then
+		return otherPlayer.Team == player.Team
+	end
+	return false
+end
 
 local function isVisible(targetCharacter)
+	if not WALL_CHECK_ENABLED then
+		return true
+	end
 	if not targetCharacter then return false end
 	
 	local hrp = targetCharacter:FindFirstChild("HumanoidRootPart")
@@ -57,7 +67,7 @@ local function isVisible(targetCharacter)
 	local direction = hrp.Position - origin
 	
 	local params = RaycastParams.new()
-	params.FilterType = Enum.RaycastFilterType.Blacklist
+	params.FilterType = Enum.RaycastFilterType.Exclude
 	params.FilterDescendantsInstances = {
 		player.Character,
 		targetCharacter
@@ -66,8 +76,6 @@ local function isVisible(targetCharacter)
 	local result = Workspace:Raycast(origin, direction, params)
 	return result == nil
 end
-
-
 
 local function getClosestInFOV()
 	local closest = nil
@@ -78,7 +86,7 @@ local function getClosestInFOV()
 	)
 
 	for _, plr in ipairs(Players:GetPlayers()) do
-		if plr ~= player and plr.Character then
+		if plr ~= player and not isSameTeam(plr) and plr.Character then
 			
 			local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
 			local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
@@ -103,8 +111,6 @@ local function getClosestInFOV()
 	
 	return closest
 end
-
-
 
 RunService.RenderStepped:Connect(function()
 
@@ -147,15 +153,13 @@ RunService.RenderStepped:Connect(function()
 	
 end)
 
-
-
 local menuGui = Instance.new("ScreenGui")
 menuGui.Name = "AimbotMenu"
 menuGui.ResetOnSpawn = false
 menuGui.Parent = playerGui
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0,220,0,150)
+mainFrame.Size = UDim2.new(0,220,0,220)
 mainFrame.Position = UDim2.new(0.05,0,0.3,0)
 mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainFrame.BorderSizePixel = 0
@@ -176,16 +180,32 @@ title.TextScaled = true
 title.Parent = mainFrame
 
 local toggleButton = Instance.new("TextButton")
-toggleButton.Size = UDim2.new(0.8,0,0,30)
-toggleButton.Position = UDim2.new(0.1,0,0,40)
+toggleButton.Size = UDim2.new(0.8,0,0,28)
+toggleButton.Position = UDim2.new(0.1,0,0,36)
 toggleButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
 toggleButton.TextColor3 = Color3.new(0,0,0)
 toggleButton.Text = "Aimbot: ON"
 toggleButton.Parent = mainFrame
 
+local teamButton = Instance.new("TextButton")
+teamButton.Size = UDim2.new(0.8,0,0,26)
+teamButton.Position = UDim2.new(0.1,0,0,68)
+teamButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+teamButton.TextColor3 = Color3.new(0,0,0)
+teamButton.Text = "Team Check: ON"
+teamButton.Parent = mainFrame
+
+local wallButton = Instance.new("TextButton")
+wallButton.Size = UDim2.new(0.8,0,0,26)
+wallButton.Position = UDim2.new(0.1,0,0,98)
+wallButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+wallButton.TextColor3 = Color3.new(0,0,0)
+wallButton.Text = "Wall Check: ON"
+wallButton.Parent = mainFrame
+
 local smoothLabel = Instance.new("TextLabel")
-smoothLabel.Size = UDim2.new(1,0,0,25)
-smoothLabel.Position = UDim2.new(0,0,0,75)
+smoothLabel.Size = UDim2.new(1,0,0,24)
+smoothLabel.Position = UDim2.new(0,0,0,128)
 smoothLabel.BackgroundTransparency = 1
 smoothLabel.TextColor3 = Color3.new(1,1,1)
 smoothLabel.TextScaled = true
@@ -193,16 +213,16 @@ smoothLabel.Text = "Smoothness: "..string.format("%.2f", SMOOTHNESS)
 smoothLabel.Parent = mainFrame
 
 local minus = Instance.new("TextButton")
-minus.Size = UDim2.new(0,40,0,30)
-minus.Position = UDim2.new(0.2,0,0,110)
+minus.Size = UDim2.new(0,40,0,28)
+minus.Position = UDim2.new(0.2,0,0,158)
 minus.Text = "-"
 minus.BackgroundColor3 = Color3.fromRGB(255,252,252)
 minus.TextColor3 = Color3.new(0,0,0)
 minus.Parent = mainFrame
 
 local plus = Instance.new("TextButton")
-plus.Size = UDim2.new(0,40,0,30)
-plus.Position = UDim2.new(0.6,0,0,110)
+plus.Size = UDim2.new(0,40,0,28)
+plus.Position = UDim2.new(0.6,0,0,158)
 plus.Text = "+"
 plus.BackgroundColor3 = Color3.fromRGB(255,252,252)
 plus.TextColor3 = Color3.new(0,0,0)
@@ -220,9 +240,27 @@ local function updateAimbotState()
 	end
 end
 
+local function updateTeamCheckState()
+	teamButton.Text = TEAM_CHECK_ENABLED and "Team Check: ON" or "Team Check: OFF"
+end
+
+local function updateWallCheckState()
+	wallButton.Text = WALL_CHECK_ENABLED and "Wall Check: ON" or "Wall Check: OFF"
+end
+
 toggleButton.MouseButton1Click:Connect(function()
 	AIMBOT_ENABLED = not AIMBOT_ENABLED
 	updateAimbotState()
+end)
+
+teamButton.MouseButton1Click:Connect(function()
+	TEAM_CHECK_ENABLED = not TEAM_CHECK_ENABLED
+	updateTeamCheckState()
+end)
+
+wallButton.MouseButton1Click:Connect(function()
+	WALL_CHECK_ENABLED = not WALL_CHECK_ENABLED
+	updateWallCheckState()
 end)
 
 UserInputService.InputBegan:Connect(function(input, processed)
@@ -257,6 +295,5 @@ local function sendNotification(title, text, duration)
 		Duration = duration or 5; 
 	})
 end
-
 
 sendNotification("Tubers93", "Use E to toggle the aimbot on PC", 5)
