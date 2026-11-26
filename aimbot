@@ -5,7 +5,11 @@ local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
-local VirtualInputManager = game:GetService("VirtualInputManager")
+
+local VirtualInputManager = nil
+pcall(function()
+	VirtualInputManager = game:GetService("VirtualInputManager")
+end)
 
 local player = Players.LocalPlayer
 if not player then
@@ -31,9 +35,14 @@ local AIMBOT_ENABLED = false
 local TRIGGERBOT_ENABLED = false
 local TEAM_CHECK_ENABLED = false
 local WALL_CHECK_ENABLED = false
+local SHOW_FOV_CIRCLE = false
 
 local TRIGGER_COOLDOWN = 0.12
 local lastTriggerTime = 0
+
+-- Whitelist keyed by lowercase Name/DisplayName or numeric UserId
+local WHITELIST_NAMES = {}
+local WHITELIST_IDS = {}
 
 local target = nil
 local MOUSE_LOCKED = false
@@ -59,12 +68,22 @@ fovCircle.Position = UDim2.new(0.5, 0, 0.5, 0)
 fovCircle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 fovCircle.BackgroundTransparency = 0.85
 fovCircle.BorderSizePixel = 0
-fovCircle.Visible = false
+fovCircle.Visible = SHOW_FOV_CIRCLE
 fovCircle.Parent = screenGui
 
 local circleCorner = Instance.new("UICorner")
 circleCorner.CornerRadius = UDim.new(1, 0)
 circleCorner.Parent = fovCircle
+
+local function isWhitelisted(otherPlayer)
+	if not otherPlayer then return false end
+	if WHITELIST_IDS[otherPlayer.UserId] == true then
+		return true
+	end
+	local nameKey = string.lower(otherPlayer.Name or "")
+	local displayKey = string.lower(otherPlayer.DisplayName or "")
+	return WHITELIST_NAMES[nameKey] == true or WHITELIST_NAMES[displayKey] == true
+end
 
 local function getTargetPart(character)
 	if not character then return nil end
@@ -116,6 +135,7 @@ local function getPlayerFromCharacter(descendant)
 end
 
 local function triggerClick()
+	if not VirtualInputManager then return end
 	pcall(function()
 		VirtualInputManager:SendMouseButtonEvent(
 			camera.ViewportSize.X / 2,
@@ -155,7 +175,7 @@ local function checkTriggerBot()
 	if not result or not result.Instance then return end
 
 	local hitPlayer = getPlayerFromCharacter(result.Instance)
-	if not hitPlayer or hitPlayer == player or isSameTeam(hitPlayer) then return end
+	if not hitPlayer or hitPlayer == player or isWhitelisted(hitPlayer) or isSameTeam(hitPlayer) then return end
 
 	local humanoid = hitPlayer.Character and hitPlayer.Character:FindFirstChildOfClass("Humanoid")
 	if not humanoid or humanoid.Health <= 0 then return end
@@ -173,7 +193,7 @@ local function getClosestInFOV()
 	)
 
 	for _, plr in ipairs(Players:GetPlayers()) do
-		if plr ~= player and not isSameTeam(plr) and plr.Character then
+		if plr ~= player and not isWhitelisted(plr) and not isSameTeam(plr) and plr.Character then
 			local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
 			local part = getTargetPart(plr.Character)
 
@@ -241,7 +261,6 @@ menuGui.Parent = playerGui
 
 local OFF_COLOR = Color3.fromRGB(140, 40, 40)
 local ON_COLOR = Color3.fromRGB(35, 150, 75)
-local SHOW_FOV_CIRCLE = false
 
 -- TOGGLE MENU BUTTON
 local menuToggleButton = Instance.new("TextButton")
@@ -263,7 +282,7 @@ menuToggleCorner.Parent = menuToggleButton
 -- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.fromOffset(230, 330)
+mainFrame.Size = UDim2.fromOffset(230, 365)
 mainFrame.Position = UDim2.fromOffset(20, 62)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
@@ -291,7 +310,7 @@ listLayout.Parent = mainFrame
 
 local function resizeMainFrame()
 	local contentY = listLayout.AbsoluteContentSize.Y
-	mainFrame.Size = UDim2.fromOffset(230, math.max(330, contentY + 24))
+	mainFrame.Size = UDim2.fromOffset(230, math.max(365, contentY + 24))
 end
 
 listLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(resizeMainFrame)
@@ -342,7 +361,7 @@ local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 5, OFF
 -- 5. Show FOV Circle Toggle
 local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 6, OFF_COLOR)
 
--- 6. FOV Radius Row (Label + TextBox)
+-- 6. FOV Radius Row
 local fovRow = Instance.new("Frame")
 fovRow.Name = "FovRow"
 fovRow.LayoutOrder = 7
@@ -380,7 +399,7 @@ local fovBoxCorner = Instance.new("UICorner")
 fovBoxCorner.CornerRadius = UDim.new(0, 6)
 fovBoxCorner.Parent = fovBox
 
--- 7. Smoothing Row (Label + TextBox)
+-- 7. Smoothing Row
 local smoothRow = Instance.new("Frame")
 smoothRow.Name = "SmoothRow"
 smoothRow.LayoutOrder = 8
@@ -418,10 +437,49 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
--- 8. Minus / Plus Row
+-- 8. Whitelist Row (Name or UserId)
+local whitelistRow = Instance.new("Frame")
+whitelistRow.Name = "WhitelistRow"
+whitelistRow.LayoutOrder = 9
+whitelistRow.Size = UDim2.new(1, 0, 0, 28)
+whitelistRow.BackgroundTransparency = 1
+whitelistRow.ZIndex = 8
+whitelistRow.Parent = mainFrame
+
+local whitelistLabel = Instance.new("TextLabel")
+whitelistLabel.Size = UDim2.new(0.46, 0, 1, 0)
+whitelistLabel.Position = UDim2.fromScale(0, 0)
+whitelistLabel.BackgroundTransparency = 1
+whitelistLabel.TextColor3 = Color3.new(1, 1, 1)
+whitelistLabel.Font = Enum.Font.SourceSansPro
+whitelistLabel.TextSize = 16
+whitelistLabel.TextXAlignment = Enum.TextXAlignment.Left
+whitelistLabel.Text = "Whitelist:"
+whitelistLabel.ZIndex = 10
+whitelistLabel.Parent = whitelistRow
+
+local whitelistBox = Instance.new("TextBox")
+whitelistBox.Name = "WhitelistBox"
+whitelistBox.Size = UDim2.new(0.50, 0, 1, 0)
+whitelistBox.Position = UDim2.fromScale(0.50, 0)
+whitelistBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+whitelistBox.TextColor3 = Color3.new(1, 1, 1)
+whitelistBox.Font = Enum.Font.SourceSansPro
+whitelistBox.TextSize = 15
+whitelistBox.PlaceholderText = "Name / ID"
+whitelistBox.Text = ""
+whitelistBox.ClearTextOnFocus = true
+whitelistBox.ZIndex = 10
+whitelistBox.Parent = whitelistRow
+
+local whitelistCorner = Instance.new("UICorner")
+whitelistCorner.CornerRadius = UDim.new(0, 6)
+whitelistCorner.Parent = whitelistBox
+
+-- 9. Minus / Plus Row
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
-stepRow.LayoutOrder = 9
+stepRow.LayoutOrder = 10
 stepRow.Size = UDim2.new(1, 0, 0, 28)
 stepRow.BackgroundTransparency = 1
 stepRow.ZIndex = 8
@@ -499,6 +557,38 @@ local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
+local function toggleWhitelistEntry(rawInput)
+	local trimmed = (rawInput or ""):match("^%s*(.-)%s*$") or ""
+	if trimmed == "" then return end
+
+	local numericId = tonumber(trimmed)
+	local added = false
+
+	if numericId then
+		if WHITELIST_IDS[numericId] then
+			WHITELIST_IDS[numericId] = nil
+		else
+			WHITELIST_IDS[numericId] = true
+			added = true
+		end
+	else
+		local key = string.lower(trimmed)
+		if WHITELIST_NAMES[key] then
+			WHITELIST_NAMES[key] = nil
+		else
+			WHITELIST_NAMES[key] = true
+			added = true
+		end
+	end
+
+	whitelistLabel.Text = added and "Whitelist (+)" or "Whitelist (-)"
+	task.delay(1.2, function()
+		if whitelistLabel and whitelistLabel.Parent then
+			whitelistLabel.Text = "Whitelist:"
+		end
+	end)
+end
+
 -- Events
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
@@ -545,6 +635,13 @@ smoothBox.FocusLost:Connect(function()
 		SMOOTHNESS = math.clamp(parsed, 0.01, 1)
 	end
 	updateSmoothDisplay()
+end)
+
+whitelistBox.FocusLost:Connect(function()
+	if whitelistBox.Text ~= "" then
+		toggleWhitelistEntry(whitelistBox.Text)
+		whitelistBox.Text = ""
+	end
 end)
 
 UserInputService.InputBegan:Connect(function(input, processed)
