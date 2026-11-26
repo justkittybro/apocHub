@@ -13,7 +13,13 @@ end)
 
 local player = Players.LocalPlayer
 if not player then
-	player = Players:GetPropertyChangedSignal("LocalPlayer"):Wait() and Players.LocalPlayer
+	local ok = pcall(function()
+		player = Players:GetPropertyChangedSignal("LocalPlayer"):Wait() and Players.LocalPlayer
+	end)
+	if not ok or not player then
+		warn("LocalPlayer unavailable")
+		return
+	end
 end
 
 local playerGui = player:WaitForChild("PlayerGui", 10)
@@ -23,10 +29,12 @@ if not playerGui then
 end
 
 local camera = Workspace.CurrentCamera
-Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-	if Workspace.CurrentCamera then
-		camera = Workspace.CurrentCamera
-	end
+pcall(function()
+	Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+		if Workspace.CurrentCamera then
+			camera = Workspace.CurrentCamera
+		end
+	end)
 end)
 
 local FOV_RADIUS = 150
@@ -110,7 +118,8 @@ local function isVisible(targetCharacter)
 	local part = getTargetPart(targetCharacter)
 	if not part then return false end
 
-	local origin = camera.CFrame.Position
+	local activeCam = Workspace.CurrentCamera or camera
+	local origin = activeCam.CFrame.Position
 	local direction = part.Position - origin
 
 	local params = RaycastParams.new()
@@ -136,10 +145,11 @@ end
 
 local function triggerClick()
 	if not VirtualInputManager then return end
+	local activeCam = Workspace.CurrentCamera or camera
 	pcall(function()
 		VirtualInputManager:SendMouseButtonEvent(
-			camera.ViewportSize.X / 2,
-			camera.ViewportSize.Y / 2,
+			activeCam.ViewportSize.X / 2,
+			activeCam.ViewportSize.Y / 2,
 			0,
 			true,
 			game,
@@ -147,8 +157,8 @@ local function triggerClick()
 		)
 		task.wait(0.02)
 		VirtualInputManager:SendMouseButtonEvent(
-			camera.ViewportSize.X / 2,
-			camera.ViewportSize.Y / 2,
+			activeCam.ViewportSize.X / 2,
+			activeCam.ViewportSize.Y / 2,
 			0,
 			false,
 			game,
@@ -162,8 +172,9 @@ local function checkTriggerBot()
 	local now = os.clock()
 	if now - lastTriggerTime < TRIGGER_COOLDOWN then return end
 
-	local center = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
-	local ray = camera:ViewportPointToRay(center.X, center.Y)
+	local activeCam = Workspace.CurrentCamera or camera
+	local center = Vector2.new(activeCam.ViewportSize.X / 2, activeCam.ViewportSize.Y / 2)
+	local ray = activeCam:ViewportPointToRay(center.X, center.Y)
 
 	local params = RaycastParams.new()
 	params.FilterType = Enum.RaycastFilterType.Exclude
@@ -187,9 +198,10 @@ end
 local function getClosestInFOV()
 	local closest = nil
 	local shortestDistance = math.huge
+	local activeCam = Workspace.CurrentCamera or camera
 	local screenCenter = Vector2.new(
-		camera.ViewportSize.X / 2,
-		camera.ViewportSize.Y / 2
+		activeCam.ViewportSize.X / 2,
+		activeCam.ViewportSize.Y / 2
 	)
 
 	for _, plr in ipairs(Players:GetPlayers()) do
@@ -198,7 +210,7 @@ local function getClosestInFOV()
 			local part = getTargetPart(plr.Character)
 
 			if humanoid and humanoid.Health > 0 and part then
-				local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
+				local screenPos, onScreen = activeCam:WorldToViewportPoint(part.Position)
 
 				if onScreen then
 					local dist = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
@@ -220,6 +232,7 @@ end
 RunService.RenderStepped:Connect(function()
 	checkTriggerBot()
 
+	local activeCam = Workspace.CurrentCamera or camera
 	if not AIMBOT_ENABLED then
 		if MOUSE_LOCKED then
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
@@ -234,10 +247,10 @@ RunService.RenderStepped:Connect(function()
 		local part = getTargetPart(target.Character)
 
 		if part then
-			local camPos = camera.CFrame.Position
+			local camPos = activeCam.CFrame.Position
 			local lookAt = CFrame.new(camPos, part.Position)
 
-			camera.CFrame = camera.CFrame:Lerp(lookAt, SMOOTHNESS)
+			activeCam.CFrame = activeCam.CFrame:Lerp(lookAt, SMOOTHNESS)
 
 			if not MOUSE_LOCKED then
 				UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
