@@ -26,7 +26,6 @@ local AIM_PART = "Head"
 local target = nil
 local MOUSE_LOCKED = false
 
--- Remove old copies if re-executed
 if playerGui:FindFirstChild("FOVGui") then
 	playerGui.FOVGui:Destroy()
 end
@@ -34,6 +33,7 @@ if playerGui:FindFirstChild("AimbotMenu") then
 	playerGui.AimbotMenu:Destroy()
 end
 
+-- FOV CIRCLE GUI
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "FOVGui"
 screenGui.ResetOnSpawn = false
@@ -164,67 +164,80 @@ end)
 local menuGui = Instance.new("ScreenGui")
 menuGui.Name = "AimbotMenu"
 menuGui.ResetOnSpawn = false
-menuGui.DisplayOrder = 10
+menuGui.DisplayOrder = 20
 menuGui.Parent = playerGui
 
--- 1. TOP-LEFT MENU TOGGLE BUTTON (Toggles mainFrame ON/OFF)
+local OFF_COLOR = Color3.fromRGB(140, 40, 40)
+local ON_COLOR = Color3.fromRGB(35, 150, 75)
+
+-- TOGGLE MENU BUTTON (shows/hides mainFrame)
 local menuToggleButton = Instance.new("TextButton")
 menuToggleButton.Name = "MenuToggleButton"
-menuToggleButton.Size = UDim2.fromOffset(120, 34)
+menuToggleButton.Size = UDim2.fromOffset(130, 34)
 menuToggleButton.Position = UDim2.fromOffset(20, 20)
-menuToggleButton.BackgroundColor3 = Color3.fromRGB(35, 150, 75)
+menuToggleButton.BackgroundColor3 = ON_COLOR
 menuToggleButton.TextColor3 = Color3.new(1, 1, 1)
 menuToggleButton.Font = Enum.Font.GothamBold
 menuToggleButton.TextSize = 14
 menuToggleButton.Text = "Menu: ON"
-menuToggleButton.ZIndex = 10
+menuToggleButton.ZIndex = 25
 menuToggleButton.Parent = menuGui
 
 local menuToggleCorner = Instance.new("UICorner")
 menuToggleCorner.CornerRadius = UDim.new(0, 8)
 menuToggleCorner.Parent = menuToggleButton
 
--- 2. MAIN MENU FRAME (Positioned directly below MenuToggleButton)
+-- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.fromOffset(220, 265)
+mainFrame.Size = UDim2.fromOffset(230, 280)
 mainFrame.Position = UDim2.fromOffset(20, 62)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
 mainFrame.Draggable = true
 mainFrame.Visible = true
-mainFrame.ZIndex = 2
+mainFrame.ZIndex = 5
 mainFrame.Parent = menuGui
 
 local frameCorner = Instance.new("UICorner")
 frameCorner.CornerRadius = UDim.new(0, 12)
 frameCorner.Parent = mainFrame
 
+local framePadding = Instance.new("UIPadding")
+framePadding.PaddingTop = UDim.new(0, 10)
+framePadding.PaddingBottom = UDim.new(0, 10)
+framePadding.PaddingLeft = UDim.new(0, 14)
+framePadding.PaddingRight = UDim.new(0, 14)
+framePadding.Parent = mainFrame
+
+local listLayout = Instance.new("UIListLayout")
+listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+listLayout.Padding = UDim.new(0, 6)
+listLayout.Parent = mainFrame
+
 local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, 0, 0, 32)
-title.Position = UDim2.fromOffset(0, 2)
+title.LayoutOrder = 1
+title.Size = UDim2.new(1, 0, 0, 26)
 title.BackgroundTransparency = 1
 title.Text = "Tubers Aimbot"
 title.Font = Enum.Font.GothamBold
 title.TextColor3 = Color3.new(1, 1, 1)
 title.TextSize = 16
-title.ZIndex = 3
+title.ZIndex = 8
 title.Parent = mainFrame
 
-local OFF_COLOR = Color3.fromRGB(140, 40, 40)
-local ON_COLOR = Color3.fromRGB(35, 150, 75)
-
-local function makeToggleButton(text, yPos)
+local function makeToggleButton(name, text, order)
 	local btn = Instance.new("TextButton")
-	btn.Size = UDim2.new(0.84, 0, 0, 28)
-	btn.Position = UDim2.new(0.08, 0, 0, yPos)
+	btn.Name = name
+	btn.LayoutOrder = order
+	btn.Size = UDim2.new(1, 0, 0, 28)
 	btn.BackgroundColor3 = OFF_COLOR
 	btn.TextColor3 = Color3.new(1, 1, 1)
 	btn.Font = Enum.Font.GothamBold
 	btn.TextSize = 13
 	btn.Text = text
-	btn.ZIndex = 5
+	btn.ZIndex = 10
 	btn.Parent = mainFrame
 
 	local c = Instance.new("UICorner")
@@ -234,72 +247,98 @@ local function makeToggleButton(text, yPos)
 	return btn
 end
 
--- Toggle buttons inside MainFrame
-local toggleButton = makeToggleButton("Aimbot: OFF", 38)
-local teamButton = makeToggleButton("Team Check: OFF", 72)
-local wallButton = makeToggleButton("Wall Check: OFF", 106)
-local fovButton = makeToggleButton("Show FOV Circle: OFF", 140)
+-- 1. Aimbot Toggle
+local toggleButton = makeToggleButton("AimbotToggle", "Aimbot: OFF", 2)
 
--- Smoothing Label + TextBox
+-- 2. Team Check Toggle
+local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 3)
+
+-- 3. Wall Check Toggle
+local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4)
+
+-- 4. Show FOV Circle Toggle
+local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5)
+
+-- 5. Smoothing Row (Label + TextBox)
+local smoothRow = Instance.new("Frame")
+smoothRow.Name = "SmoothRow"
+smoothRow.LayoutOrder = 6
+smoothRow.Size = UDim2.new(1, 0, 0, 28)
+smoothRow.BackgroundTransparency = 1
+smoothRow.ZIndex = 8
+smoothRow.Parent = mainFrame
+
 local smoothLabel = Instance.new("TextLabel")
-smoothLabel.Size = UDim2.new(0.46, 0, 0, 28)
-smoothLabel.Position = UDim2.new(0.08, 0, 0, 176)
+smoothLabel.Size = UDim2.new(0.56, 0, 1, 0)
+smoothLabel.Position = UDim2.fromScale(0, 0)
 smoothLabel.BackgroundTransparency = 1
 smoothLabel.TextColor3 = Color3.new(1, 1, 1)
 smoothLabel.Font = Enum.Font.Gotham
 smoothLabel.TextSize = 13
 smoothLabel.TextXAlignment = Enum.TextXAlignment.Left
 smoothLabel.Text = "Smoothing:"
-smoothLabel.ZIndex = 5
-smoothLabel.Parent = mainFrame
+smoothLabel.ZIndex = 10
+smoothLabel.Parent = smoothRow
 
 local smoothBox = Instance.new("TextBox")
-smoothBox.Size = UDim2.new(0.36, 0, 0, 28)
-smoothBox.Position = UDim2.new(0.56, 0, 0, 176)
+smoothBox.Name = "SmoothBox"
+smoothBox.Size = UDim2.new(0.40, 0, 1, 0)
+smoothBox.Position = UDim2.fromScale(0.60, 0)
 smoothBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
 smoothBox.TextColor3 = Color3.new(1, 1, 1)
 smoothBox.Font = Enum.Font.GothamBold
 smoothBox.TextSize = 13
 smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 smoothBox.ClearTextOnFocus = false
-smoothBox.ZIndex = 5
-smoothBox.Parent = mainFrame
+smoothBox.ZIndex = 10
+smoothBox.Parent = smoothRow
 
 local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
+-- 6. Minus / Plus Row
+local stepRow = Instance.new("Frame")
+stepRow.Name = "StepRow"
+stepRow.LayoutOrder = 7
+stepRow.Size = UDim2.new(1, 0, 0, 28)
+stepRow.BackgroundTransparency = 1
+stepRow.ZIndex = 8
+stepRow.Parent = mainFrame
+
 local minus = Instance.new("TextButton")
-minus.Size = UDim2.new(0.38, 0, 0, 28)
-minus.Position = UDim2.new(0.08, 0, 0, 214)
+minus.Name = "SmoothMinus"
+minus.Size = UDim2.new(0.47, 0, 1, 0)
+minus.Position = UDim2.fromScale(0, 0)
 minus.Text = "-"
 minus.Font = Enum.Font.GothamBold
 minus.TextSize = 16
 minus.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
 minus.TextColor3 = Color3.new(1, 1, 1)
-minus.ZIndex = 5
-minus.Parent = mainFrame
+minus.ZIndex = 10
+minus.Parent = stepRow
 
 local minusCorner = Instance.new("UICorner")
 minusCorner.CornerRadius = UDim.new(0, 6)
 minusCorner.Parent = minus
 
 local plus = Instance.new("TextButton")
-plus.Size = UDim2.new(0.38, 0, 0, 28)
-plus.Position = UDim2.new(0.54, 0, 0, 214)
+plus.Name = "SmoothPlus"
+plus.Size = UDim2.new(0.47, 0, 1, 0)
+plus.Position = UDim2.fromScale(0.53, 0)
 plus.Text = "+"
 plus.Font = Enum.Font.GothamBold
 plus.TextSize = 16
 plus.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
 plus.TextColor3 = Color3.new(1, 1, 1)
-plus.ZIndex = 5
-plus.Parent = mainFrame
+plus.ZIndex = 10
+plus.Parent = stepRow
 
 local plusCorner = Instance.new("UICorner")
 plusCorner.CornerRadius = UDim.new(0, 6)
 plusCorner.Parent = plus
 
--- State update functions
+-- State updates
 local function updateAimbotState()
 	toggleButton.Text = AIMBOT_ENABLED and "Aimbot: ON" or "Aimbot: OFF"
 	toggleButton.BackgroundColor3 = AIMBOT_ENABLED and ON_COLOR or OFF_COLOR
@@ -329,7 +368,7 @@ local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
--- Button Connections
+-- Events
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
 	menuToggleButton.Text = mainFrame.Visible and "Menu: ON" or "Menu: OFF"
