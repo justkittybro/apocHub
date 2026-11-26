@@ -22,10 +22,9 @@ local TEAM_CHECK_ENABLED = false
 local WALL_CHECK_ENABLED = false
 local SHOW_FOV_CIRCLE = false
 
--- Cycle order: "Head" -> "Arm" -> "Torso"
 local TARGET_OPTIONS = { "Head", "Arm", "Torso" }
-local targetIndex = 1
-local AIM_PART_MODE = TARGET_OPTIONS[targetIndex]
+local AIM_PART_MODE = "Head"
+local dropdownOpen = false
 
 local target = nil
 local MOUSE_LOCKED = false
@@ -58,7 +57,6 @@ local circleCorner = Instance.new("UICorner")
 circleCorner.CornerRadius = UDim.new(1, 0)
 circleCorner.Parent = fovCircle
 
--- Resolves "Head", "Arm" (R6/R15), or "Torso" (R6/R15) on any character
 local function getTargetPart(character)
 	if not character then return nil end
 
@@ -189,6 +187,7 @@ menuGui.Parent = playerGui
 local OFF_COLOR = Color3.fromRGB(140, 40, 40)
 local ON_COLOR = Color3.fromRGB(35, 150, 75)
 local SELECT_COLOR = Color3.fromRGB(45, 95, 165)
+local OPTION_IDLE_COLOR = Color3.fromRGB(45, 45, 56)
 
 -- TOGGLE MENU BUTTON
 local menuToggleButton = Instance.new("TextButton")
@@ -210,7 +209,7 @@ menuToggleCorner.Parent = menuToggleButton
 -- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.fromOffset(230, 315)
+mainFrame.Size = UDim2.fromOffset(230, 355)
 mainFrame.Position = UDim2.fromOffset(20, 62)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
@@ -235,6 +234,13 @@ local listLayout = Instance.new("UIListLayout")
 listLayout.SortOrder = Enum.SortOrder.LayoutOrder
 listLayout.Padding = UDim.new(0, 6)
 listLayout.Parent = mainFrame
+
+local function resizeMainFrame()
+	local contentY = listLayout.AbsoluteContentSize.Y
+	mainFrame.Size = UDim2.fromOffset(230, math.max(355, contentY + 24))
+end
+
+listLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(resizeMainFrame)
 
 local title = Instance.new("TextLabel")
 title.LayoutOrder = 1
@@ -279,13 +285,110 @@ local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4, OFF
 -- 4. Show FOV Circle Toggle
 local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5, OFF_COLOR)
 
--- 5. Target Body Part Selector (Head / Arm / Torso)
-local targetPartButton = makeToggleButton("TargetPartSelector", "Target: " .. AIM_PART_MODE, 6, SELECT_COLOR)
+-- 5. Target Body Part Dropdown Header + Expandable List
+local targetDropdownButton = makeToggleButton("TargetDropdownToggle", "Target: " .. AIM_PART_MODE .. " v", 6, SELECT_COLOR)
 
--- 6. Smoothing Row (Label + TextBox)
+local targetListFrame = Instance.new("Frame")
+targetListFrame.Name = "TargetDropdownList"
+targetListFrame.LayoutOrder = 7
+targetListFrame.Size = UDim2.new(1, 0, 0, #TARGET_OPTIONS * 28)
+targetListFrame.BackgroundColor3 = Color3.fromRGB(28, 28, 35)
+targetListFrame.BorderSizePixel = 0
+targetListFrame.Visible = false
+targetListFrame.ZIndex = 9
+targetListFrame.Parent = mainFrame
+
+local targetListCorner = Instance.new("UICorner")
+targetListCorner.CornerRadius = UDim.new(0, 6)
+targetListCorner.Parent = targetListFrame
+
+local targetListLayout = Instance.new("UIListLayout")
+targetListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+targetListLayout.Padding = UDim.new(0, 2)
+targetListLayout.Parent = targetListFrame
+
+local optionButtons = {}
+
+local function refreshOptionColors()
+	for optionName, optBtn in pairs(optionButtons) do
+		local isSelected = (optionName == AIM_PART_MODE)
+		optBtn.BackgroundColor3 = isSelected and SELECT_COLOR or OPTION_IDLE_COLOR
+		optBtn.Text = isSelected and ("> " .. optionName) or optionName
+	end
+	targetDropdownButton.Text = "Target: " .. AIM_PART_MODE .. (dropdownOpen and " ^" or " v")
+end
+
+for idx, optionName in ipairs(TARGET_OPTIONS) do
+	local optBtn = Instance.new("TextButton")
+	optBtn.Name = "Option_" .. optionName
+	optBtn.LayoutOrder = idx
+	optBtn.Size = UDim2.new(1, 0, 0, 26)
+	optBtn.BackgroundColor3 = OPTION_IDLE_COLOR
+	optBtn.TextColor3 = Color3.new(1, 1, 1)
+	optBtn.Font = Enum.Font.GothamBold
+	optBtn.TextSize = 12
+	optBtn.Text = optionName
+	optBtn.ZIndex = 11
+	optBtn.Parent = targetListFrame
+
+	local optCorner = Instance.new("UICorner")
+	optCorner.CornerRadius = UDim.new(0, 5)
+	optCorner.Parent = optBtn
+
+	optionButtons[optionName] = optBtn
+
+	optBtn.MouseButton1Click:Connect(function()
+		AIM_PART_MODE = optionName
+		dropdownOpen = false
+		targetListFrame.Visible = false
+		refreshOptionColors()
+	end)
+end
+
+refreshOptionColors()
+
+-- 6. FOV Radius Row (Label + TextBox)
+local fovRow = Instance.new("Frame")
+fovRow.Name = "FovRow"
+fovRow.LayoutOrder = 8
+fovRow.Size = UDim2.new(1, 0, 0, 28)
+fovRow.BackgroundTransparency = 1
+fovRow.ZIndex = 8
+fovRow.Parent = mainFrame
+
+local fovLabel = Instance.new("TextLabel")
+fovLabel.Size = UDim2.new(0.56, 0, 1, 0)
+fovLabel.Position = UDim2.fromScale(0, 0)
+fovLabel.BackgroundTransparency = 1
+fovLabel.TextColor3 = Color3.new(1, 1, 1)
+fovLabel.Font = Enum.Font.Gotham
+fovLabel.TextSize = 13
+fovLabel.TextXAlignment = Enum.TextXAlignment.Left
+fovLabel.Text = "FOV Radius:"
+fovLabel.ZIndex = 10
+fovLabel.Parent = fovRow
+
+local fovBox = Instance.new("TextBox")
+fovBox.Name = "FovBox"
+fovBox.Size = UDim2.new(0.40, 0, 1, 0)
+fovBox.Position = UDim2.fromScale(0.60, 0)
+fovBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+fovBox.TextColor3 = Color3.new(1, 1, 1)
+fovBox.Font = Enum.Font.GothamBold
+fovBox.TextSize = 13
+fovBox.Text = tostring(FOV_RADIUS)
+fovBox.ClearTextOnFocus = false
+fovBox.ZIndex = 10
+fovBox.Parent = fovRow
+
+local fovBoxCorner = Instance.new("UICorner")
+fovBoxCorner.CornerRadius = UDim.new(0, 6)
+fovBoxCorner.Parent = fovBox
+
+-- 7. Smoothing Row (Label + TextBox)
 local smoothRow = Instance.new("Frame")
 smoothRow.Name = "SmoothRow"
-smoothRow.LayoutOrder = 7
+smoothRow.LayoutOrder = 9
 smoothRow.Size = UDim2.new(1, 0, 0, 28)
 smoothRow.BackgroundTransparency = 1
 smoothRow.ZIndex = 8
@@ -320,10 +423,10 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
--- 7. Minus / Plus Row
+-- 8. Minus / Plus Row
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
-stepRow.LayoutOrder = 8
+stepRow.LayoutOrder = 10
 stepRow.Size = UDim2.new(1, 0, 0, 28)
 stepRow.BackgroundTransparency = 1
 stepRow.ZIndex = 8
@@ -387,9 +490,9 @@ local function updateFovCircleState()
 	fovButton.BackgroundColor3 = SHOW_FOV_CIRCLE and ON_COLOR or OFF_COLOR
 end
 
-local function updateTargetPartState()
-	AIM_PART_MODE = TARGET_OPTIONS[targetIndex]
-	targetPartButton.Text = "Target: " .. AIM_PART_MODE
+local function updateFovRadiusDisplay()
+	fovCircle.Size = UDim2.new(0, FOV_RADIUS * 2, 0, FOV_RADIUS * 2)
+	fovBox.Text = tostring(math.floor(FOV_RADIUS))
 end
 
 local function updateSmoothDisplay()
@@ -423,9 +526,19 @@ fovButton.MouseButton1Click:Connect(function()
 	updateFovCircleState()
 end)
 
-targetPartButton.MouseButton1Click:Connect(function()
-	targetIndex = (targetIndex % #TARGET_OPTIONS) + 1
-	updateTargetPartState()
+targetDropdownButton.MouseButton1Click:Connect(function()
+	dropdownOpen = not dropdownOpen
+	targetListFrame.Visible = dropdownOpen
+	refreshOptionColors()
+	resizeMainFrame()
+end)
+
+fovBox.FocusLost:Connect(function()
+	local parsed = tonumber(fovBox.Text)
+	if parsed then
+		FOV_RADIUS = math.clamp(parsed, 10, 1000)
+	end
+	updateFovRadiusDisplay()
 end)
 
 smoothBox.FocusLost:Connect(function()
