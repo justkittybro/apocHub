@@ -1,0 +1,563 @@
+--Made by RainbowTickleBlaster 
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local UserInputService = game:GetService("UserInputService")
+local StarterGui = game:GetService("StarterGui")
+
+local player = Players.LocalPlayer
+while not player do
+	task.wait()
+	player = Players.LocalPlayer
+end
+
+local playerGui = player:WaitForChild("PlayerGui")
+local camera = workspace.CurrentCamera
+
+local FOV_RADIUS = 150
+local SMOOTHNESS = 0.15
+local AIMBOT_ENABLED = false
+local TEAM_CHECK_ENABLED = false
+local WALL_CHECK_ENABLED = false
+local SHOW_FOV_CIRCLE = false
+
+local TARGET_OPTIONS = { "Head", "Arm", "Torso" }
+local AIM_PART_MODE = "Head"
+local dropdownOpen = false
+
+local target = nil
+local MOUSE_LOCKED = false
+
+if playerGui:FindFirstChild("FOVGui") then
+	playerGui.FOVGui:Destroy()
+end
+if playerGui:FindFirstChild("AimbotMenu") then
+	playerGui.AimbotMenu:Destroy()
+end
+
+-- FOV CIRCLE GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "FOVGui"
+screenGui.ResetOnSpawn = false
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = playerGui
+
+local fovCircle = Instance.new("Frame")
+fovCircle.Size = UDim2.new(0, FOV_RADIUS * 2, 0, FOV_RADIUS * 2)
+fovCircle.AnchorPoint = Vector2.new(0.5, 0.5)
+fovCircle.Position = UDim2.new(0.5, 0, 0.5, 0)
+fovCircle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+fovCircle.BackgroundTransparency = 0.85
+fovCircle.BorderSizePixel = 0
+fovCircle.Visible = SHOW_FOV_CIRCLE
+fovCircle.Parent = screenGui
+
+local circleCorner = Instance.new("UICorner")
+circleCorner.CornerRadius = UDim.new(1, 0)
+circleCorner.Parent = fovCircle
+
+local function getTargetPart(character)
+	if not character then return nil end
+
+	if AIM_PART_MODE == "Head" then
+		return character:FindFirstChild("Head")
+			or character:FindFirstChild("HumanoidRootPart")
+	elseif AIM_PART_MODE == "Arm" then
+		return character:FindFirstChild("RightUpperArm")
+			or character:FindFirstChild("Right Arm")
+			or character:FindFirstChild("LeftUpperArm")
+			or character:FindFirstChild("Left Arm")
+			or character:FindFirstChild("HumanoidRootPart")
+	elseif AIM_PART_MODE == "Torso" then
+		return character:FindFirstChild("UpperTorso")
+			or character:FindFirstChild("Torso")
+			or character:FindFirstChild("HumanoidRootPart")
+	end
+
+	return character:FindFirstChild("Head") or character:FindFirstChild("HumanoidRootPart")
+end
+
+local function isSameTeam(otherPlayer)
+	if not TEAM_CHECK_ENABLED then
+		return false
+	end
+	if otherPlayer.Team ~= nil and player.Team ~= nil then
+		return otherPlayer.Team == player.Team
+	end
+	return false
+end
+
+local function isVisible(targetCharacter)
+	if not WALL_CHECK_ENABLED then
+		return true
+	end
+	if not targetCharacter then return false end
+
+	local part = getTargetPart(targetCharacter)
+	if not part then return false end
+
+	local origin = camera.CFrame.Position
+	local direction = part.Position - origin
+
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterDescendantsInstances = {
+		player.Character,
+		targetCharacter
+	}
+
+	local result = Workspace:Raycast(origin, direction, params)
+	return result == nil
+end
+
+local function getClosestInFOV()
+	local closest = nil
+	local shortestDistance = math.huge
+	local screenCenter = Vector2.new(
+		camera.ViewportSize.X / 2,
+		camera.ViewportSize.Y / 2
+	)
+
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr ~= player and not isSameTeam(plr) and plr.Character then
+			local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+			local part = getTargetPart(plr.Character)
+
+			if humanoid and humanoid.Health > 0 and part then
+				local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
+
+				if onScreen then
+					local dist = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
+
+					if dist < FOV_RADIUS and dist < shortestDistance then
+						if isVisible(plr.Character) then
+							closest = plr
+							shortestDistance = dist
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return closest
+end
+
+RunService.RenderStepped:Connect(function()
+	if not AIMBOT_ENABLED then
+		if MOUSE_LOCKED then
+			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+			MOUSE_LOCKED = false
+		end
+		return
+	end
+
+	target = getClosestInFOV()
+
+	if target and target.Character then
+		local part = getTargetPart(target.Character)
+
+		if part then
+			local camPos = camera.CFrame.Position
+			local lookAt = CFrame.new(camPos, part.Position)
+
+			camera.CFrame = camera.CFrame:Lerp(lookAt, SMOOTHNESS)
+
+			if not MOUSE_LOCKED then
+				UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+				MOUSE_LOCKED = true
+			end
+		end
+	else
+		if MOUSE_LOCKED then
+			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+			MOUSE_LOCKED = false
+		end
+	end
+end)
+
+-- MENU GUI
+local menuGui = Instance.new("ScreenGui")
+menuGui.Name = "AimbotMenu"
+menuGui.ResetOnSpawn = false
+menuGui.DisplayOrder = 20
+menuGui.Parent = playerGui
+
+local OFF_COLOR = Color3.fromRGB(140, 40, 40)
+local ON_COLOR = Color3.fromRGB(35, 150, 75)
+local SELECT_COLOR = Color3.fromRGB(45, 95, 165)
+local OPTION_IDLE_COLOR = Color3.fromRGB(45, 45, 56)
+
+local menuToggleButton = Instance.new("TextButton")
+menuToggleButton.Name = "MenuToggleButton"
+menuToggleButton.Size = UDim2.fromOffset(130, 34)
+menuToggleButton.Position = UDim2.fromOffset(20, 20)
+menuToggleButton.BackgroundColor3 = ON_COLOR
+menuToggleButton.TextColor3 = Color3.new(1, 1, 1)
+menuToggleButton.Font = Enum.Font.SourceSansPro
+menuToggleButton.TextSize = 16
+menuToggleButton.Text = "Menu: ON"
+menuToggleButton.ZIndex = 25
+menuToggleButton.Parent = menuGui
+
+local menuToggleCorner = Instance.new("UICorner")
+menuToggleCorner.CornerRadius = UDim.new(0, 8)
+menuToggleCorner.Parent = menuToggleButton
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.fromOffset(230, 355)
+mainFrame.Position = UDim2.fromOffset(20, 62)
+mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Visible = true
+mainFrame.ZIndex = 5
+mainFrame.Parent = menuGui
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 12)
+frameCorner.Parent = mainFrame
+
+local framePadding = Instance.new("UIPadding")
+framePadding.PaddingTop = UDim.new(0, 10)
+framePadding.PaddingBottom = UDim.new(0, 10)
+framePadding.PaddingLeft = UDim.new(0, 14)
+framePadding.PaddingRight = UDim.new(0, 14)
+framePadding.Parent = mainFrame
+
+local listLayout = Instance.new("UIListLayout")
+listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+listLayout.Padding = UDim.new(0, 6)
+listLayout.Parent = mainFrame
+
+local function resizeMainFrame()
+	local contentY = listLayout.AbsoluteContentSize.Y
+	mainFrame.Size = UDim2.fromOffset(230, math.max(355, contentY + 24))
+end
+
+listLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(resizeMainFrame)
+
+local title = Instance.new("TextLabel")
+title.LayoutOrder = 1
+title.Size = UDim2.new(1, 0, 0, 26)
+title.BackgroundTransparency = 1
+title.Text = "Tubers Aimbot"
+title.Font = Enum.Font.SourceSansPro
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextSize = 18
+title.ZIndex = 8
+title.Parent = mainFrame
+
+local function makeToggleButton(name, text, order, bgColor)
+	local btn = Instance.new("TextButton")
+	btn.Name = name
+	btn.LayoutOrder = order
+	btn.Size = UDim2.new(1, 0, 0, 28)
+	btn.BackgroundColor3 = bgColor or OFF_COLOR
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.Font = Enum.Font.SourceSansPro
+	btn.TextSize = 16
+	btn.Text = text
+	btn.ZIndex = 10
+	btn.Parent = mainFrame
+
+	local c = Instance.new("UICorner")
+	c.CornerRadius = UDim.new(0, 6)
+	c.Parent = btn
+
+	return btn
+end
+
+local toggleButton = makeToggleButton("AimbotToggle", "Aimbot: OFF", 2, OFF_COLOR)
+local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 3, OFF_COLOR)
+local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4, OFF_COLOR)
+local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5, OFF_COLOR)
+local targetDropdownButton = makeToggleButton("TargetDropdownToggle", "Target: " .. AIM_PART_MODE .. " v", 6, SELECT_COLOR)
+
+local targetListFrame = Instance.new("Frame")
+targetListFrame.Name = "TargetDropdownList"
+targetListFrame.LayoutOrder = 7
+targetListFrame.Size = UDim2.new(1, 0, 0, #TARGET_OPTIONS * 28)
+targetListFrame.BackgroundColor3 = Color3.fromRGB(28, 28, 35)
+targetListFrame.BorderSizePixel = 0
+targetListFrame.Visible = false
+targetListFrame.ZIndex = 9
+targetListFrame.Parent = mainFrame
+
+local targetListCorner = Instance.new("UICorner")
+targetListCorner.CornerRadius = UDim.new(0, 6)
+targetListCorner.Parent = targetListFrame
+
+local targetListLayout = Instance.new("UIListLayout")
+targetListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+targetListLayout.Padding = UDim.new(0, 2)
+targetListLayout.Parent = targetListFrame
+
+local optionButtons = {}
+
+local function refreshOptionColors()
+	for optionName, optBtn in pairs(optionButtons) do
+		local isSelected = (optionName == AIM_PART_MODE)
+		optBtn.BackgroundColor3 = isSelected and SELECT_COLOR or OPTION_IDLE_COLOR
+		optBtn.Text = isSelected and ("> " .. optionName) or optionName
+	end
+	targetDropdownButton.Text = "Target: " .. AIM_PART_MODE .. (dropdownOpen and " ^" or " v")
+end
+
+for idx, optionName in ipairs(TARGET_OPTIONS) do
+	local optBtn = Instance.new("TextButton")
+	optBtn.Name = "Option_" .. optionName
+	optBtn.LayoutOrder = idx
+	optBtn.Size = UDim2.new(1, 0, 0, 26)
+	optBtn.BackgroundColor3 = OPTION_IDLE_COLOR
+	optBtn.TextColor3 = Color3.new(1, 1, 1)
+	optBtn.Font = Enum.Font.SourceSansPro
+	optBtn.TextSize = 15
+	optBtn.Text = optionName
+	optBtn.ZIndex = 11
+	optBtn.Parent = targetListFrame
+
+	local optCorner = Instance.new("UICorner")
+	optCorner.CornerRadius = UDim.new(0, 5)
+	optCorner.Parent = optBtn
+
+	optionButtons[optionName] = optBtn
+
+	optBtn.MouseButton1Click:Connect(function()
+		AIM_PART_MODE = optionName
+		dropdownOpen = false
+		targetListFrame.Visible = false
+		refreshOptionColors()
+	end)
+end
+
+refreshOptionColors()
+
+local fovRow = Instance.new("Frame")
+fovRow.Name = "FovRow"
+fovRow.LayoutOrder = 8
+fovRow.Size = UDim2.new(1, 0, 0, 28)
+fovRow.BackgroundTransparency = 1
+fovRow.ZIndex = 8
+fovRow.Parent = mainFrame
+
+local fovLabel = Instance.new("TextLabel")
+fovLabel.Size = UDim2.new(0.56, 0, 1, 0)
+fovLabel.BackgroundTransparency = 1
+fovLabel.TextColor3 = Color3.new(1, 1, 1)
+fovLabel.Font = Enum.Font.SourceSansPro
+fovLabel.TextSize = 16
+fovLabel.TextXAlignment = Enum.TextXAlignment.Left
+fovLabel.Text = "FOV Radius:"
+fovLabel.ZIndex = 10
+fovLabel.Parent = fovRow
+
+local fovBox = Instance.new("TextBox")
+fovBox.Name = "FovBox"
+fovBox.Size = UDim2.new(0.40, 0, 1, 0)
+fovBox.Position = UDim2.fromScale(0.60, 0)
+fovBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+fovBox.TextColor3 = Color3.new(1, 1, 1)
+fovBox.Font = Enum.Font.SourceSansPro
+fovBox.TextSize = 16
+fovBox.Text = tostring(FOV_RADIUS)
+fovBox.ClearTextOnFocus = false
+fovBox.ZIndex = 10
+fovBox.Parent = fovRow
+
+local fovBoxCorner = Instance.new("UICorner")
+fovBoxCorner.CornerRadius = UDim.new(0, 6)
+fovBoxCorner.Parent = fovBox
+
+local smoothRow = Instance.new("Frame")
+smoothRow.Name = "SmoothRow"
+smoothRow.LayoutOrder = 9
+smoothRow.Size = UDim2.new(1, 0, 0, 28)
+smoothRow.BackgroundTransparency = 1
+smoothRow.ZIndex = 8
+smoothRow.Parent = mainFrame
+
+local smoothLabel = Instance.new("TextLabel")
+smoothLabel.Size = UDim2.new(0.56, 0, 1, 0)
+smoothLabel.BackgroundTransparency = 1
+smoothLabel.TextColor3 = Color3.new(1, 1, 1)
+smoothLabel.Font = Enum.Font.SourceSansPro
+smoothLabel.TextSize = 16
+smoothLabel.TextXAlignment = Enum.TextXAlignment.Left
+smoothLabel.Text = "Smoothing:"
+smoothLabel.ZIndex = 10
+smoothLabel.Parent = smoothRow
+
+local smoothBox = Instance.new("TextBox")
+smoothBox.Name = "SmoothBox"
+smoothBox.Size = UDim2.new(0.40, 0, 1, 0)
+smoothBox.Position = UDim2.fromScale(0.60, 0)
+smoothBox.BackgroundColor3 = Color3.fromRGB(40, 40, 48)
+smoothBox.TextColor3 = Color3.new(1, 1, 1)
+smoothBox.Font = Enum.Font.SourceSansPro
+smoothBox.TextSize = 16
+smoothBox.Text = string.format("%.2f", SMOOTHNESS)
+smoothBox.ClearTextOnFocus = false
+smoothBox.ZIndex = 10
+smoothBox.Parent = smoothRow
+
+local smoothCorner = Instance.new("UICorner")
+smoothCorner.CornerRadius = UDim.new(0, 6)
+smoothCorner.Parent = smoothBox
+
+local stepRow = Instance.new("Frame")
+stepRow.Name = "StepRow"
+stepRow.LayoutOrder = 10
+stepRow.Size = UDim2.new(1, 0, 0, 28)
+stepRow.BackgroundTransparency = 1
+stepRow.ZIndex = 8
+stepRow.Parent = mainFrame
+
+local minus = Instance.new("TextButton")
+minus.Name = "SmoothMinus"
+minus.Size = UDim2.new(0.47, 0, 1, 0)
+minus.Text = "-"
+minus.Font = Enum.Font.SourceSansPro
+minus.TextSize = 18
+minus.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+minus.TextColor3 = Color3.new(1, 1, 1)
+minus.ZIndex = 10
+minus.Parent = stepRow
+
+local minusCorner = Instance.new("UICorner")
+minusCorner.CornerRadius = UDim.new(0, 6)
+minusCorner.Parent = minus
+
+local plus = Instance.new("TextButton")
+plus.Name = "SmoothPlus"
+plus.Size = UDim2.new(0.47, 0, 1, 0)
+plus.Position = UDim2.fromScale(0.53, 0)
+plus.Text = "+"
+plus.Font = Enum.Font.SourceSansPro
+plus.TextSize = 18
+plus.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+plus.TextColor3 = Color3.new(1, 1, 1)
+plus.ZIndex = 10
+plus.Parent = stepRow
+
+local plusCorner = Instance.new("UICorner")
+plusCorner.CornerRadius = UDim.new(0, 6)
+plusCorner.Parent = plus
+
+local function updateAimbotState()
+	toggleButton.Text = AIMBOT_ENABLED and "Aimbot: ON" or "Aimbot: OFF"
+	toggleButton.BackgroundColor3 = AIMBOT_ENABLED and ON_COLOR or OFF_COLOR
+	if not AIMBOT_ENABLED then
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+		MOUSE_LOCKED = false
+	end
+end
+
+local function updateTeamCheckState()
+	teamButton.Text = TEAM_CHECK_ENABLED and "Team Check: ON" or "Team Check: OFF"
+	teamButton.BackgroundColor3 = TEAM_CHECK_ENABLED and ON_COLOR or OFF_COLOR
+end
+
+local function updateWallCheckState()
+	wallButton.Text = WALL_CHECK_ENABLED and "Wall Check: ON" or "Wall Check: OFF"
+	wallButton.BackgroundColor3 = WALL_CHECK_ENABLED and ON_COLOR or OFF_COLOR
+end
+
+local function updateFovCircleState()
+	fovCircle.Visible = SHOW_FOV_CIRCLE
+	fovButton.Text = SHOW_FOV_CIRCLE and "Show FOV Circle: ON" or "Show FOV Circle: OFF"
+	fovButton.BackgroundColor3 = SHOW_FOV_CIRCLE and ON_COLOR or OFF_COLOR
+end
+
+local function updateFovRadiusDisplay()
+	fovCircle.Size = UDim2.new(0, FOV_RADIUS * 2, 0, FOV_RADIUS * 2)
+	fovBox.Text = tostring(math.floor(FOV_RADIUS))
+end
+
+local function updateSmoothDisplay()
+	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
+end
+
+menuToggleButton.MouseButton1Click:Connect(function()
+	mainFrame.Visible = not mainFrame.Visible
+	menuToggleButton.Text = mainFrame.Visible and "Menu: ON" or "Menu: OFF"
+	menuToggleButton.BackgroundColor3 = mainFrame.Visible and ON_COLOR or OFF_COLOR
+end)
+
+toggleButton.MouseButton1Click:Connect(function()
+	AIMBOT_ENABLED = not AIMBOT_ENABLED
+	updateAimbotState()
+end)
+
+teamButton.MouseButton1Click:Connect(function()
+	TEAM_CHECK_ENABLED = not TEAM_CHECK_ENABLED
+	updateTeamCheckState()
+end)
+
+wallButton.MouseButton1Click:Connect(function()
+	WALL_CHECK_ENABLED = not WALL_CHECK_ENABLED
+	updateWallCheckState()
+end)
+
+fovButton.MouseButton1Click:Connect(function()
+	SHOW_FOV_CIRCLE = not SHOW_FOV_CIRCLE
+	updateFovCircleState()
+end)
+
+targetDropdownButton.MouseButton1Click:Connect(function()
+	dropdownOpen = not dropdownOpen
+	targetListFrame.Visible = dropdownOpen
+	refreshOptionColors()
+	resizeMainFrame()
+end)
+
+fovBox.FocusLost:Connect(function()
+	local parsed = tonumber(fovBox.Text)
+	if parsed then
+		FOV_RADIUS = math.clamp(parsed, 10, 1000)
+	end
+	updateFovRadiusDisplay()
+end)
+
+smoothBox.FocusLost:Connect(function()
+	local parsed = tonumber(smoothBox.Text)
+	if parsed then
+		SMOOTHNESS = math.clamp(parsed, 0.01, 1)
+	end
+	updateSmoothDisplay()
+end)
+
+UserInputService.InputBegan:Connect(function(input, processed)
+	if processed then return end
+	if input.KeyCode == Enum.KeyCode.E then
+		AIMBOT_ENABLED = not AIMBOT_ENABLED
+		updateAimbotState()
+	end
+end)
+
+minus.MouseButton1Click:Connect(function()
+	SMOOTHNESS = math.clamp(SMOOTHNESS - 0.05, 0.01, 1)
+	updateSmoothDisplay()
+end)
+
+plus.MouseButton1Click:Connect(function()
+	SMOOTHNESS = math.clamp(SMOOTHNESS + 0.05, 0.01, 1)
+	updateSmoothDisplay()
+end)
+
+player.CharacterAdded:Connect(function()
+	camera.CameraType = Enum.CameraType.Custom
+	UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+	MOUSE_LOCKED = false
+end)
+
+pcall(function()
+	StarterGui:SetCore("SendNotification", {
+		Title = "Tubers93",
+		Text = "Use E to toggle the aimbot on PC",
+		Duration = 5
+	})
+end)
