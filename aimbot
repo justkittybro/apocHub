@@ -17,10 +17,10 @@ local camera = workspace.CurrentCamera
 
 local FOV_RADIUS = 150
 local SMOOTHNESS = 0.15
-local AIMBOT_ENABLED = true
-local TEAM_CHECK_ENABLED = true
-local WALL_CHECK_ENABLED = true
-local AIM_PART = "Head" -- "Head" or "HumanoidRootPart"
+local AIMBOT_ENABLED = false
+local TEAM_CHECK_ENABLED = false
+local WALL_CHECK_ENABLED = false
+local AIM_PART = "Head"
 
 local target = nil
 local MOUSE_LOCKED = false
@@ -165,7 +165,7 @@ menuGui.ResetOnSpawn = false
 menuGui.Parent = playerGui
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0,220,0,252)
+mainFrame.Size = UDim2.new(0,220,0,225)
 mainFrame.Position = UDim2.new(0.05,0,0.3,0)
 mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainFrame.BorderSizePixel = 0
@@ -190,45 +190,47 @@ toggleButton.Size = UDim2.new(0.8,0,0,28)
 toggleButton.Position = UDim2.new(0.1,0,0,36)
 toggleButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
 toggleButton.TextColor3 = Color3.new(0,0,0)
-toggleButton.Text = "Aimbot: ON"
+toggleButton.Text = "Aimbot: OFF"
 toggleButton.Parent = mainFrame
 
 local teamButton = Instance.new("TextButton")
-teamButton.Size = UDim2.new(0.8,0,0,26)
-teamButton.Position = UDim2.new(0.1,0,0,68)
+teamButton.Size = UDim2.new(0.8,0,0,28)
+teamButton.Position = UDim2.new(0.1,0,0,70)
 teamButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
 teamButton.TextColor3 = Color3.new(0,0,0)
-teamButton.Text = "Team Check: ON"
+teamButton.Text = "Team Check: OFF"
 teamButton.Parent = mainFrame
 
 local wallButton = Instance.new("TextButton")
-wallButton.Size = UDim2.new(0.8,0,0,26)
-wallButton.Position = UDim2.new(0.1,0,0,98)
+wallButton.Size = UDim2.new(0.8,0,0,28)
+wallButton.Position = UDim2.new(0.1,0,0,104)
 wallButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
 wallButton.TextColor3 = Color3.new(0,0,0)
-wallButton.Text = "Wall Check: ON"
+wallButton.Text = "Wall Check: OFF"
 wallButton.Parent = mainFrame
 
-local partButton = Instance.new("TextButton")
-partButton.Size = UDim2.new(0.8,0,0,26)
-partButton.Position = UDim2.new(0.1,0,0,128)
-partButton.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
-partButton.TextColor3 = Color3.new(0,0,0)
-partButton.Text = "Target: Head"
-partButton.Parent = mainFrame
-
 local smoothLabel = Instance.new("TextLabel")
-smoothLabel.Size = UDim2.new(1,0,0,24)
-smoothLabel.Position = UDim2.new(0,0,0,158)
+smoothLabel.Size = UDim2.new(0.45,0,0,28)
+smoothLabel.Position = UDim2.new(0.1,0,0,140)
 smoothLabel.BackgroundTransparency = 1
 smoothLabel.TextColor3 = Color3.new(1,1,1)
 smoothLabel.TextScaled = true
-smoothLabel.Text = "Smoothness: "..string.format("%.2f", SMOOTHNESS)
+smoothLabel.TextXAlignment = Enum.TextXAlignment.Left
+smoothLabel.Text = "Smoothing:"
 smoothLabel.Parent = mainFrame
+
+local smoothBox = Instance.new("TextBox")
+smoothBox.Size = UDim2.new(0.32,0,0,28)
+smoothBox.Position = UDim2.new(0.58,0,0,140)
+smoothBox.BackgroundColor3 = Color3.fromRGB(255, 252, 252)
+smoothBox.TextColor3 = Color3.new(0,0,0)
+smoothBox.Text = string.format("%.2f", SMOOTHNESS)
+smoothBox.ClearTextOnFocus = false
+smoothBox.Parent = mainFrame
 
 local minus = Instance.new("TextButton")
 minus.Size = UDim2.new(0,40,0,28)
-minus.Position = UDim2.new(0.2,0,0,188)
+minus.Position = UDim2.new(0.2,0,0,178)
 minus.Text = "-"
 minus.BackgroundColor3 = Color3.fromRGB(255,252,252)
 minus.TextColor3 = Color3.new(0,0,0)
@@ -236,7 +238,7 @@ minus.Parent = mainFrame
 
 local plus = Instance.new("TextButton")
 plus.Size = UDim2.new(0,40,0,28)
-plus.Position = UDim2.new(0.6,0,0,188)
+plus.Position = UDim2.new(0.6,0,0,178)
 plus.Text = "+"
 plus.BackgroundColor3 = Color3.fromRGB(255,252,252)
 plus.TextColor3 = Color3.new(0,0,0)
@@ -262,8 +264,8 @@ local function updateWallCheckState()
 	wallButton.Text = WALL_CHECK_ENABLED and "Wall Check: ON" or "Wall Check: OFF"
 end
 
-local function updatePartState()
-	partButton.Text = AIM_PART == "Head" and "Target: Head" or "Target: Torso"
+local function updateSmoothDisplay()
+	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
 toggleButton.MouseButton1Click:Connect(function()
@@ -281,9 +283,12 @@ wallButton.MouseButton1Click:Connect(function()
 	updateWallCheckState()
 end)
 
-partButton.MouseButton1Click:Connect(function()
-	AIM_PART = (AIM_PART == "Head") and "HumanoidRootPart" or "Head"
-	updatePartState()
+smoothBox.FocusLost:Connect(function()
+	local parsed = tonumber(smoothBox.Text)
+	if parsed then
+		SMOOTHNESS = math.clamp(parsed, 0.01, 1)
+	end
+	updateSmoothDisplay()
 end)
 
 UserInputService.InputBegan:Connect(function(input, processed)
@@ -297,12 +302,12 @@ end)
 
 minus.MouseButton1Click:Connect(function()
 	SMOOTHNESS = math.clamp(SMOOTHNESS - 0.05, 0.01, 1)
-	smoothLabel.Text = "Smoothness: "..string.format("%.2f", SMOOTHNESS)
+	updateSmoothDisplay()
 end)
 
 plus.MouseButton1Click:Connect(function()
 	SMOOTHNESS = math.clamp(SMOOTHNESS + 0.05, 0.01, 1)
-	smoothLabel.Text = "Smoothness: "..string.format("%.2f", SMOOTHNESS)
+	updateSmoothDisplay()
 end)
 
 player.CharacterAdded:Connect(function()
