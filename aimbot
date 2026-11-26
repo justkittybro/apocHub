@@ -21,7 +21,11 @@ local AIMBOT_ENABLED = false
 local TEAM_CHECK_ENABLED = false
 local WALL_CHECK_ENABLED = false
 local SHOW_FOV_CIRCLE = false
-local AIM_PART = "Head"
+
+-- Cycle order: "Head" -> "Arm" -> "Torso"
+local TARGET_OPTIONS = { "Head", "Arm", "Torso" }
+local targetIndex = 1
+local AIM_PART_MODE = TARGET_OPTIONS[targetIndex]
 
 local target = nil
 local MOUSE_LOCKED = false
@@ -54,11 +58,26 @@ local circleCorner = Instance.new("UICorner")
 circleCorner.CornerRadius = UDim.new(1, 0)
 circleCorner.Parent = fovCircle
 
+-- Resolves "Head", "Arm" (R6/R15), or "Torso" (R6/R15) on any character
 local function getTargetPart(character)
 	if not character then return nil end
-	return character:FindFirstChild(AIM_PART)
-		or character:FindFirstChild("Head")
-		or character:FindFirstChild("HumanoidRootPart")
+
+	if AIM_PART_MODE == "Head" then
+		return character:FindFirstChild("Head")
+			or character:FindFirstChild("HumanoidRootPart")
+	elseif AIM_PART_MODE == "Arm" then
+		return character:FindFirstChild("RightUpperArm")
+			or character:FindFirstChild("Right Arm")
+			or character:FindFirstChild("LeftUpperArm")
+			or character:FindFirstChild("Left Arm")
+			or character:FindFirstChild("HumanoidRootPart")
+	elseif AIM_PART_MODE == "Torso" then
+		return character:FindFirstChild("UpperTorso")
+			or character:FindFirstChild("Torso")
+			or character:FindFirstChild("HumanoidRootPart")
+	end
+
+	return character:FindFirstChild("Head") or character:FindFirstChild("HumanoidRootPart")
 end
 
 local function isSameTeam(otherPlayer)
@@ -169,8 +188,9 @@ menuGui.Parent = playerGui
 
 local OFF_COLOR = Color3.fromRGB(140, 40, 40)
 local ON_COLOR = Color3.fromRGB(35, 150, 75)
+local SELECT_COLOR = Color3.fromRGB(45, 95, 165)
 
--- TOGGLE MENU BUTTON (shows/hides mainFrame)
+-- TOGGLE MENU BUTTON
 local menuToggleButton = Instance.new("TextButton")
 menuToggleButton.Name = "MenuToggleButton"
 menuToggleButton.Size = UDim2.fromOffset(130, 34)
@@ -190,7 +210,7 @@ menuToggleCorner.Parent = menuToggleButton
 -- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.fromOffset(230, 280)
+mainFrame.Size = UDim2.fromOffset(230, 315)
 mainFrame.Position = UDim2.fromOffset(20, 62)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 22)
 mainFrame.BorderSizePixel = 0
@@ -227,12 +247,12 @@ title.TextSize = 16
 title.ZIndex = 8
 title.Parent = mainFrame
 
-local function makeToggleButton(name, text, order)
+local function makeToggleButton(name, text, order, bgColor)
 	local btn = Instance.new("TextButton")
 	btn.Name = name
 	btn.LayoutOrder = order
 	btn.Size = UDim2.new(1, 0, 0, 28)
-	btn.BackgroundColor3 = OFF_COLOR
+	btn.BackgroundColor3 = bgColor or OFF_COLOR
 	btn.TextColor3 = Color3.new(1, 1, 1)
 	btn.Font = Enum.Font.GothamBold
 	btn.TextSize = 13
@@ -248,21 +268,24 @@ local function makeToggleButton(name, text, order)
 end
 
 -- 1. Aimbot Toggle
-local toggleButton = makeToggleButton("AimbotToggle", "Aimbot: OFF", 2)
+local toggleButton = makeToggleButton("AimbotToggle", "Aimbot: OFF", 2, OFF_COLOR)
 
 -- 2. Team Check Toggle
-local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 3)
+local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 3, OFF_COLOR)
 
 -- 3. Wall Check Toggle
-local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4)
+local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4, OFF_COLOR)
 
 -- 4. Show FOV Circle Toggle
-local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5)
+local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5, OFF_COLOR)
 
--- 5. Smoothing Row (Label + TextBox)
+-- 5. Target Body Part Selector (Head / Arm / Torso)
+local targetPartButton = makeToggleButton("TargetPartSelector", "Target: " .. AIM_PART_MODE, 6, SELECT_COLOR)
+
+-- 6. Smoothing Row (Label + TextBox)
 local smoothRow = Instance.new("Frame")
 smoothRow.Name = "SmoothRow"
-smoothRow.LayoutOrder = 6
+smoothRow.LayoutOrder = 7
 smoothRow.Size = UDim2.new(1, 0, 0, 28)
 smoothRow.BackgroundTransparency = 1
 smoothRow.ZIndex = 8
@@ -297,10 +320,10 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
--- 6. Minus / Plus Row
+-- 7. Minus / Plus Row
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
-stepRow.LayoutOrder = 7
+stepRow.LayoutOrder = 8
 stepRow.Size = UDim2.new(1, 0, 0, 28)
 stepRow.BackgroundTransparency = 1
 stepRow.ZIndex = 8
@@ -364,6 +387,11 @@ local function updateFovCircleState()
 	fovButton.BackgroundColor3 = SHOW_FOV_CIRCLE and ON_COLOR or OFF_COLOR
 end
 
+local function updateTargetPartState()
+	AIM_PART_MODE = TARGET_OPTIONS[targetIndex]
+	targetPartButton.Text = "Target: " .. AIM_PART_MODE
+end
+
 local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
@@ -393,6 +421,11 @@ end)
 fovButton.MouseButton1Click:Connect(function()
 	SHOW_FOV_CIRCLE = not SHOW_FOV_CIRCLE
 	updateFovCircleState()
+end)
+
+targetPartButton.MouseButton1Click:Connect(function()
+	targetIndex = (targetIndex % #TARGET_OPTIONS) + 1
+	updateTargetPartState()
 end)
 
 smoothBox.FocusLost:Connect(function()
