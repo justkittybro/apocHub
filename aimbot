@@ -7,13 +7,22 @@ local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
 local player = Players.LocalPlayer
-while not player do
-	task.wait()
-	player = Players.LocalPlayer
+if not player then
+	player = Players:GetPropertyChangedSignal("LocalPlayer"):Wait() and Players.LocalPlayer
 end
 
-local playerGui = player:WaitForChild("PlayerGui")
-local camera = workspace.CurrentCamera
+local playerGui = player:WaitForChild("PlayerGui", 10)
+if not playerGui then
+	warn("PlayerGui not found")
+	return
+end
+
+local camera = Workspace.CurrentCamera
+Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+	if Workspace.CurrentCamera then
+		camera = Workspace.CurrentCamera
+	end
+end)
 
 local FOV_RADIUS = 150
 local SMOOTHNESS = 0.15
@@ -189,6 +198,7 @@ local ON_COLOR = Color3.fromRGB(35, 150, 75)
 local SELECT_COLOR = Color3.fromRGB(45, 95, 165)
 local OPTION_IDLE_COLOR = Color3.fromRGB(45, 45, 56)
 
+-- TOGGLE MENU BUTTON
 local menuToggleButton = Instance.new("TextButton")
 menuToggleButton.Name = "MenuToggleButton"
 menuToggleButton.Size = UDim2.fromOffset(130, 34)
@@ -205,6 +215,7 @@ local menuToggleCorner = Instance.new("UICorner")
 menuToggleCorner.CornerRadius = UDim.new(0, 8)
 menuToggleCorner.Parent = menuToggleButton
 
+-- MAIN FRAME
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.fromOffset(230, 355)
@@ -271,10 +282,19 @@ local function makeToggleButton(name, text, order, bgColor)
 	return btn
 end
 
+-- 1. Aimbot Toggle
 local toggleButton = makeToggleButton("AimbotToggle", "Aimbot: OFF", 2, OFF_COLOR)
+
+-- 2. Team Check Toggle
 local teamButton = makeToggleButton("TeamCheckToggle", "Team Check: OFF", 3, OFF_COLOR)
+
+-- 3. Wall Check Toggle
 local wallButton = makeToggleButton("WallCheckToggle", "Wall Check: OFF", 4, OFF_COLOR)
+
+-- 4. Show FOV Circle Toggle
 local fovButton = makeToggleButton("ShowFovToggle", "Show FOV Circle: OFF", 5, OFF_COLOR)
+
+-- 5. Target Body Part Dropdown Header + Expandable List
 local targetDropdownButton = makeToggleButton("TargetDropdownToggle", "Target: " .. AIM_PART_MODE .. " v", 6, SELECT_COLOR)
 
 local targetListFrame = Instance.new("Frame")
@@ -336,6 +356,7 @@ end
 
 refreshOptionColors()
 
+-- 6. FOV Radius Row (Label + TextBox)
 local fovRow = Instance.new("Frame")
 fovRow.Name = "FovRow"
 fovRow.LayoutOrder = 8
@@ -346,6 +367,7 @@ fovRow.Parent = mainFrame
 
 local fovLabel = Instance.new("TextLabel")
 fovLabel.Size = UDim2.new(0.56, 0, 1, 0)
+fovLabel.Position = UDim2.fromScale(0, 0)
 fovLabel.BackgroundTransparency = 1
 fovLabel.TextColor3 = Color3.new(1, 1, 1)
 fovLabel.Font = Enum.Font.SourceSansPro
@@ -372,6 +394,7 @@ local fovBoxCorner = Instance.new("UICorner")
 fovBoxCorner.CornerRadius = UDim.new(0, 6)
 fovBoxCorner.Parent = fovBox
 
+-- 7. Smoothing Row (Label + TextBox)
 local smoothRow = Instance.new("Frame")
 smoothRow.Name = "SmoothRow"
 smoothRow.LayoutOrder = 9
@@ -382,6 +405,7 @@ smoothRow.Parent = mainFrame
 
 local smoothLabel = Instance.new("TextLabel")
 smoothLabel.Size = UDim2.new(0.56, 0, 1, 0)
+smoothLabel.Position = UDim2.fromScale(0, 0)
 smoothLabel.BackgroundTransparency = 1
 smoothLabel.TextColor3 = Color3.new(1, 1, 1)
 smoothLabel.Font = Enum.Font.SourceSansPro
@@ -408,6 +432,7 @@ local smoothCorner = Instance.new("UICorner")
 smoothCorner.CornerRadius = UDim.new(0, 6)
 smoothCorner.Parent = smoothBox
 
+-- 8. Minus / Plus Row
 local stepRow = Instance.new("Frame")
 stepRow.Name = "StepRow"
 stepRow.LayoutOrder = 10
@@ -419,6 +444,7 @@ stepRow.Parent = mainFrame
 local minus = Instance.new("TextButton")
 minus.Name = "SmoothMinus"
 minus.Size = UDim2.new(0.47, 0, 1, 0)
+minus.Position = UDim2.fromScale(0, 0)
 minus.Text = "-"
 minus.Font = Enum.Font.SourceSansPro
 minus.TextSize = 18
@@ -447,6 +473,7 @@ local plusCorner = Instance.new("UICorner")
 plusCorner.CornerRadius = UDim.new(0, 6)
 plusCorner.Parent = plus
 
+-- State updates
 local function updateAimbotState()
 	toggleButton.Text = AIMBOT_ENABLED and "Aimbot: ON" or "Aimbot: OFF"
 	toggleButton.BackgroundColor3 = AIMBOT_ENABLED and ON_COLOR or OFF_COLOR
@@ -481,6 +508,7 @@ local function updateSmoothDisplay()
 	smoothBox.Text = string.format("%.2f", SMOOTHNESS)
 end
 
+-- Events
 menuToggleButton.MouseButton1Click:Connect(function()
 	mainFrame.Visible = not mainFrame.Visible
 	menuToggleButton.Text = mainFrame.Visible and "Menu: ON" or "Menu: OFF"
